@@ -1,0 +1,61 @@
+.signup-box {
+  display: flex;
+  position: relative;
+  width: 480px;
+  height: 610px;
+  background-color: #36393e;
+  top: 100px;
+  left: 33%;
+  border-radius: 10px;
+}
+.signup-main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+}
+
+.signup-main > div {
+  margin-top: 0px;
+}
+.signup-main > div > h3 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 24px;
+}
+p {
+  color: #c4c4c4;
+}
+
+.signup-main > input {
+  margin-top: -20px;
+  font-size: 16px;
+  width: 409px;
+  height: 44px;
+  background-color: #303338;
+  border: solid 0.5mm #000000;
+  border-radius: 4px;
+  color: #ffffff;
+}
+.signup-main > .red-box {
+  border: solid 2px #ed4145;
+  outline: none;
+}
+.signup-main > .invalid {
+  color: #ed4145;
+}
+
+h4 {
+  text-align: left;
+  color: #ffffff;
+  font-size: 16px;
+  opacity: 50%;
+}
+
+.date-of-birth {
+  display: flex;
+  gap: 25px;
+  border-radius: 4px;
+}
