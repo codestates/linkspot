@@ -1,0 +1,78 @@
+.modal {
+  display: flex;
+  position: relative;
+  width: 500px;
+  height: 470px;
+  background-color: #36393e;
+  top: 100px;
+  left: 32%;
+  border-radius: 10px;
+}
+.main {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: center;
+}
+
+.main > div {
+  margin-top: 0px;
+  padding-left: 2px;
+}
+p {
+  color: #c4c4c4;
+}
+
+.main > input {
+  margin-top: -10px;
+  margin-bottom: -3px;
+  width: 439px;
+  height: 50px;
+  background-color: #303338;
+  border: solid 0.5mm #000000;
+  border-radius: 4px;
+  color: #ffffff;
+}
+.main > .red-box {
+  border: solid 2px #ed4145;
+  outline: none;
+}
+.main > .invalid {
+  color: #ed4145;
+}
+
+h3 {
+  text-align: left;
+  color: #ffffff;
+  font-size: 24px;
+}
+h4 {
+  margin-top: -10px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 16px;
+  opacity: 50%;
+}
+.blue {
+  font-size: 12px;
+  color: #0cabf0;
+}
+.blue:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signup-link {
+  color: #c4c4c4;
+  font-size: 12px;
+}
+.signup-link > strong {
+  color: #0cabf0;
+  font-weight: 800;
+  font-size: 14px;
+}
+strong:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

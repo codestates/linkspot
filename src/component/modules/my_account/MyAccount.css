@@ -1,0 +1,171 @@
+.myaccount {
+  margin: 90px 10px 20px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.myaccount > .box {
+  max-width: 90%;
+  min-width: 532px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+.box > .top {
+  flex: 1;
+  background-color: #3da45c;
+  border-radius: 8px 8px 0px 0px;
+}
+.top > .profile-round {
+  position: relative;
+  top: 70px;
+  left: 20px;
+  width: 85px;
+  height: 85px;
+  border: solid 2mm #1f2225;
+  border-radius: 100%;
+  background-color: #3da45c;
+}
+.profile-round > .icon {
+  margin-top: 33px;
+  margin-left: 35px;
+  transform: scale(3.5);
+  color: #fff;
+}
+.profile-round > .small {
+  position: relative;
+  top: 7px;
+  left: 56px;
+  width: 17px;
+  height: 17px;
+  border: solid 1.6mm #1f2225;
+  border-radius: 100%;
+  background-color: #3da45c;
+}
+
+.box > .bottom {
+  flex: 3;
+  background-color: #1f2225;
+  border-radius: 0px 0px 8px 8px;
+  display: flex;
+  flex-direction: column;
+}
+.bottom-upper {
+  flex: 1;
+  margin-top: 30px;
+  margin-left: 70px;
+  display: flex;
+  padding: 10px;
+}
+.bottom-upper > h4 {
+  color: #fff;
+  margin-top: -25px;
+  margin-left: 50px;
+  width: 200px;
+  opacity: 1;
+}
+.bottom-upper > button {
+  margin-top: -20px;
+  width: 116px;
+  height: 32px;
+  background-color: #5765f2;
+
+  color: #fff;
+  margin-left: 200px;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+}
+.bottom-upper > button:hover {
+  background-color: #4b58ca;
+}
+.bottom-upper > button:active {
+  background-color: #3f4aad;
+}
+
+.bottom-lower {
+  flex: 8;
+  border-radius: 8px;
+  height: 100px;
+  background-color: #2e3136;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.bottom-lower-inner {
+  display: flex;
+}
+.bottom-lower-inner > div {
+  flex: 20;
+  padding-left: 25px;
+}
+.bottom-lower-inner > button {
+  flex: 3;
+  justify-content: right;
+  background-color: #4f545c;
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  margin: 30px 20px 0px 40px;
+  color: #fff;
+}
+.bottom-lower-inner > button:hover {
+  background-color: #737373cc;
+}
+.bottom-lower-inner > button:active {
+  background-color: #a1a1a1b7;
+  transition: 6ms;
+}
+.bottom-lower-inner > div > h6 {
+  font-size: 12px;
+  color: #b8bbbe;
+  margin-top: 24px;
+  margin-bottom: 15px;
+}
+.bottom-lower-inner > div > h5 {
+  color: #fff;
+  font-size: 16px;
+  margin-top: -7px;
+  margin-left: -3px;
+  margin-bottom: 20px;
+}
+.myaccount-box-lower {
+  position: inherit;
+  margin-top: 120px;
+  border-top: solid 0.2mm #424549;
+}
+.myaccount-box-lower > button {
+  margin-top: -20px;
+  width: 116px;
+  height: 32px;
+  background-color: #5765f2;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+}
+.myaccount-box-lower > button:hover {
+  background-color: #4b58ca;
+}
+.myaccount-box-lower > button:active {
+  background-color: #3f4aad;
+}
+.myaccount-box-lower > .account-delete {
+  margin-top: -20px;
+  width: 116px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0);
+  border: solid 0.2mm #ed4145;
+  color: #ed4145;
+  font-size: 14px;
+  border-radius: 3px;
+}
+.myaccount-box-lower > .account-delete:hover {
+  background-color: #e96a6c23;
+}
+.myaccount-box-lower > .account-delete:active {
+  background-color: #9443443f;
+}
