@@ -79,7 +79,7 @@ const Login = ({ isSignup, setIsSignup }) => {
       } catch (error) {
         setIsValidEmail(false);
         setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');
-        console.log(error);
+        //console.log(error);
       }
 
       //axios

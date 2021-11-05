@@ -34,7 +34,7 @@ const UserSettingModal = ({ modalType, setIsModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target[2].value.length);
+    //console.log(e.target[2].value.length);
     if (modalType === '사용자 이름 수정') {
       if (
         !nickname_Reg.test(e.target[0].value) ||

@@ -111,7 +111,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
       setIsValidDob(true);
       setDobMessage('생년월일');
     }
-    console.log(e);
+    //console.log(e);
     try {
       const user = await createUserWithEmailAndPassword(
         auth,

@@ -8,7 +8,7 @@ const EmailValidation = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  console.log(checked);
+  //console.log(checked);
   return (
     <div className='email-validation-box'>
       <h3>이메일을 검증해주세요.</h3>

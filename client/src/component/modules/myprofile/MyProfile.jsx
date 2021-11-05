@@ -15,7 +15,7 @@ const MyProfile = () => {
   const [isImgUpload, setIsImgUpload] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  console.log(userInfo.profilecolor);
+  //console.log(userInfo.profilecolor);
   useEffect(() => {
     if (userInfo.profilecolor !== '#3da45c') {
       setIsCustomColor(true);

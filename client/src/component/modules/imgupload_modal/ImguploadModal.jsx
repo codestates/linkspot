@@ -7,13 +7,13 @@ const ImguploadModal = ({ setIsImgUpload, previewUrl, setPreviewUrl }) => {
     e.preventDefault();
 
     const newFile = e.target.files[0];
-    console.log(newFile);
+    //console.log(newFile);
     if (newFile) {
       const reader = new FileReader();
       reader.readAsDataURL(newFile);
       reader.onloadend = () => {
         setPreviewUrl(reader.result);
-        console.log(reader.result);
+        //console.log(reader.result);
       };
     }
     setIsImgUpload(false);

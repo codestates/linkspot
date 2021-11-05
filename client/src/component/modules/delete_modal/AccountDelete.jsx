@@ -34,7 +34,7 @@ const AccountDelete = ({ setIsModal }) => {
     const credential = EmailAuthProvider.credential(user.email, password);
     await reauthenticateWithCredential(user, credential)
       .then(async (el) => {
-        console.log(el);
+        //console.log(el);
         setData(true);
 
         await deleteDoc(doc(db, 'userinfo', user.email));
