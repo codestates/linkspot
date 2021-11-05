@@ -1,0 +1,13 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12000px;
+  height: 820px;
+  background-image: url('../../../util/imgs/cloudBackground.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.wrapper {
+  display: flex;
+}
