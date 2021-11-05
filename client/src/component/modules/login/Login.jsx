@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
-const Login = ({ isSignup, setIsSignup }) => {
+const Login = ({ isSignup, setIsSignup, isLogin, setIsLogin }) => {
+
+  useEffect(() => {
+    setIsLogin(!isLogin)
+  }, [isLogin])
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -79,6 +84,8 @@ const Login = ({ isSignup, setIsSignup }) => {
         </p>
         <ThemeProvider theme={theme}>
           <Button
+            // 실제 서비스는 axios로 정보를 받아와서 정보를 넘겨주어야 함
+            onClick={()=>setIsLogin(true)}
             color='primary'
             variant='contained'
             type='submit'

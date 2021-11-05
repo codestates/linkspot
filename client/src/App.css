@@ -1,0 +1,20 @@
+.card-container{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  width:220px;
+  height: 42px;
+  color: #8E9297
+}
+
+.card-container:hover{
+  background-color: #4f545c29;
+  color:#dcddde;
+}
+
+.card-container > img {
+  width:32px;
+  height:32px;
+  margin: 0 10px 0 10px;
+  border-radius: 50%;
+}
