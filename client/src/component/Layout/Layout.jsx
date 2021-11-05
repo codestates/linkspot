@@ -4,11 +4,14 @@ import { withRouter } from "react-router-dom"
 import Main from "../../page/Main"
 import Header from "../modules/Header/Header"
 import Login from "../modules/login/Login"
+import {UserInfoContext} from './context/UserInfoContext'
+import {AuthContext} from './context/AuthContext'
 
 function Layout(props){
 
   const [isLogin, setIsLogin] = useState(false)
   const [isSignup, setIsSignup] = useState(false)
+  
   
   const serverLocationHandler = () => {
     const serverLocator = window.localStorage.getItem("server")
