@@ -1,0 +1,109 @@
+.my-profile {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  gap: 60px;
+}
+.virture-background {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+.my-profile-box1 {
+  flex: 1;
+  padding: 30px;
+}
+.my-profile-box1 > h3 {
+  color: #fff;
+  margin: 0px 0px 40px 0px;
+}
+.my-profile-box1 > button {
+  margin-top: 0px;
+  width: 116px;
+  height: 32px;
+  background-color: #5765f2;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.my-profile-box1 > button:hover {
+  background-color: #4b58ca;
+}
+.my-profile-box1 > button:active {
+  background-color: #3f4aad;
+}
+.my-profile-box1 > p {
+  margin-bottom: 15px;
+}
+.box1-under {
+  display: flex;
+  gap: 30px;
+}
+.profile-color-header {
+  margin-top: 60px;
+}
+.color-picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 112px;
+  height: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+  /* border: solid 0.2mm #848588; */
+}
+.picker {
+  position: relative;
+  z-index: 3;
+}
+.check-icon {
+  color: #fff;
+}
+.color-picker > .icon {
+  position: absolute;
+  color: #fff;
+  margin: -30px 0px 20px 46px;
+}
+.my-profile-box2 {
+  flex: 1;
+}
+.my-profile-box2 > .box {
+  margin-top: 5px;
+}
+.top > .profile-round {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile-round > .hover-backgound {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+}
+.profile-round > .hover-backgound:hover {
+  opacity: 60%;
+  background-color: #2e3136;
+  z-index: 10;
+  color: #fff;
+  font-size: 15px;
+  transform: scale(1.11);
+}
+.my-profile-box2 > p {
+  margin-top: 85px;
+}
+.profile-round > .upload-icon {
+  position: absolute;
+  margin-top: -5px;
+  border-radius: 100%;
+  width: 17px;
+  height: 17px;
+  background-color: #dcddde;
+  padding: 5px;
+  top: 10px;
+  right: 0px;
+}

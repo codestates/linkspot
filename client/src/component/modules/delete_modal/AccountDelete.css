@@ -1,0 +1,106 @@
+.background {
+  background: #080909;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 85%;
+  z-index: 1;
+}
+.delete-modal {
+  position: fixed;
+  top: 195px;
+  left: 35%;
+  width: 438px;
+  height: 330px;
+  background-color: #36393e;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  z-index: 2;
+}
+.onpassword {
+  height: 398px;
+}
+.delete-modal > h3 {
+  color: #fff;
+  text-align: center;
+  margin: 20px 0px 0px 0px;
+}
+.delete-modal > h5 {
+  color: #b7babd;
+  text-align: center;
+  margin: 20px 0px;
+}
+.delete-modal > p {
+  margin-left: 14px;
+  margin-bottom: 0px;
+}
+.delete-modal > input {
+  width: 408px;
+  height: 40px;
+  margin: 8px 0px 20px 0px;
+  align-self: center;
+  background-color: #303338;
+  border-radius: 5px;
+  border: solid 0.2mm #232427;
+  color: #fff;
+}
+.delete-modal > .bottom {
+  display: flex;
+  flex: 1;
+  background-color: #2e3136;
+  margin-top: 0px;
+  padding: 10px 0px 10px 240px;
+  gap: 20px;
+  border-radius: 0px 0px 8px 8px;
+}
+.bottom > p {
+  margin-top: 20px;
+  cursor: pointer;
+}
+.bottom > p:hover {
+  text-decoration: underline;
+}
+.bottom > button {
+  margin-top: 11px;
+  width: 116px;
+  height: 32px;
+  background-color: #5765f2;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+.bottom > button:hover {
+  background-color: #4b58ca;
+}
+
+.bottom > button:active {
+  background-color: #3f4aad;
+}
+.delete-modal > .icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  padding: 10px;
+  align-self: flex-end;
+  color: #6f7276;
+  cursor: pointer;
+}
+.delete-modal > .icon:hover {
+  color: rgba(255, 255, 255, 0.836);
+  transition: linear 0.2s;
+}
+.yellow-box {
+  margin: 30px 20px;
+  padding: 20px 20px;
+  border-radius: 5px;
+  background-color: #faa81a;
+}
+.yellow-box > h5 {
+  color: #fff;
+}
