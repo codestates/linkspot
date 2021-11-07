@@ -1,6 +1,6 @@
 .signup-box {
   display: flex;
-  position: relative;
+  position: fixed;
   width: 480px;
   height: 610px;
   background-color: #36393e;
@@ -17,20 +17,18 @@
   justify-content: center;
 }
 
-.signup-main > div {
-  margin-top: 0px;
-}
 .signup-main > div > h3 {
   text-align: center;
   color: #ffffff;
   font-size: 24px;
+  margin-bottom: 20px;
 }
 p {
   color: #c4c4c4;
 }
 
 .signup-main > input {
-  margin-top: -20px;
+  margin-bottom: 20px;
   font-size: 16px;
   width: 409px;
   height: 44px;
@@ -46,15 +44,11 @@ p {
 .signup-main > .invalid {
   color: #ed4145;
 }
-
-h4 {
-  text-align: left;
-  color: #ffffff;
-  font-size: 16px;
-  opacity: 50%;
+.signup-main > .blue {
+  margin-top: 10px;
 }
-
 .date-of-birth {
+  margin-top: 15px;
   display: flex;
   gap: 25px;
   border-radius: 4px;

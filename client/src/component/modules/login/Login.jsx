@@ -1,24 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import './Login.css';
+import { useHistory } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { auth } from '../../../utils/firebase/firebase';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+} from '@firebase/auth';
+import { UserInfoContext } from '../../../context/UserInfoContext';
+import { AuthContext } from '../../../context/AuthContext';
 
-const Login = ({ isSignup, setIsSignup, isLogin, setIsLogin }) => {
-
-  useEffect(() => {
-    setIsLogin(!isLogin)
-  }, [isLogin])
-
+const Login = ({ isSignup, setIsSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [emailMessage, setEmailMessage] = useState('이메일');
+  const [user, setUser] = useState({});
+  const history = useHistory();
+  const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+
   const email_Reg =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  const password_Reg =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
-  const isSubmit = (e) => {
+  const password_Reg = /^[a-z0-9_]{8,15}$/;
+  const isSubmit = async (e) => {
     e.preventDefault();
     if (!email_Reg.test(email) || email.length === 0) {
       setIsValidEmail(false);
@@ -33,7 +42,24 @@ const Login = ({ isSignup, setIsSignup, isLogin, setIsLogin }) => {
     }
     //console.log(e.target[0]);
     // axios
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      setIsLoggedIn(true);
+      history.push('/');
+    } catch (error) {
+      setIsValidEmail(false);
+      setIsValidPassword(false);
+      setEmailMessage('이메일 - 이메일 또는 비밀번호가 일치하지 않습니다.');
+    }
   };
+  onAuthStateChanged(
+    auth,
+    (currentUser) => {
+      setUser(currentUser);
+      setUserInfo(currentUser);
+    },
+    []
+  );
   const theme = createTheme({
     palette: {
       primary: {
@@ -42,11 +68,19 @@ const Login = ({ isSignup, setIsSignup, isLogin, setIsLogin }) => {
       },
     },
   });
-  const handleForgotPassword = () => {
+  const handleForgotPassword = async () => {
     if (email.length === 0 || !email_Reg.test(email)) {
       setIsValidEmail(false);
       setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');
     } else {
+      try {
+        const renewEmail = await sendPasswordResetEmail(auth, email);
+      } catch (error) {
+        setIsValidEmail(false);
+        setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');
+        //console.log(error);
+      }
+
       //axios
     }
   };
@@ -84,8 +118,6 @@ const Login = ({ isSignup, setIsSignup, isLogin, setIsLogin }) => {
         </p>
         <ThemeProvider theme={theme}>
           <Button
-            // 실제 서비스는 axios로 정보를 받아와서 정보를 넘겨주어야 함
-            onClick={()=>setIsLogin(true)}
             color='primary'
             variant='contained'
             type='submit'
