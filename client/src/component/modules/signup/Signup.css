@@ -1,10 +1,6 @@
 .signup-box {
   display: flex;
-<<<<<<< HEAD
-  position: relative;
-=======
   position: fixed;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
   width: 480px;
   height: 610px;
   background-color: #36393e;
@@ -21,31 +17,18 @@
   justify-content: center;
 }
 
-<<<<<<< HEAD
-.signup-main > div {
-  margin-top: 0px;
-}
-=======
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
 .signup-main > div > h3 {
   text-align: center;
   color: #ffffff;
   font-size: 24px;
-<<<<<<< HEAD
-=======
   margin-bottom: 20px;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
 }
 p {
   color: #c4c4c4;
 }
 
 .signup-main > input {
-<<<<<<< HEAD
-  margin-top: -20px;
-=======
   margin-bottom: 20px;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
   font-size: 16px;
   width: 409px;
   height: 44px;
@@ -61,23 +44,11 @@ p {
 .signup-main > .invalid {
   color: #ed4145;
 }
-<<<<<<< HEAD
-
-h4 {
-  text-align: left;
-  color: #ffffff;
-  font-size: 16px;
-  opacity: 50%;
-}
-
-.date-of-birth {
-=======
 .signup-main > .blue {
   margin-top: 10px;
 }
 .date-of-birth {
   margin-top: 15px;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
   display: flex;
   gap: 25px;
   border-radius: 4px;

@@ -1,5 +1,5 @@
 import "./Header.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { FaUserFriends } from "react-icons/fa"
 import { TiMessages } from "react-icons/ti"
 import { RiInboxFill } from "react-icons/ri"
@@ -8,12 +8,12 @@ import NoOnline from "../../../assets/image/no-online.svg"
 import NoRequest from "../../../assets/image/no-request.svg"
 import Nobody from "../../../assets/image/nobody.svg"
 import NoBlock from "../../../assets/image/no-block.svg"
+import { UserInfoContext } from "../../../context/UserInfoContext"
 
-const Header = ({ props }) =>{
+const Header = () =>{
 
 
-  const currentServer = props.currentServerInfo.name
-  const currentChannel = props.currentChannel
+  const serverLocator = useContext(UserInfoContext).serverLocator
   const [key, setKey] = useState("온라인")
   const tabList = ["온라인", "모두", "대기 중", "차단 목록", "친구 추가하기"]
   const [onlineList, setOnlineList] = useState([])
@@ -21,8 +21,6 @@ const Header = ({ props }) =>{
   const [requestList, setRequestList] = useState([])
   const [blockList, setBlockList] = useState([])
   const [disable, setDisable]=useState(true)
-
-
 
 
   const disableHandler = (e) => {
@@ -118,7 +116,7 @@ const Header = ({ props }) =>{
 
   return (    
     <>
-    {currentServer === "Home" ?
+    {!serverLocator || serverLocator === "Home" ?
       <div className="header-container">
         <nav className="nav-container">
           <div className="friend-tag">
@@ -148,7 +146,7 @@ const Header = ({ props }) =>{
       </div>
       :
       <div className="location-name">
-        {currentChannel}
+        {serverLocator}
       </div>
     }
     </>

@@ -11,8 +11,6 @@
   flex-direction: column;
   border-radius: 8px;
 }
-<<<<<<< HEAD
-=======
 .myaccount > h3 {
   text-align: left;
   color: #ffffff;
@@ -20,7 +18,6 @@
   margin-bottom: 20px;
 }
 
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
 .box > .top {
   flex: 1;
   background-color: #3da45c;
@@ -147,11 +144,7 @@
   border-top: solid 0.2mm #424549;
 }
 .myaccount-box-lower > button {
-<<<<<<< HEAD
-  margin-top: -20px;
-=======
   margin-top: 10px;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
   width: 116px;
   height: 32px;
   background-color: #5765f2;
@@ -168,11 +161,7 @@
   background-color: #3f4aad;
 }
 .myaccount-box-lower > .account-delete {
-<<<<<<< HEAD
-  margin-top: -20px;
-=======
   margin-top: 10px;
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973
   width: 116px;
   height: 32px;
   background-color: rgba(0, 0, 0, 0);
@@ -187,12 +176,9 @@
 .myaccount-box-lower > .account-delete:active {
   background-color: #9443443f;
 }
-<<<<<<< HEAD
-=======
 .myaccount-box-lower > h3 {
   text-align: left;
   color: #ffffff;
   font-size: 24px;
   margin: 30px 0px 10px 0px;
 }
->>>>>>> 9af2b1089b17c4471b16dc7cf09bc7a744b80973

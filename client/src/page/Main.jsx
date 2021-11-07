@@ -1,20 +1,13 @@
+import { useState, useEffect } from "react"
 import ServerList from "../component/modules/ServerList/ServerList"
 import SectionContainer from "../component/modules/SectionContainer/SectionContainer"
+import { UserInfoContext } from "../context/UserInfoContext"
 
-const Main = ({ props }) => {
-
-
-  const serverList = props.serverList
-  const setCurrentServer = props.setCurrentServer
-  const currentServer = props.currentServer
-  const user = props.user
-  const setIsLogin = props.setIsLogin
-
-
+const Main = () => {
   return (
     <>
-      <ServerList props={{serverList,setCurrentServer}} />
-      <SectionContainer props={{serverList, user, currentServer}}/>
+      <ServerList />
+      <SectionContainer/>
     </>
   )
 }

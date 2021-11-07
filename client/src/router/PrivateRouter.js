@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 // import { useSelector } from "react-redux";
 
 const PrivateRouter = ({ component: Component, ...rest }) => {
-  // const currentUser = useSelector((state) => state.user.login);
-  const currentUser = { login: true };
+  console.log({ component: Component, ...rest })
+  const currentUser = useContext(AuthContext).isLoggedIn
+  console.log(currentUser)
   return (
     <Route
       {...rest}
       render={(props) => {
-        {console.log(props)}
+        console.log(props)
         !currentUser && alert("로그인이 필요한 페이지입니다.");
         return currentUser ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/signin" />
+          <Redirect to="/login" />
         );
       }}
     />
