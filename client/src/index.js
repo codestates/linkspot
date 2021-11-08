@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css'
 import AuthContextProvider from './context/AuthContext';
-import UserContextProvider from './context/UserInfoContext';
+import UserInfoContextProvider from './context/UserInfoContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-    <UserContextProvider >
+    <UserInfoContextProvider >
     <App />
-    </UserContextProvider>
+    </UserInfoContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

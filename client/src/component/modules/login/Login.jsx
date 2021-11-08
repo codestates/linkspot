@@ -45,8 +45,7 @@ const Login = ({ isSignup, setIsSignup }) => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       setIsLoggedIn(true);
-
-      history.push('/user_setting');
+      history.push('/');
     } catch (error) {
       setIsValidEmail(false);
       setIsValidPassword(false);

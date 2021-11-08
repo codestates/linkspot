@@ -1,7 +1,10 @@
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { useState } from "react"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,9 +21,17 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
+firebase.initializeApp(firebaseConfig)
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
+const app =initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const auth = getAuth(app);
+const db = firebase.firestore()
+
+// console.log(db.collection('userinfo').onSnapshot((snapshot)=>{
+//   let userlist=[]
+//   snapso.forEach((doc)=> userlist.push({...doc.data(), id:doc.id}))
+//   console.log(userlist)
+// }))
+
+export { auth, db }

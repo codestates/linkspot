@@ -62,7 +62,6 @@ const MyAccount = ({ userInfo, setPage }) => {
           </div>
         </div>
       </div>
-
       <div className='myaccount-box-lower'>
         <h3>비밀번호</h3>
         <button onClick={() => handleClick('비밀번호 수정')}>

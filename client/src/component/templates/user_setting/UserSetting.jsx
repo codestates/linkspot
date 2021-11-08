@@ -19,6 +19,8 @@ const UserSetting = ({}) => {
   const history = useHistory();
   const docRef = doc(db, 'userinfo', userInfo.email);
 
+  console.log(userInfo)
+
   useEffect(() => {
     const getUserinfo = async () => {
       try {

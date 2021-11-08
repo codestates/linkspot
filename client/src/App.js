@@ -1,27 +1,27 @@
-import React, {useContext, useState} from 'react'
-import Login from './component/templates/login/LoginFrom.jsx'
+import "./App.css"
+import Layout from "./component/Layout/Layout.jsx"
+import Main from "./page/Main"
 import {
   BrowserRouter as Router,
   Switch,
-  Route
 } from "react-router-dom";
 import UserSetting from './component/templates/user_setting/UserSetting'
-import {UserInfoContext} from './context/UserInfoContext'
-import {AuthContext} from './context/AuthContext'
+import PublicRouter from "./router/PublicRouter"
+import PrivateRouter from "./router/PrivateRouter"
+import LoginFrom from "./component/templates/login/LoginFrom.jsx";
+
 
 function App() {
-  const { userInfo, setUserInfo } = useContext(UserInfoContext)
-  const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
   return (
-    
     <Router>
       <Switch>
-        {isLoggedIn?<Route exact path="/user_setting" render={()=><UserSetting isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />:<Route exact path="/" render={()=><Login />} />}
-        
-        
+        <Layout>
+          <PrivateRouter path="/" component={Main} exact />
+          <PublicRouter path="/login" component={LoginFrom} exact />
+          <PrivateRouter path="/user_setting" component={UserSetting} exact />
+        </Layout> 
       </Switch>
     </Router>
-    
   );
 }
 
