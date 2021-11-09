@@ -16,6 +16,9 @@ const MyProfile = () => {
   const [previewUrl, setPreviewUrl] = useState('');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   //console.log(userInfo.profilecolor);
+
+
+
   useEffect(() => {
     if (userInfo.profilecolor !== '#3da45c') {
       setIsCustomColor(true);
@@ -111,14 +114,14 @@ const MyProfile = () => {
           </div>
           <div className='bottom'>
             <div className='bottom-upper'>
-              <h4>디스코더 전원재</h4>
+              <h4>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h4>
             </div>
 
             <div className='bottom-lower'>
               <div className='bottom-lower-inner'>
                 <div>
                   <h6>사용자 설정</h6>
-                  <h5>디스코더 전원재</h5>
+                  <h5>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h5>
                 </div>
               </div>
             </div>
