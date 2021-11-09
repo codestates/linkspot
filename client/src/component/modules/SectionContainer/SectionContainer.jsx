@@ -1,8 +1,6 @@
 import Header from "../Header/Header"
 import Sidebar from "../Sidebar/Sidebar"
 import "./SectionContainer.css"
-import { useEffect, useState } from "react"
-import { Redirect } from "react-router-dom"
 
 
 const SectionContainer = () => {

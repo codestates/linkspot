@@ -16,8 +16,6 @@ const ServerList = () => {
   const setServerLocator = useContext(UserInfoContext).setServerLocator
   const [open, setOpen] = useState(false);
 
-  console.log(serverLocator, setServerLocator)
-
 
   const handleOpen = () => {
     setOpen(true);

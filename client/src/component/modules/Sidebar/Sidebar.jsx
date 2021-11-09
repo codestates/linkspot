@@ -1,16 +1,13 @@
 import "./Sidebar.css"
-import { useContext, useEffect, useState } from "react" 
+import { useContext } from "react" 
 import { FaUserFriends } from "react-icons/fa"
-import { AiOutlineSetting } from "react-icons/ai"
-import { Link, Route } from "react-router-dom"
-import avatar from "../../../assets/image/avatar-yellow.png"
 import { UserInfoContext } from "../../../context/UserInfoContext"
-import { AuthContext } from "../../../context/AuthContext"
+import avatar from "../../../assets/image/avatar-yellow.png"
+import UserSection from "../user_section/UserSection"
 
 const Sidebar = () => {
 
   const serverLocator = useContext(UserInfoContext).serverLocator
-  const setServerLocator = useContext(UserInfoContext).setServerLocator
   const userInfo = useContext(UserInfoContext).userInfo
 
   console.log(serverLocator)
@@ -95,17 +92,7 @@ const Sidebar = () => {
       </div> */}
     </>
     }
-      <section className="my-info">
-        {userInfo.img ? 
-        <img src={userInfo.img} alt={userInfo.nickname} /> 
-        : <img src={avatar} alt="default img"/> }
-        <div className="userinfo-container">
-          <p className="userinfo-nickname">{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</p>
-          <p className="userinfo-tag">#1234</p>
-        </div>
-        <div className="icon-container">
-        </div>
-      </section>
+      <UserSection />
     </div>
   )
 }
