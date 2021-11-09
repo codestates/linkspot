@@ -1,6 +1,6 @@
 import "./App.css"
 import Layout from "./component/Layout/Layout.jsx"
-import Main from "./page/Main"
+import Main from "./component/templates/main/Main.jsx"
 import {
   BrowserRouter as Router,
   Switch,

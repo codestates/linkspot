@@ -37,7 +37,7 @@ const MyAccount = ({ userInfo, setPage }) => {
         </div>
         <div className='bottom'>
           <div className='bottom-upper'>
-            <h4>디스코더 전원재</h4>
+            <h4>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h4>
             <button onClick={() => setPage('myprofile')}>프로필 수정</button>
           </div>
 
@@ -45,7 +45,7 @@ const MyAccount = ({ userInfo, setPage }) => {
             <div className='bottom-lower-inner'>
               <div>
                 <h6>사용자 설정</h6>
-                <h5>디스코더 전원재</h5>
+                <h5>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h5>
               </div>
               {/* '사용자 이름 수정' */}
               <button onClick={(e) => handleClick('사용자 이름 수정')}>
@@ -55,7 +55,7 @@ const MyAccount = ({ userInfo, setPage }) => {
             <div className='bottom-lower-inner'>
               <div>
                 <h6>이메일</h6>
-                <h5>이메일</h5>
+                <h5>{userInfo.email}</h5>
               </div>
               <button onClick={() => handleClick('이메일 수정')}>수정</button>
             </div>
