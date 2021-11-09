@@ -9,9 +9,9 @@
   z-index: 1;
 }
 .user-setting-modal {
-  position: relative;
-  top: 95px;
-  left: 12%;
+  position: fixed;
+  top: 200px;
+  left: 35%;
   width: 438px;
   height: 330px;
   background-color: #36393e;
