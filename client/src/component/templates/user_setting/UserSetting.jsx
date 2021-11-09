@@ -19,7 +19,7 @@ const UserSetting = ({}) => {
   const history = useHistory();
   const docRef = doc(db, 'userinfo', userInfo.email);
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   useEffect(() => {
     const getUserinfo = async () => {
@@ -43,6 +43,7 @@ const UserSetting = ({}) => {
     try {
       const logout = await signOut(auth);
       setIsLoggedIn(false);
+      window.localStorage.clear();
       history.push('/');
     } catch (error) {}
   };
@@ -78,7 +79,7 @@ const UserSetting = ({}) => {
           })()}
         </div>
         <div className='right-box-2'>
-          <CloseIcon className='close' />
+          <CloseIcon className='close' onClick={() => history.push('/')} />
         </div>
       </div>
     </div>

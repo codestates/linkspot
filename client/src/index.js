@@ -4,15 +4,24 @@ import App from './App';
 import './index.css'
 import AuthContextProvider from './context/AuthContext';
 import UserInfoContextProvider from './context/UserInfoContext';
+import { ContactsProvider } from './context/ContactsContext';
+import { SocketProvider } from './context/SocketContext';
+import { ConversationsProvider } from './context/ConversationContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
     <UserInfoContextProvider >
-    <App />
+      <ContactsProvider>
+        <SocketProvider>  
+          <ConversationsProvider>
+            <AuthContextProvider>    
+              <App /> 
+            </AuthContextProvider>
+          </ConversationsProvider>
+        </SocketProvider>
+      </ContactsProvider> 
     </UserInfoContextProvider>
-    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

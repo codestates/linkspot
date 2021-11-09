@@ -9,7 +9,7 @@
   z-index: 1;
 }
 .user-setting-modal {
-  position: relative;
+  position: fixed;
   top: 95px;
   left: 12%;
   width: 440px;

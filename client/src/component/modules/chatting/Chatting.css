@@ -1,0 +1,64 @@
+.chatting {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+}
+.catting-form {
+  margin-top: 20px;
+  width: 100%;
+}
+.chatting-form > .input-box {
+  width: 100%;
+}
+.inner-box > input {
+  background-color: #2b2e32;
+  border-radius: 5px;
+  width: 80%;
+  height: 15px;
+  padding: 10px;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+}
+.inner-box > button {
+  opacity: 0;
+}
+.chatting-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.message-box {
+  display: flex;
+  gap: 10px;
+}
+.text-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+.text-box > .name {
+  color: #fff;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+.text-box > .text {
+  color: #fff;
+}
+.profile-circle {
+  top: 70px;
+  left: 20px;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background-color: #3da45c;
+}
+.profile-circle > .icon {
+  margin-top: 9px;
+  margin-left: 10px;
+  transform: scale(1.7);
+  color: #fff;
+}
