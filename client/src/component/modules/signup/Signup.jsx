@@ -126,7 +126,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
       });
       setUserInfo({ ...userInfo, email: e.target[0].value });
       setIsLoggedIn(true);
-      history.push('/user_setting');
+      history.push('/');
     } catch (error) {
       setIsValidEmail(false);
       setEmailMessage('이메일 - 이미 존재하는 이메일입니다.');
