@@ -1,42 +1,58 @@
-import { useState } from "react"
-import ServerButton from "../../atoms/Button/ServerButton"
+import { useContext, useState, useEffect } from "react"
+import ServerButton from "../../atoms/button/ServerButton"
+import ServerAddButton from "../../atoms/button/ServerAddButton"
 import icon from "../../../assets/image/icon_clyde_white_RGB.svg"
 import "./ServerList.css"
-import { ConstructionOutlined } from "@mui/icons-material"
+import { UserInfoContext } from "../../../context/UserInfoContext"
+import { Dialog } from "@mui/material"
+import ServerHandler from "../server_handler/ServerHandler"
+import { db } from "../../../utils/firebase/firebase"
 
 
-const ServerList = ({ props }) => {
+const ServerList = () => {
 
-  const setIsLogin = props.setIsLogin
-  const setCurrentServer= props.setCurrentServer
-  const serverList = Object.keys(props.serverList)
-  const locator = window.localStorage.getItem("server")
+  const server = useContext(UserInfoContext).server
+  const serverLocator = useContext(UserInfoContext).serverLocator
+  const setServerLocator = useContext(UserInfoContext).setServerLocator
+  const [open, setOpen] = useState(false);
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return(
     <div className="serverlist-container">
-      <ServerButton
+        <ServerButton
         img={icon}
         onClick={()=>{
-          setCurrentServer("Home")
-          window.localStorage.setItem("server", "Home")
+          window.localStorage.setItem("serverLocator", "Home")
+          setServerLocator("Home")
         }}
-        className={locator === "Home" || !locator ? "Home clicked" : "Home"} >
+        className={serverLocator === "Home" || !serverLocator ? "Home clicked" : "Home"} >
           Home
         </ServerButton>
-        {serverList.map((item)=>
-        <ServerButton
-          className={locator === `${item}` ? `${item} clicked` : `${item}`} 
-          onClick={() => {
-            setCurrentServer(`${item}`)
-            window.localStorage.setItem("server", `${item}`)
-          }}>
-          {item}
-        </ServerButton>
-        )}
-        <ServerButton
-        onClick={()=>setIsLogin(false)}>
-          clear
-        </ServerButton>
+        { server.length !== 0 ? 
+        (server.map((item)=>
+          <ServerButton
+            className={serverLocator === `${item.serverName}` ? `${item.serverName} clicked` : `${item.serverName}`} 
+            onClick={() => {
+              window.localStorage.setItem("serverLocator", `${item.serverName}`)
+              setServerLocator(`${item.serverName}`)
+            }}>
+            {item.serverName}
+          </ServerButton>
+        )) : 
+        null }
+        <ServerAddButton onClick={handleOpen}/>
+        <Dialog open={open} onClose={handleClose}>
+          <ServerHandler/>
+          <button onClick={handleClose}>닫기</button>
+        </Dialog>
     </div>
   )
 }

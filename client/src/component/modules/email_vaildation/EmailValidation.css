@@ -1,0 +1,43 @@
+.email-validation-box {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 500px;
+  height: 370px;
+  background-color: #36393e;
+  top: 120px;
+  left: 32%;
+  padding: 25px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+}
+.email-validation-box > h3 {
+  color: #fff;
+  font-size: 24px;
+  align-self: center;
+}
+.checkbox-wrapper {
+  margin: 30px 15px;
+  padding: 15px 10px;
+  border: solid 0.2mm #fff;
+  width: 70%;
+  border-radius: 5px;
+  background-color: #222;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.checkbox-wrapper > p {
+  color: #fff;
+  font-size: 12px;
+}
+.checkbox-wrapper > input {
+  width: 24px;
+  height: 24px;
+}
+.lock-icon {
+  width: 30px;
+  height: 30px;
+}

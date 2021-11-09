@@ -1,0 +1,105 @@
+.background {
+  background: #080909;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 85%;
+  z-index: 1;
+}
+.user-setting-modal {
+  position: relative;
+  top: 95px;
+  left: 12%;
+  width: 438px;
+  height: 330px;
+  background-color: #36393e;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  z-index: 2;
+}
+.onpassword {
+  height: 398px;
+}
+.user-setting-modal > h3 {
+  text-align: center;
+  margin: 15px 0px;
+  color: #fff;
+  font-size: 20px;
+}
+.user-setting-modal > h5 {
+  color: #b7babd;
+  text-align: center;
+  margin: 5px 0px 10px 0px;
+}
+.user-setting-modal > p {
+  margin: 10px 14px;
+}
+.user-setting-modal > input {
+  width: 408px;
+  height: 40px;
+  align-self: center;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  color: #fff;
+  background-color: #303338;
+  border-radius: 5px;
+  border: solid 0.2mm #232427;
+}
+.user-setting-modal > .bottom {
+  display: flex;
+  flex: 1;
+  background-color: #2e3136;
+  margin-top: 20px;
+  padding: 0px 0px 10px 240px;
+  gap: 30px;
+  border-radius: 0px 0px 8px 8px;
+}
+.bottom > p {
+  margin-top: 26px;
+  cursor: pointer;
+}
+.bottom > p:hover {
+  text-decoration: underline;
+}
+.bottom > button {
+  margin-top: 18px;
+  width: 116px;
+  height: 32px;
+  background-color: #5765f2;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+.bottom > button:hover {
+  background-color: #4b58ca;
+}
+
+.bottom > button:active {
+  background-color: #3f4aad;
+}
+.user-setting-modal > .icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  padding: 10px;
+  align-self: flex-end;
+  color: #6f7276;
+  cursor: pointer;
+}
+.user-setting-modal > .icon:hover {
+  color: rgba(255, 255, 255, 0.836);
+  transition: linear 0.2s;
+}
+.user-setting-modal > .red-box {
+  border: solid 2px #ed4145;
+  outline: none;
+}
+.user-setting-modal > .invalid {
+  color: #ed4145;
+}
