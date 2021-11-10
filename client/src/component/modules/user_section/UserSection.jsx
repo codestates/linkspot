@@ -14,6 +14,10 @@ import Menu from '@mui/material/Menu';
 
 
 const UserSection = () => {
+
+  //유저섹션에서 다루는 정보
+  // 1. 유저 정보
+
   const element = useRef()
   const [micOff, setMicOff] = useState(false)
   const [soundOff, setSoundOff] = useState(false)
@@ -35,12 +39,14 @@ const UserSection = () => {
     }
   }, [])
   
-
   const userInfo = useContext(UserInfoContext).userInfo
+
+
   return(
     <>
     <section className="my-info">
       <div className="thumnail-container">
+        {/* 유저 정보에 썸네일이 없을 경우 기본 아바타를, 있을 경우 썸네일 랜더링 */}
       {userInfo.img ? 
       <img className="thumbnail" src={userInfo.img} alt={userInfo.nickname} onClick={handleOpen}/> 
       : <img className="thumbnail" src={avatar} alt="default img" onClick={handleOpen} /> }
@@ -51,12 +57,15 @@ const UserSection = () => {
       </Menu> */}
       </div>
       <div className="userinfo-container">
+        {/* 유저 정보에 닉네임이 존재할 경우 닉네임을, 없을 경우 이메일에서 @ 앞부분을 랜더링 */}
         <p className="userinfo-nickname">{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</p>
         <p className="userinfo-tag">#1234</p>
       </div>
       <div className="icon-container">
+        {/* 마이크 및 헤드셋 컨트롤 버튼 */}
         {micOff ? <BsFillMicMuteFill onClick={()=>setMicOff(!micOff)}/> : <BsFillMicFill onClick={()=>setMicOff(!micOff)}/> }
         {soundOff ? <MdHeadsetOff onClick={()=>setSoundOff(!soundOff)} /> : <MdHeadsetMic onClick={()=>setSoundOff(!soundOff)}/> }
+        {/* 개인정보 수정 버튼 */}
         <Link to="/user_setting">
           <IoSettingsSharp className="icon" />
         </Link>

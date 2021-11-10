@@ -81,6 +81,7 @@ const Sidebar = () => {
       <div className="sidebar-server-name">
         {serverLocator}
       </div>
+      {/* 접속한 서버의 채널 정보를 불러와 랜더링(수정중) */}
       {/* <div className="sidebar-group-container">
         {Object.keys(serverInfo).map((item)=>
         <div className="channel-group">

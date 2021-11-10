@@ -1,6 +1,9 @@
 import "./StatusMenu.css"
 
 const StatusMenu =(props) => {
+  //스테이터스메뉴에서 다루는 정보
+  // 1. 유저 상태정보
+
   return (
     <div className="status-menu-container">
       <div className="status-menu online">온라인</div>

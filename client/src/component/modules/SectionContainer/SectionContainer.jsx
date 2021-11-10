@@ -2,7 +2,7 @@ import Header from "../Header/Header"
 import Sidebar from "../Sidebar/Sidebar"
 import "./SectionContainer.css"
 
-
+// Main 페이지에서 서버 리스트를 제외한 나머지 부분을 담고있는 컨테이너
 const SectionContainer = () => {
 
   // const userInfo = {

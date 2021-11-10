@@ -2,6 +2,9 @@ import React from 'react';
 import './UserSettingModal.css';
 import CloseIcon from '@mui/icons-material/Close';
 const UserSettingModal = ({ modalType, setIsModal }) => {
+
+  // 개인정보 수정 모달
+
   return (
     <>
       <div className='background' onClick={() => setIsModal(false)}></div>
