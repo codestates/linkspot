@@ -12,6 +12,12 @@ import { UserInfoContext } from "../../../context/UserInfoContext"
 
 const Header = () =>{
 
+  //헤더에서 다루는 정보
+  // 1. 유저의 친구 목록, 친구 요청 목록, 대기 및 차단 목록
+  // 2. 현재 접속한 채널 정보
+  // 3. 유저와 DM을 주고받은 상대방 정보
+  // 4. 채널, DM 채팅 내역
+
 
   const serverLocator = useContext(UserInfoContext).serverLocator
   const [key, setKey] = useState("온라인")
@@ -23,6 +29,7 @@ const Header = () =>{
   const [disable, setDisable]=useState(true)
 
 
+  // 친구 추가할 대상 정보를 입력하지 않으면 친구 추가 보내기 버튼 비활성화
   const disableHandler = (e) => {
     if(e.target.value.length > 0) {
       setDisable(false)
@@ -33,6 +40,7 @@ const Header = () =>{
 
 
   const tabComponent = (props) => {
+    // 유저의 온라인 상태인 친구목록이 비어있을때 vs 비어있지 않을 때
     if (key==="온라인"){
       return (
         (onlineList.length === 0 ? 
@@ -49,6 +57,7 @@ const Header = () =>{
           )
       )
     } else if (key==="모두"){
+      // 유저의 모든 친구목록이 비어있을 때 vs 비어있지 않을 때
       return(
         (friendList.length === 0 ? 
           <div className="friends empty">
@@ -64,6 +73,7 @@ const Header = () =>{
           )
       )
     } else if (key==="대기 중"){
+      // 유저가 받은 친구 요청 목록이 비어있을 때 vs 비어있지 않을 때
       return (requestList.length === 0 ? 
         <div className="request empty">
             <div className="image-container">
@@ -77,6 +87,7 @@ const Header = () =>{
         </div>
         )
     } else if (key==="차단 목록"){
+      // 유저가 차단한 유저 목록이 비어있을 때 vs 비어있지 않을 때
       return(blockList.length === 0 ? 
         <div className="block empty">
             <div className="image-container">
@@ -90,6 +101,7 @@ const Header = () =>{
         </div>
         )
     } else if (key==="친구 추가하기"){
+      // 친구 추가하기 탭에 접속했을 때
       return (
       <div className="friend-request">
         <header className="friend-request-form-container">
@@ -117,12 +129,14 @@ const Header = () =>{
   return (    
     <>
     {!serverLocator || serverLocator === "Home" ?
+    // 현재 접속한 곳이 홈이거나 접속 이력이 없을 경우 홈 화면 랜더링
       <div className="header-container">
         <nav className="nav-container">
           <div className="friend-tag">
             <FaUserFriends size="24px"/>
             <p>친구</p>
           </div>
+          {/* 홈 화면 상단 탭 랜더링 */}
           <Tabs
             id="controlled-tab-example"
             activeKey={key}
@@ -141,10 +155,12 @@ const Header = () =>{
         </div>
         </nav>
         <div className="tab-content">
+          {/*  각 탭에 맞는 화면 랜더링 */}
           {tabComponent()}
         </div>
       </div>
       :
+      //  현재 접속한 곳이 홈이 아닐 때 현재 접속한 곳의 이름을 표시함
       <div className="location-name">
         {serverLocator}
       </div>

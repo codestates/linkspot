@@ -1,0 +1,14 @@
+import "./StatusMenu.css"
+
+const StatusMenu =(props) => {
+  return (
+    <div className="status-menu-container">
+      <div className="status-menu online">온라인</div>
+      <div className="status-menu away">자리 비움</div>
+      <div className="status-memu off">다른 용무 중</div>
+      <div className="status-menu offline">오프라인 표시</div>
+    </div>
+  );
+}
+
+export default StatusMenu

@@ -1,12 +1,9 @@
 import "./Layout.css"
-import React, { useState, useContext, useEffect } from "react"
 import { withRouter } from "react-router-dom"
-import {UserInfoContext} from "../../context/UserInfoContext"
-import {AuthContext} from "../../context/AuthContext"
 
-function Layout(props){
 
-  
+// 가장 최상단 컨테이너
+function Layout(props){  
   return (
     <div className="layout-wrap">
       <div className="layout" id="layout">

@@ -12,6 +12,12 @@ const UserInfoContextProvider = (props) => {
   const [friends, setFriends] = useState([])
   const [serverLocator, setServerLocator] = useState("")
 
+
+
+
+
+  
+
   useEffect(()=>{
     db.collection('server').onSnapshot((snapshot)=>{
     let list=[]

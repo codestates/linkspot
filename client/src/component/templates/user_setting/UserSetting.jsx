@@ -12,6 +12,9 @@ import { AuthContext } from '../../../context/AuthContext';
 import { db } from '../../../utils/firebase/firebase';
 import { getDoc, doc } from '@firebase/firestore';
 
+
+// Main에서 설정 버튼을 누르면 연결되는 페이지
+
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
