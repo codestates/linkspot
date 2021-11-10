@@ -3,11 +3,12 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import './SectionContainer.css';
-import { server } from '../../../db';
 import Chatting from '../chatting/Chatting';
 import { data } from '../../../db';
+import { useConversations } from '../../../context/ConversationContext';
 const SectionContainer = () => {
   const { userInfo, setUserInfo, setServer } = useContext(UserInfoContext);
+  const { conversations } = useConversations();
   // const userInfo = {
   //   email : props.user.email,
   //   nickname:props.user.nickname
@@ -36,7 +37,9 @@ const SectionContainer = () => {
       <div className='section-container'>
         <Header />
         <div className='chatting-container'>
-          <Chatting time={data.time}></Chatting>
+          {conversations.length !== 0 ? (
+            <Chatting time={data.time}></Chatting>
+          ) : null}
         </div>
       </div>
     </div>
