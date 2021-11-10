@@ -1,0 +1,80 @@
+.background {
+  background: #080909;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 85%;
+  z-index: 1;
+}
+.upload-modal > .img-upload {
+  position: fixed;
+  top: 195px;
+  left: 35%;
+  width: 382px;
+  height: 330px;
+  background-color: #363e3b;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  z-index: 5;
+}
+.img-upload > h3 {
+  padding: 20px;
+  font-weight: bold;
+  border-bottom: solid 0.2mm black;
+  color: #fff;
+}
+.fake-input > input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.fake-input {
+  position: absolute;
+  top: 100px;
+  left: 90px;
+  width: 180px;
+  height: 200px;
+  cursor: pointer;
+  background-color: #18191c;
+  border: solid 0.2mm #4f545c;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  color: #b6b9bc;
+}
+.fake-input > input:hover {
+  z-index: 10;
+}
+.fake-input > .circle {
+  position: absolute;
+  border-radius: 100px;
+  top: 20px;
+  width: 130px;
+  height: 130px;
+  background-color: #5765f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .circle > p:before {
+  color: rgba(255, 255, 255, 0.486);
+} */
+
+.fake-input:hover {
+  border: solid 0.2mm #5765f2;
+  color: #fff;
+  transition: 0.2s ease;
+  z-index: 0;
+}
+/* .circle > p:after {
+  color: #fff;
+} */
