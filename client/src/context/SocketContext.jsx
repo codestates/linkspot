@@ -19,7 +19,7 @@ export const SocketProvider = ({ children }) => {
       console.log(typeof userInfo);
       setId(userInfo.email);
     }
-    const newSocket = io('http://localhost:5001', { query: { id } });
+    const newSocket = io('http://localhost:8080');
 
     setSocket(newSocket);
     return () => newSocket.close();

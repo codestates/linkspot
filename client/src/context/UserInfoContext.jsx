@@ -29,6 +29,7 @@ const UserInfoContextProvider = (props) => {
         userInfo,
         setUserInfo,
         server,
+        setServer,
         serverLocator,
         setServerLocator,
         friends,

@@ -3,8 +3,9 @@ import './Chatting.css';
 import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { FaDiscord } from 'react-icons/fa';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
-const Chatting = () => {
+const Chatting = ({ time }) => {
   const [text, setText] = useState('');
   const { sendMessage, selectedConversation } = useConversations();
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
@@ -27,12 +28,12 @@ const Chatting = () => {
     );
     setText('');
   }
-  const data = {
-    ninkName: UserInfoContext.ninkName,
-    fulltime: YearMonthDate,
-    time:
-      new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
-  };
+  // const data = {
+  //   ninkName: UserInfoContext.ninkName,
+  //   fulltime: YearMonthDate,
+  //   time:
+  //     new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+  // };
   return (
     <div className='chatting'>
       <div className='chatting-box'>
@@ -55,7 +56,10 @@ const Chatting = () => {
                 key={index}
                 className='text-box'
               >
-                <div className='name'>{message.senderName}</div>
+                <div className='name'>
+                  {message.senderName} {'  '}
+                  {time}
+                </div>
                 <div
                   className={`text ${
                     message.fromMe ? 'bg-primary text-white' : 'border'

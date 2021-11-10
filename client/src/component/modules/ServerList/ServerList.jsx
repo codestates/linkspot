@@ -7,9 +7,9 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 import { Dialog } from '@mui/material';
 import ServerHandler from '../server_handler/ServerHandler';
 import { db } from '../../../utils/firebase/firebase';
-
+import { server } from '../../../db';
 const ServerList = () => {
-  const server = useContext(UserInfoContext).server;
+  // const server = useContext(UserInfoContext).server;
   const serverLocator = useContext(UserInfoContext).serverLocator;
   const setServerLocator = useContext(UserInfoContext).setServerLocator;
   const [open, setOpen] = useState(false);

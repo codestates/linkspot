@@ -26,6 +26,12 @@ export const ConversationsProvider = ({ children }) => {
   const [selectConversationIndex, setSelectConversationIndex] = useState(0);
 
   const { contacts } = useContacts();
+
+  // const { channelId } = useContacts();
+  // const { userId } = useContacts();
+  // const channelIdKeys = Object.keys(channelId)
+  // const userIdKeys = Object.keys(userId)
+
   const socket = useSocket();
   function createConversation(recipients) {
     setConversations((prevConversations) => {
@@ -58,7 +64,7 @@ export const ConversationsProvider = ({ children }) => {
     },
     [setConversations]
   );
-
+  // 메세지를 보내면 아래형식으로 보내지고 addMessageToConversation에 기록됨
   function sendMessage(recipients, text) {
     socket.emit('direct-message', { recipients, text });
     addMessageToConversation({ recipients, text, sender: id });
