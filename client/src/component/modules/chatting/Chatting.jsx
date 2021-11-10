@@ -3,7 +3,6 @@ import './Chatting.css';
 import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { FaDiscord } from 'react-icons/fa';
-import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Chatting = ({ time }) => {
   const [text, setText] = useState('');
@@ -22,10 +21,7 @@ const Chatting = ({ time }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    sendMessage(
-      selectedConversation.recipients.map((r) => r.id),
-      text
-    );
+    sendMessage(selectedConversation.recipients, text);
     setText('');
   }
   // const data = {
@@ -78,7 +74,7 @@ const Chatting = ({ time }) => {
           <div className='inner-box'>
             <input value={text} onChange={(e) => setText(e.target.value)} />
 
-            <button type='submit' aria-hidden='true'></button>
+            <button type='submit'></button>
           </div>
         </div>
       </form>
