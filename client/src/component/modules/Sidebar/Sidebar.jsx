@@ -8,7 +8,7 @@ import { server } from '../../../db';
 const Sidebar = () => {
   const serverLocator = useContext(UserInfoContext).serverLocator;
   const userInfo = useContext(UserInfoContext).userInfo;
-
+  const serverKey = Object.keys(server);
   console.log(serverLocator);
 
   // const serverInfo = props.currentServerInfo.info
@@ -53,37 +53,51 @@ const Sidebar = () => {
             </div>
             <div className='card-container'>
               {userInfo.friend ? (
-                <>
+                <div>
                   <img src={avatar} alt='default img' />
                   <div className='card-info'>nickname</div>
-                </>
+                </div>
               ) : null}
             </div>
           </div>
         </>
       ) : (
         <>
-          <div className='sidebar-server-name'>{serverLocator}</div>
+          <div className='sidebar-server-name'>
+            {'  '} {serverLocator}
+          </div>
           <div className='sidebar-group-container'>
-            {server.map((item) => (
-              <div className='channel-group'>
-                <p>{item.serverName}</p>
-                {item.chattingChannel.map((sub) => (
-                  <div
-                    className={`channel ${item.serverName}-${sub}`}
-                    onClick={() => {
-                      // setCurrentChannel(sub);
-                      window.localStorage.setItem(
-                        `${item.serverName}`,
-                        JSON.stringify({ group: item.serverName, channel: sub })
-                      );
-                    }}
-                  >
-                    {sub}
-                  </div>
-                ))}
-              </div>
-            ))}
+            <div className='channel-group'>
+              {server[serverLocator].channel.map((sub) => {
+                const item = Object.keys(sub);
+                console.log(sub);
+                return (
+                  <>
+                    <p>{sub.channelTitle}</p>
+                    {item.map((el) => {
+                      if (el !== 'channelTitle')
+                        return (
+                          <div
+                            className={`channel ${serverLocator}-${sub[el].channelName}`}
+                            onClick={() => {
+                              // setCurrentChannel(sub);
+                              window.localStorage.setItem(
+                                `${serverLocator}`,
+                                JSON.stringify({
+                                  group: serverLocator,
+                                  channel: sub[el].channelName,
+                                })
+                              );
+                            }}
+                          >
+                            {sub[el].channelName}
+                          </div>
+                        );
+                    })}
+                  </>
+                );
+              })}
+            </div>
           </div>
         </>
       )}

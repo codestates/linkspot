@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const ContactsContext = React.createContext();
+const ContactsContext = createContext();
 
 export function useContacts() {
   return useContext(ContactsContext);

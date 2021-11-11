@@ -13,7 +13,7 @@ const ServerList = () => {
   const serverLocator = useContext(UserInfoContext).serverLocator;
   const setServerLocator = useContext(UserInfoContext).setServerLocator;
   const [open, setOpen] = useState(false);
-
+  const serverKey = Object.keys(server);
   console.log(serverLocator, setServerLocator);
 
   const handleOpen = () => {
@@ -21,6 +21,11 @@ const ServerList = () => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClick = (e, item) => {
+    // e.preventDefault();
+    // window.localStorage.setItem('serverLocator', `${item.serverId}`);
+    // setServerLocator(`${item.serverId}`);
   };
 
   return (
@@ -37,31 +42,34 @@ const ServerList = () => {
       >
         Home
       </ServerButton>
-      {server.length !== 0
-        ? server.map((item) => (
-            <ServerButton
-              className={
-                serverLocator === `${item.serverName}`
-                  ? `${item.serverName} clicked`
-                  : `${item.serverName}`
-              }
-              onClick={() => {
-                window.localStorage.setItem(
-                  'serverLocator',
-                  `${item.serverName}`
-                );
-                setServerLocator(`${item.serverName}`);
-              }}
-            >
-              {item.serverName}
-            </ServerButton>
-          ))
+      {serverKey.length !== 0
+        ? serverKey.map((el) => {
+            //data를 배열에서 객체로 바꾸면서 최대한 이전의 형태를 유지하기 위해
+            // 아이템을 server[el]로 정의해둠
+            const item = server[el];
+            return (
+              <ServerButton
+                className={
+                  serverLocator === `${item.serverName}`
+                    ? `${item.serverName} clicked`
+                    : `${item.serverName}`
+                }
+                onClick={(e) => {
+                  handleClick(e, item);
+                  window.localStorage.setItem(
+                    'serverLocator',
+                    `${item.serverName}`
+                  );
+                  setServerLocator(`${item.serverName}`);
+                }}
+              >
+                {item.serverName}
+              </ServerButton>
+            );
+          })
         : null}
       <ServerAddButton onClick={handleOpen} />
-      <Dialog open={open} onClose={handleClose}>
-        <ServerHandler />
-        <button onClick={handleClose}>닫기</button>
-      </Dialog>
+      {open && <ServerHandler onClose={handleClose} />}
     </div>
   );
 };

@@ -23,6 +23,8 @@ export const ConversationsProvider = ({ children }) => {
   const [id, setId] = useState();
 
   useEffect(() => {
+    console.log(conversations);
+    //createConversation('dsf');
     if (userInfo) {
       setId(userInfo.email);
     }
@@ -77,7 +79,6 @@ export const ConversationsProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket === undefined) return;
-    console.log(socket);
 
     socket.on('direct-message', addMessageToConversation);
 
@@ -122,6 +123,5 @@ export const ConversationsProvider = ({ children }) => {
 
 function arrayEquality(a, b) {
   if (a !== b) return false;
-
-  return a === b;
+  else return true;
 }

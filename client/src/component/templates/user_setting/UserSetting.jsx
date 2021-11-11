@@ -63,7 +63,7 @@ const UserSetting = ({}) => {
             나의 프로필
           </h3>
 
-          <h4 onClick={handleLogout}>로그아웃</h4>
+          <h4 onClick={() => handleLogout()}>로그아웃</h4>
         </div>
       </div>
       <div className='right-box'>
