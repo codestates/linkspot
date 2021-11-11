@@ -22,7 +22,7 @@ const UserSetting = ({}) => {
   const history = useHistory();
   const docRef = doc(db, 'userinfo', userInfo.email);
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   useEffect(() => {
     const getUserinfo = async () => {
@@ -46,6 +46,7 @@ const UserSetting = ({}) => {
     try {
       const logout = await signOut(auth);
       setIsLoggedIn(false);
+      window.localStorage.clear();
       history.push('/');
     } catch (error) {}
   };
@@ -65,7 +66,7 @@ const UserSetting = ({}) => {
             나의 프로필
           </h3>
 
-          <h4 onClick={handleLogout}>로그아웃</h4>
+          <h4 onClick={() => handleLogout()}>로그아웃</h4>
         </div>
       </div>
       <div className='right-box'>
@@ -81,7 +82,7 @@ const UserSetting = ({}) => {
           })()}
         </div>
         <div className='right-box-2'>
-          <CloseIcon className='close' />
+          <CloseIcon className='close' onClick={() => history.push('/')} />
         </div>
       </div>
     </div>

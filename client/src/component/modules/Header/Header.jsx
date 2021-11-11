@@ -28,16 +28,24 @@ const Header = () =>{
   const [blockList, setBlockList] = useState([])
   const [disable, setDisable]=useState(true)
 
+const Header = () => {
+  const serverLocator = useContext(UserInfoContext).serverLocator;
+  const [key, setKey] = useState('온라인');
+  const tabList = ['온라인', '모두', '대기 중', '차단 목록', '친구 추가하기'];
+  const [onlineList, setOnlineList] = useState([]);
+  const [friendList, setFriendList] = useState([]);
+  const [requestList, setRequestList] = useState([]);
+  const [blockList, setBlockList] = useState([]);
+  const [disable, setDisable] = useState(true);
 
   // 친구 추가할 대상 정보를 입력하지 않으면 친구 추가 보내기 버튼 비활성화
   const disableHandler = (e) => {
-    if(e.target.value.length > 0) {
-      setDisable(false)
-    } else{
-      setDisable(true)
+    if (e.target.value.length > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
     }
-  }
-
+  };
 
   const tabComponent = (props) => {
     // 유저의 온라인 상태인 친구목록이 비어있을때 vs 비어있지 않을 때
@@ -81,9 +89,7 @@ const Header = () =>{
             </div>
             <p>대기 중인 친구 요청이 없네요. 그래도 옆에 Wumpus는 있네요.</p>
           </div>
-        :
-        <div className="request">
-          {requestList.length}
+          <p>Wumpus는 친구를 기다리고 있어요.</p>
         </div>
         )
     } else if (key==="차단 목록"){
@@ -95,38 +101,56 @@ const Header = () =>{
             </div>
             <p>Wumpus는 차단 해제를 할 수 없어요.</p>
         </div>
-        :
-        <div className="block">
-          {blockList.length}
+      ) : (
+        <div className='request'>{requestList.length}</div>
+      );
+    } else if (key === '차단 목록') {
+      return blockList.length === 0 ? (
+        <div className='block empty'>
+          <div className='image-container'>
+            <img src={NoBlock} alt='Empty block list' />
+          </div>
+          <p>Wumpus는 차단 해제를 할 수 없어요.</p>
         </div>
         )
     } else if (key==="친구 추가하기"){
       // 친구 추가하기 탭에 접속했을 때
       return (
-      <div className="friend-request">
-        <header className="friend-request-form-container">
-          <div className="friend-request-head">
-            <p className="title">친구 추가하기</p>
-            <p className="explaination">Discord Tag를 사용하여 친구를 추가할 수 있어요. 대문자, 소문자를 구별한답니다!</p>
-          </div>
-          <div className="friend-request-form">
-            <input className="infomation-input" placeholder="사용자명#0000 입력" onChange={disableHandler}/>
-            <button type="submit" className={disable ? "disable" : "infomation-submit"}>친구 요청 보내기</button>
-          </div>
-        </header>
-        <div className="friends empty">
-            <div className="image-container">
-              <img src={Nobody} alt="Empty friend-list" />
+        <div className='friend-request'>
+          <header className='friend-request-form-container'>
+            <div className='friend-request-head'>
+              <p className='title'>친구 추가하기</p>
+              <p className='explaination'>
+                Discord Tag를 사용하여 친구를 추가할 수 있어요. 대문자, 소문자를
+                구별한답니다!
+              </p>
+            </div>
+            <div className='friend-request-form'>
+              <input
+                className='infomation-input'
+                placeholder='사용자명#0000 입력'
+                onChange={disableHandler}
+              />
+              <button
+                type='submit'
+                className={disable ? 'disable' : 'infomation-submit'}
+              >
+                친구 요청 보내기
+              </button>
+            </div>
+          </header>
+          <div className='friends empty'>
+            <div className='image-container'>
+              <img src={Nobody} alt='Empty friend-list' />
             </div>
             <p>Wumpus는 친구를 기다리고 있어요.</p>
           </div>
-      </div>
-      )
+        </div>
+      );
     }
-  }
+  };
 
-
-  return (    
+  return (
     <>
     {!serverLocator || serverLocator === "Home" ?
     // 현재 접속한 곳이 홈이거나 접속 이력이 없을 경우 홈 화면 랜더링
@@ -166,7 +190,7 @@ const Header = () =>{
       </div>
     }
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -1,0 +1,95 @@
+.chatting {
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.catting-form {
+  margin-top: 20px;
+  width: 100%;
+}
+.chatting-form > .input-box {
+  width: 100%;
+}
+.inner-box > input {
+  background-color: #2b2e32;
+  border-radius: 5px;
+  width: 80%;
+  height: 15px;
+  padding: 10px;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+}
+.inner-box > button {
+  opacity: 0;
+}
+.chatting-box {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  gap: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chatting-box::-webkit-scrollbar-track {
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 2px 0;
+  background-color: #404040;
+}
+
+.chatting-box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chatting-box::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #737272;
+  border: 1px solid #000;
+}
+.message-box {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+.message-box:hover {
+  background-color: #2e3136;
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+.text-box > .name {
+  color: #fff;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+.text-box > .text {
+  color: #fff;
+}
+
+.profile-circle {
+  top: 70px;
+  left: 20px;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background-color: #3da45c;
+}
+.profile-circle > .icon {
+  margin-top: 9px;
+  margin-left: 10px;
+  transform: scale(1.7);
+  color: #fff;
+}
