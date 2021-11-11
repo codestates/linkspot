@@ -5,13 +5,8 @@ import Button from '@mui/material/Button';
 import './Signup.css';
 import Dropdown from '../../atoms/dropdown/Dropdown';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from '@firebase/auth';
-import { auth, db } from '../../../utils/firebase/firebase';
 import { AuthContext } from '../../../context/AuthContext';
-import { collection, doc, setDoc } from '@firebase/firestore';
+import { userInfo as userInfoData } from '../../../db';
 const Signup = ({ isSignup, setIsSignup }) => {
   const [years, setYears] = useState([]);
   const [year, setYear] = useState('');
@@ -36,7 +31,6 @@ const Signup = ({ isSignup, setIsSignup }) => {
   const password_Reg = /^[a-z0-9_]{8,15}$/;
   const nickname_Reg = /^[a-zA-Z]\w*$/;
 
-  const userInfoRef = collection(db, 'userinfo');
   useEffect(() => {
     let tempYear = [];
     let tempMonth = [];
@@ -56,10 +50,6 @@ const Signup = ({ isSignup, setIsSignup }) => {
     setMonths(tempMonth);
     setDays(tempDay);
   }, [month]);
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
   const isSubmit = async (e) => {
     e.preventDefault();
@@ -113,12 +103,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
     }
     //console.log(e);
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        e.target[0].value,
-        e.target[2].value
-      );
-      await setDoc(doc(userInfoRef, e.target[0].value), {
+      userInfoData.push({
         email: e.target[0].value,
         profilecolor: '#3da45c',
         profileimg: '',

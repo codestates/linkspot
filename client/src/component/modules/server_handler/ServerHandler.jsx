@@ -1,21 +1,20 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import { db } from '../../../utils/firebase/firebase';
+import { server } from '../../../db';
 import './ServerHandler.css';
-
 const ServerHandler = ({ open, onClose }) => {
-  const [serverList, setServerList] = useState();
+  // const [serverList, setServerList] = useState();
   const [previewUrl, setPreviewUrl] = useState('');
 
-  useEffect(() => {
-    return db.collection('server').onSnapshot((snapshot) => {
-      let serverList = [];
-      snapshot.forEach((doc) => serverList.push({ ...doc.data(), id: doc.id }));
-      setServerList(serverList);
-    });
-  }, []);
+  // useEffect(() => {
+  //   return db.collection('server').onSnapshot((snapshot) => {
+  //     let serverList = [];
+  //     snapshot.forEach((doc) => serverList.push({ ...doc.data(), id: doc.id }));
+  //     setServerList(serverList);
+  //   });
+  // }, []);
 
-  console.log(serverList);
+  // console.log(serverList);
 
   const [serverName, setServerName] = useState(
     `${useContext(UserInfoContext).userInfo.email.split('@')[0]}님의 서버`
@@ -45,7 +44,6 @@ const ServerHandler = ({ open, onClose }) => {
     const serverTemplate = {
       serverName: serverName,
     };
-    await db.collection('server').add(serverTemplate);
   };
 
   return (

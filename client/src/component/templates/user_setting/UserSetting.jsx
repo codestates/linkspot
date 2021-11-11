@@ -7,24 +7,22 @@ import MyAccount from '../../modules/my_account/MyAccount';
 import MyProfile from '../../modules/myprofile/MyProfile';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { db } from '../../../utils/firebase/firebase';
-import { getDoc, doc } from '@firebase/firestore';
+import { userInfo as userInfoData } from '../../../db';
 
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-  const docRef = doc(db, 'userinfo', userInfo.email);
-
-  console.log(userInfo);
 
   useEffect(() => {
     const getUserinfo = async () => {
+      const newUserData = userInfoData.filter(
+        (el) => el.email === userInfo.email
+      );
       try {
-        const docSnap = await getDoc(docRef);
-        //console.log(docSnap.data(), userInfo.email);
-        setUserInfo(docSnap.data());
+        //axios 들어가는 부분
+        setUserInfo(...newUserData);
       } catch (error) {}
     };
     getUserinfo();

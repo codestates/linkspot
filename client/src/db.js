@@ -2,6 +2,7 @@
     email : "test@gmail.com",
     userName : "test",
     userNumber:'#4039',
+    profilecolor: "#E7E80B",
     joinedServer : [
       {
         "serverId" : 1,
@@ -20,6 +21,7 @@
     email : "roro@homail.com",
     userName : "roro",
     userNumber: '#3421',
+    profilecolor: "#3da45c",
     joinedServer : [
       {
         "serverId" : 1,

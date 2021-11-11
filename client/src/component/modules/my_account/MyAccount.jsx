@@ -16,6 +16,7 @@ const MyAccount = ({ userInfo, setPage }) => {
       setIsModal(true);
     }
   };
+  console.log(userInfo);
   return (
     <div className='myaccount'>
       {isModal ? (
@@ -37,7 +38,11 @@ const MyAccount = ({ userInfo, setPage }) => {
         </div>
         <div className='bottom'>
           <div className='bottom-upper'>
-            <h4>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h4>
+            <h4>
+              {userInfo.nickname
+                ? userInfo.nickname
+                : userInfo.email.split('@')[0]}
+            </h4>
             <button onClick={() => setPage('myprofile')}>프로필 수정</button>
           </div>
 
@@ -45,7 +50,11 @@ const MyAccount = ({ userInfo, setPage }) => {
             <div className='bottom-lower-inner'>
               <div>
                 <h6>사용자 설정</h6>
-                <h5>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h5>
+                <h5>
+                  {userInfo.nickname
+                    ? userInfo.nickname
+                    : userInfo.email.split('@')[0]}
+                </h5>
               </div>
               {/* '사용자 이름 수정' */}
               <button onClick={(e) => handleClick('사용자 이름 수정')}>

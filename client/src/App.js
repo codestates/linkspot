@@ -8,7 +8,7 @@ import {
 import UserSetting from './component/templates/user_setting/UserSetting'
 import PublicRouter from "./router/PublicRouter"
 import PrivateRouter from "./router/PrivateRouter"
-import LoginFrom from "./component/templates/login/LoginFrom.jsx";
+import LoginFrom from "./component/templates/login-form/LoginFrom.jsx";
 
 
 function App() {
