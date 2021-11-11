@@ -9,7 +9,6 @@ import { server } from '../../../db';
 const Sidebar = () => {
   const serverLocator = useContext(UserInfoContext).serverLocator;
   const userInfo = useContext(UserInfoContext).userInfo;
-  const serverKey = Object.keys(server);
   console.log(serverLocator);
 
   // const serverInfo = props.currentServerInfo.info

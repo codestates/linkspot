@@ -1,30 +1,4 @@
-<<<<<<< HEAD
-import { useContext, useState, useEffect } from "react"
-import { Dialog } from "@mui/material"
-import { UserInfoContext } from "../../../context/UserInfoContext"
-import { db } from "../../../utils/firebase/firebase"
-
-const ServerHandler = () => {
-
-  // 서버핸들러에서 다루는 정보
-  // 1. 만들고자 하는 서버 명
-  // 2. 서버 썸네일
-
-  const [serverList, setServerList] = useState()
-
-  useEffect(()=>{
-    return db.collection('server').onSnapshot((snapshot)=>{
-      let serverList=[]
-      snapshot.forEach((doc)=> serverList.push({...doc.data(), id:doc.id}))
-      setServerList(serverList)
-  })},[])
-  
-  console.log(serverList)
-  
-  const [serverName, setServerName] = useState(`${useContext(UserInfoContext).userInfo.email.split("@")[0]}님의 서버`)
-=======
 import { useContext, useState, useEffect } from 'react';
-import { Dialog } from '@mui/material';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { db } from '../../../utils/firebase/firebase';
 import './ServerHandler.css';
@@ -46,7 +20,6 @@ const ServerHandler = ({ open, onClose }) => {
   const [serverName, setServerName] = useState(
     `${useContext(UserInfoContext).userInfo.email.split('@')[0]}님의 서버`
   );
->>>>>>> b265d9f149bf827ef23e9d829f62ba28005adbef
 
   const onChange = (e) => {
     setServerName(e.target.value);
@@ -80,8 +53,10 @@ const ServerHandler = ({ open, onClose }) => {
       <div className='background' onClick={() => onClose()}></div>
       <div className='server-add-modal'>
         <div className='server-add-modal-header'>
-          <h3>새 서버 만들기</h3>
-          <p>새 서버에 이름과 아이콘을 설정하세요.</p>
+          <h3 className='server-add-modal-header-title'>새 서버 만들기</h3>
+          <p className='server-add-modal-header-sb'>
+            새 서버에 이름과 아이콘을 설정하세요.
+          </p>
         </div>
         <div className='server-add-modal-body'>
           <div className='fake-input2'>

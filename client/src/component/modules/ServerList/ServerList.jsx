@@ -4,9 +4,7 @@ import ServerAddButton from '../../atoms/Button/ServerAddButton';
 import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import { Dialog } from '@mui/material';
 import ServerHandler from '../server_handler/ServerHandler';
-import { db } from '../../../utils/firebase/firebase';
 import { server } from '../../../db';
 const ServerList = () => {
   // const server = useContext(UserInfoContext).server;

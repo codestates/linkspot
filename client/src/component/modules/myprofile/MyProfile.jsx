@@ -9,15 +9,12 @@ import { FaDiscord } from 'react-icons/fa';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 const MyProfile = () => {
-  const [color, setColor] = useState('');
   const [openColorPicker, setOpenColorPicker] = useState(false);
   const [isCustomColor, setIsCustomColor] = useState(false);
   const [isImgUpload, setIsImgUpload] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   //console.log(userInfo.profilecolor);
-
-
 
   useEffect(() => {
     if (userInfo.profilecolor !== '#3da45c') {
@@ -114,14 +111,22 @@ const MyProfile = () => {
           </div>
           <div className='bottom'>
             <div className='bottom-upper'>
-              <h4>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h4>
+              <h4>
+                {userInfo.nickname
+                  ? userInfo.nickname
+                  : userInfo.email.split('@')[0]}
+              </h4>
             </div>
 
             <div className='bottom-lower'>
               <div className='bottom-lower-inner'>
                 <div>
                   <h6>사용자 설정</h6>
-                  <h5>{userInfo.nickname ? userInfo.nickname : userInfo.email.split("@")[0]}</h5>
+                  <h5>
+                    {userInfo.nickname
+                      ? userInfo.nickname
+                      : userInfo.email.split('@')[0]}
+                  </h5>
                 </div>
               </div>
             </div>
