@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
+<<<<<<< HEAD
 import axios from "axios"
 import { db } from '../../../utils/firebase/firebase';
 import './ServerHandler.css';
@@ -7,6 +8,12 @@ import './ServerHandler.css';
 const ServerHandler = ({ onClose }) => {
   const server = useContext(UserInfoContext).server
   const setServer = useContext(UserInfoContext).setServer
+=======
+import { server } from '../../../db';
+import './ServerHandler.css';
+const ServerHandler = ({ open, onClose }) => {
+  // const [serverList, setServerList] = useState();
+>>>>>>> 5488769f55721d9b597ec5ebd1ad931af7405c75
   const [previewUrl, setPreviewUrl] = useState('');
 
   // useEffect(() => {
@@ -17,7 +24,11 @@ const ServerHandler = ({ onClose }) => {
   //   });
   // }, []);
 
+<<<<<<< HEAD
   // console.log(useContext(UserInfoContext).userInfo.username);
+=======
+  // console.log(serverList);
+>>>>>>> 5488769f55721d9b597ec5ebd1ad931af7405c75
 
 
   
@@ -44,6 +55,7 @@ const ServerHandler = ({ onClose }) => {
     }
   };
 
+<<<<<<< HEAD
   const createServer =()=> {
     axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/server`,{
       "serverName" : serverName
@@ -52,6 +64,13 @@ const ServerHandler = ({ onClose }) => {
     })
     .then(response => setServer([...server,response.data.serverData]))
     .catch(error => console.log(error))
+=======
+  const createServer = async (e) => {
+    e.preventDefault();
+    const serverTemplate = {
+      serverName: serverName,
+    };
+>>>>>>> 5488769f55721d9b597ec5ebd1ad931af7405c75
   };
 
   return (

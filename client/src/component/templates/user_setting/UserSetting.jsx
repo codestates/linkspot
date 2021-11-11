@@ -7,27 +7,27 @@ import MyAccount from '../../modules/my_account/MyAccount';
 import MyProfile from '../../modules/myprofile/MyProfile';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
+<<<<<<< HEAD
 import { db } from '../../../utils/firebase/firebase';
 import { getDoc, doc } from '@firebase/firestore';
 
 
 // Main에서 설정 버튼을 누르면 연결되는 페이지
 
+=======
+import { userInfo as userInfoData } from '../../../db';
+import axios from 'axios';
+>>>>>>> 5488769f55721d9b597ec5ebd1ad931af7405c75
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-  const docRef = doc(db, 'userinfo', userInfo.email);
-
-  console.log(userInfo);
 
   useEffect(() => {
     const getUserinfo = async () => {
       try {
-        const docSnap = await getDoc(docRef);
-        //console.log(docSnap.data(), userInfo.email);
-        setUserInfo(docSnap.data());
+        //axios 들어가는 부분
       } catch (error) {}
     };
     getUserinfo();
@@ -42,10 +42,14 @@ const UserSetting = ({}) => {
   });
   const handleLogout = async () => {
     try {
-      setIsLoggedIn(false);
-      window.localStorage.clear();
-      history.push('/');
-    } catch (error) {}
+      await axios.post('http://localhost:8080/user/signout').then((data) => {
+        setIsLoggedIn(false);
+        window.localStorage.clear();
+        history.push('/');
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

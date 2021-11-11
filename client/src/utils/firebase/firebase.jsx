@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-
+import { getStorage, ref } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,6 +23,8 @@ firebase.initializeApp(firebaseConfig);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storageService = getStorage(app);
+const storageRef = ref(storageService);
 const db = firebase.firestore();
 
 // console.log(db.collection('userinfo').onSnapshot((snapshot)=>{
@@ -31,4 +33,4 @@ const db = firebase.firestore();
 //   console.log(userlist)
 // }))
 
-export { auth, db };
+export { auth, db, storageService, storageRef };

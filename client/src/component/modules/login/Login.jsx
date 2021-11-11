@@ -3,14 +3,10 @@ import './Login.css';
 import { useHistory } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { auth } from '../../../utils/firebase/firebase';
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from '@firebase/auth';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
+import { userInfo as userInfoData } from '../../../db';
+import axios from 'axios';
 
 const Login = ({ isSignup, setIsSignup }) => {
   const [email, setEmail] = useState('');
@@ -18,7 +14,6 @@ const Login = ({ isSignup, setIsSignup }) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [emailMessage, setEmailMessage] = useState('이메일');
-  const [user, setUser] = useState({});
   const history = useHistory();
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -26,6 +21,7 @@ const Login = ({ isSignup, setIsSignup }) => {
   const email_Reg =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
+
   const isSubmit = async (e) => {
     e.preventDefault();
     if (!email_Reg.test(email) || email.length === 0) {
@@ -39,26 +35,27 @@ const Login = ({ isSignup, setIsSignup }) => {
       setIsValidPassword(false);
       return;
     }
-    //console.log(e.target[0]);
-    // axios
+
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      setIsLoggedIn(true);
-      history.push('/');
+      await axios
+        .post('http://localhost:8080/user/signin', {
+          email: email,
+          password: password,
+        })
+        .then((data) => {
+          console.log(data.data.data.userInfo);
+          setIsLoggedIn(true);
+
+          setUserInfo(data.data.data.userInfo);
+          history.push('/');
+        });
     } catch (error) {
       setIsValidEmail(false);
       setIsValidPassword(false);
       setEmailMessage('이메일 - 이메일 또는 비밀번호가 일치하지 않습니다.');
     }
   };
-  onAuthStateChanged(
-    auth,
-    (currentUser) => {
-      setUser(currentUser);
-      setUserInfo(currentUser);
-    },
-    []
-  );
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -73,7 +70,6 @@ const Login = ({ isSignup, setIsSignup }) => {
       setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');
     } else {
       try {
-        const renewEmail = await sendPasswordResetEmail(auth, email);
       } catch (error) {
         setIsValidEmail(false);
         setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');

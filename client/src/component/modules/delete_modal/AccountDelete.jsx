@@ -2,56 +2,21 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './AccountDelete.css';
 import CloseIcon from '@mui/icons-material/Close';
-import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { auth } from '../../../utils/firebase/firebase';
-import { db } from '../../../utils/firebase/firebase';
-import { getDoc, doc, deleteDoc } from '@firebase/firestore';
-import {
-  reauthenticateWithCredential,
-  EmailAuthProvider,
-  onAuthStateChanged,
-  deleteUser,
-} from '@firebase/auth';
 
 const AccountDelete = ({ setIsModal }) => {
   let history = useHistory();
-  const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const [data, setData] = useState(false);
-  const user = auth.currentUser;
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setData(currentUser);
-  //   console.log(data);
-  // });
 
   const handleSubmit = async (e) => {
     //axios 패스워드 확인 맞으면 리다이렉트
     e.preventDefault();
-
     const password = e.target[0].value;
-    console.log(password);
-    const credential = EmailAuthProvider.credential(user.email, password);
-    await reauthenticateWithCredential(user, credential)
-      .then(async (el) => {
-        //console.log(el);
-        setData(true);
-
-        await deleteDoc(doc(db, 'userinfo', user.email));
-        setIsLoggedIn(false);
-      })
-      .then(async () => {
-        await deleteUser(user);
-        window.localStorage.clear();
-        history.push('/');
-      })
-      .catch((error) => {
-        // An error ocurred
-        // ...
-      });
-
-    //
+    setIsLoggedIn(false);
+    window.localStorage.clear();
+    history.push('/');
   };
+
   return (
     <>
       <div className='background' onClick={() => setIsModal(false)}></div>

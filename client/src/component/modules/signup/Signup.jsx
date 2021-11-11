@@ -5,13 +5,10 @@ import Button from '@mui/material/Button';
 import './Signup.css';
 import Dropdown from '../../atoms/dropdown/Dropdown';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from '@firebase/auth';
-import { auth, db } from '../../../utils/firebase/firebase';
 import { AuthContext } from '../../../context/AuthContext';
-import { collection, doc, setDoc } from '@firebase/firestore';
+import { userInfo as userInfoData } from '../../../db';
+import axios from 'axios';
+
 const Signup = ({ isSignup, setIsSignup }) => {
   const [years, setYears] = useState([]);
   const [year, setYear] = useState('');
@@ -36,7 +33,6 @@ const Signup = ({ isSignup, setIsSignup }) => {
   const password_Reg = /^[a-z0-9_]{8,15}$/;
   const nickname_Reg = /^[a-zA-Z]\w*$/;
 
-  const userInfoRef = collection(db, 'userinfo');
   useEffect(() => {
     let tempYear = [];
     let tempMonth = [];
@@ -56,10 +52,6 @@ const Signup = ({ isSignup, setIsSignup }) => {
     setMonths(tempMonth);
     setDays(tempDay);
   }, [month]);
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
   const isSubmit = async (e) => {
     e.preventDefault();
@@ -113,20 +105,33 @@ const Signup = ({ isSignup, setIsSignup }) => {
     }
     //console.log(e);
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        e.target[0].value,
-        e.target[2].value
-      );
-      await setDoc(doc(userInfoRef, e.target[0].value), {
-        email: e.target[0].value,
-        profilecolor: '#3da45c',
-        profileimg: '',
-        dateOfBirth: `${e.target[3].value}/${e.target[5].value}/${e.target[7].value}`,
-      });
-      setUserInfo({ ...userInfo, email: e.target[0].value });
-      setIsLoggedIn(true);
-      history.push('/');
+      const username = e.target[0].value.split('@')[0];
+
+      await axios
+        .post(
+          'http://localhost:8080/user',
+          {
+            email: e.target[0].value,
+            password: e.target[2].value,
+            profilePicture: '',
+            username: username,
+            profilecolor: '#3da45c',
+          },
+          {
+            ContentType: 'application/json',
+          }
+        )
+        .then((data) => {
+          console.log(data);
+          setUserInfo({
+            email: e.target[0].value,
+            profilecolor: '#3da45c',
+            profileimg: '',
+            directList: [],
+          });
+          setIsLoggedIn(true);
+          history.push('/');
+        });
     } catch (error) {
       setIsValidEmail(false);
       setEmailMessage('이메일 - 이미 존재하는 이메일입니다.');

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './ImguploadModal.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
-
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storageService, storageRef } from '../../../utils/firebase/firebase';
+import { v4 as uuid4 } from 'uuid';
 const ImguploadModal = ({ setIsImgUpload, previewUrl, setPreviewUrl }) => {
-  const handleImgupload = (e) => {
+  const handleImgupload = async (e) => {
     e.preventDefault();
 
     const newFile = e.target.files[0];
@@ -15,6 +17,13 @@ const ImguploadModal = ({ setIsImgUpload, previewUrl, setPreviewUrl }) => {
         setPreviewUrl(reader.result);
         //console.log(reader.result);
       };
+      let url;
+      let id = uuid4();
+      const imgRef = ref(storageService, `main/${id}`);
+      await uploadBytes(imgRef, newFile);
+      await getDownloadURL(imgRef).then((res) => {
+        url = res;
+      });
     }
     setIsImgUpload(false);
   };
