@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './UpdateModal.css';
 import CloseIcon from '@mui/icons-material/Close';
 
-const UserSettingModal = ({ modalType, setIsModal }) => {
+const UpdateModal = ({ modalType, setIsModal }) => {
   const [firstMessage, setFirstMessage] = useState('');
   const [secondMessage, setSecondMessage] = useState('');
   const [isPassword, setIsPassword] = useState(false);
@@ -113,4 +113,4 @@ const UserSettingModal = ({ modalType, setIsModal }) => {
   );
 };
 
-export default UserSettingModal;
+export default UpdateModal;

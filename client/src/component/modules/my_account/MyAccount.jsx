@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MyAccount.css';
 import { FaDiscord } from 'react-icons/fa';
-import UpdateModalModal from '../update_modal/UpdateModal';
+import UpdateModal from '../update_modal/UpdateModal';
 import AccountDeleteModal from '../delete_modal/AccountDelete';
 
 const MyAccount = ({ userInfo, setPage }) => {
@@ -20,7 +20,7 @@ const MyAccount = ({ userInfo, setPage }) => {
   return (
     <div className='myaccount'>
       {isModal ? (
-        <UpdateModalModal modalType={modalType} setIsModal={setIsModal} />
+        <UpdateModal modalType={modalType} setIsModal={setIsModal} />
       ) : null}
       {IsDeleteModal ? (
         <AccountDeleteModal setIsModal={setIsDeleteModal} />
