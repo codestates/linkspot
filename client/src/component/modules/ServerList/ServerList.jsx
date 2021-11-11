@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
-import ServerButton from '../../atoms/Button/ServerButton';
-import ServerAddButton from '../../atoms/Button/ServerAddButton';
+import ServerButton from '../../atoms/button/ServerButton';
+import ServerAddButton from '../../atoms/button/ServerAddButton';
 import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
@@ -8,11 +8,16 @@ import ServerHandler from '../server_handler/ServerHandler';
 import { server } from '../../../db';
 const ServerList = () => {
   // const server = useContext(UserInfoContext).server;
-  const serverLocator = useContext(UserInfoContext).serverLocator;
-  const setServerLocator = useContext(UserInfoContext).setServerLocator;
+  // useEffect(()=>{
+  //   return server = servers
+  // },[useContext(UserInfoContext).server])
+  
+  const server = useContext(UserInfoContext).server
+  const locator = useContext(UserInfoContext).locator;
+  const setLocator = useContext(UserInfoContext).setLocator;
   const [open, setOpen] = useState(false);
-  const serverKey = Object.keys(server);
-  console.log(serverLocator, setServerLocator);
+
+  console.log(server)
 
   const handleOpen = () => {
     setOpen(true);
@@ -20,51 +25,41 @@ const ServerList = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = (e, item) => {
-    // e.preventDefault();
-    // window.localStorage.setItem('serverLocator', `${item.serverId}`);
-    // setServerLocator(`${item.serverId}`);
+  const handleClick = (item) => {
+    setLocator({"server" : item.serverName, "channel" : ""})
   };
 
   return (
     <div className='serverlist-container'>
       <ServerButton
         img={icon}
-        onClick={() => {
-          window.localStorage.setItem('serverLocator', 'Home');
-          setServerLocator('Home');
-        }}
+        onClick={() => 
+          setLocator({"server" : "Home", "channel" : ""})
+        }
         className={
-          serverLocator === 'Home' || !serverLocator ? 'Home clicked' : 'Home'
+          locator.server === 'Home' || !locator ? 'Home clicked' : 'Home'
         }
       >
         Home
       </ServerButton>
-      {serverKey.length !== 0
-        ? serverKey.map((el) => {
-            //data를 배열에서 객체로 바꾸면서 최대한 이전의 형태를 유지하기 위해
-            // 아이템을 server[el]로 정의해둠
-            const item = server[el];
+      {server.length !== 0
+        ? server.map((server) => {
             return (
-              <ServerButton
-                className={
-                  serverLocator === `${item.serverName}`
-                    ? `${item.serverName} clicked`
-                    : `${item.serverName}`
-                }
-                onClick={(e) => {
-                  handleClick(e, item);
-                  window.localStorage.setItem(
-                    'serverLocator',
-                    `${item.serverName}`
-                  );
-                  setServerLocator(`${item.serverName}`);
-                }}
-              >
-                {item.serverName}
-              </ServerButton>
-            );
-          })
+              <>
+                <ServerButton
+                  className={
+                    locator.server === `${server.serverName}`
+                      ? `${server.serverName} clicked`
+                      : `${server.serverName}`
+                  }
+                  onClick={() =>              
+                    handleClick(server)
+                  }
+                >
+                  <p>{server.serverName}</p>
+                </ServerButton>
+              </>
+            )})
         : null}
       <ServerAddButton onClick={handleOpen} />
       {open && <ServerHandler onClose={handleClose} />}

@@ -1,24 +1,28 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
+import axios from "axios"
 import { db } from '../../../utils/firebase/firebase';
 import './ServerHandler.css';
 
-const ServerHandler = ({ open, onClose }) => {
-  const [serverList, setServerList] = useState();
+const ServerHandler = ({ onClose }) => {
+  const server = useContext(UserInfoContext).server
+  const setServer = useContext(UserInfoContext).setServer
   const [previewUrl, setPreviewUrl] = useState('');
 
-  useEffect(() => {
-    return db.collection('server').onSnapshot((snapshot) => {
-      let serverList = [];
-      snapshot.forEach((doc) => serverList.push({ ...doc.data(), id: doc.id }));
-      setServerList(serverList);
-    });
-  }, []);
+  // useEffect(() => {
+  //   return db.collection('server').onSnapshot((snapshot) => {
+  //     let serverList = [];
+  //     snapshot.forEach((doc) => serverList.push({ ...doc.data(), id: doc.id }));
+  //     setServerList(serverList);
+  //   });
+  // }, []);
 
-  console.log(serverList);
+  // console.log(useContext(UserInfoContext).userInfo.username);
 
+
+  
   const [serverName, setServerName] = useState(
-    `${useContext(UserInfoContext).userInfo.email.split('@')[0]}님의 서버`
+    `${useContext(UserInfoContext).userInfo.username}님의 서버`
   );
 
   const onChange = (e) => {
@@ -40,12 +44,14 @@ const ServerHandler = ({ open, onClose }) => {
     }
   };
 
-  const createServer = async (e) => {
-    e.preventDefault();
-    const serverTemplate = {
-      serverName: serverName,
-    };
-    await db.collection('server').add(serverTemplate);
+  const createServer =()=> {
+    axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/server`,{
+      "serverName" : serverName
+    },{
+      withCredentials:true
+    })
+    .then(response => setServer([...server,response.data.serverData]))
+    .catch(error => console.log(error))
   };
 
   return (

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useConversations } from '../../../context/ConversationContext';
+import { data } from '../../../db';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import './SectionContainer.css';

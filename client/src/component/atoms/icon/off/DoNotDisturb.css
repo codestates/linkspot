@@ -1,0 +1,31 @@
+.icon-background {
+  position: relative;
+  height: 14px;
+  width:14px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0)
+}
+
+.icon-do-not-disturb {
+  margin:0px;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #ed4545;
+  opacity: 1;
+}
+
+.icon-vertical-bar{
+  margin:0px;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  height: 2px;
+  width: 5px;
+  transform: translate(-50%,-50%);
+  background-color: black
+}

@@ -9,15 +9,9 @@ const UserInfoContextProvider = (props) => {
   );
   const [server, setServer] = useState([]); // [{channel: name, {channelId, messages:[]}}]
   const [friends, setFriends] = useState([]);
-  const [serverLocator, setServerLocator] = useState('');
+  const [locator, setLocator] = useState({"server" : "Home", "channel" : ""});
 
-  useEffect(() => {
-    db.collection('server').onSnapshot((snapshot) => {
-      let list = [];
-      snapshot.forEach((doc) => list.push({ ...doc.data(), id: doc.id }));
-      setServer(list);
-    });
-  }, []);
+  console.log(server)
 
   useEffect(() => {
     window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
@@ -30,8 +24,8 @@ const UserInfoContextProvider = (props) => {
         setUserInfo,
         server,
         setServer,
-        serverLocator,
-        setServerLocator,
+        locator,
+        setLocator,
         friends,
         setFriends,
       }}
