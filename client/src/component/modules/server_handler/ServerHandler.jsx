@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from 'react';
-import { Dialog } from '@mui/material';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { db } from '../../../utils/firebase/firebase';
 import './ServerHandler.css';
@@ -54,8 +53,10 @@ const ServerHandler = ({ open, onClose }) => {
       <div className='background' onClick={() => onClose()}></div>
       <div className='server-add-modal'>
         <div className='server-add-modal-header'>
-          <h3>새 서버 만들기</h3>
-          <p>새 서버에 이름과 아이콘을 설정하세요.</p>
+          <h3 className='server-add-modal-header-title'>새 서버 만들기</h3>
+          <p className='server-add-modal-header-sb'>
+            새 서버에 이름과 아이콘을 설정하세요.
+          </p>
         </div>
         <div className='server-add-modal-body'>
           <div className='fake-input2'>

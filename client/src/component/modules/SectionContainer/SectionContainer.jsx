@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { UserInfoContext } from '../../../context/UserInfoContext';
+import React from 'react';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import './SectionContainer.css';
@@ -7,7 +6,6 @@ import Chatting from '../chatting/Chatting';
 import { data } from '../../../db';
 import { useConversations } from '../../../context/ConversationContext';
 const SectionContainer = () => {
-  const { userInfo, setUserInfo, setServer } = useContext(UserInfoContext);
   const { conversations } = useConversations();
   // const userInfo = {
   //   email : props.user.email,

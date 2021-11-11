@@ -8,7 +8,6 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  sendEmailVerification,
 } from '@firebase/auth';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';

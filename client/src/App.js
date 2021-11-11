@@ -9,8 +9,6 @@ import UserSetting from './component/templates/user_setting/UserSetting'
 import PublicRouter from "./router/PublicRouter"
 import PrivateRouter from "./router/PrivateRouter"
 import LoginFrom from "./component/templates/login/LoginFrom.jsx";
-import { AuthContext } from './context/AuthContext';
-import { useContext } from 'react';
 
 
 function App() {

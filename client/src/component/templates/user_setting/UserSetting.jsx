@@ -5,8 +5,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { createTheme } from '@mui/material/styles';
 import MyAccount from '../../modules/my_account/MyAccount';
 import MyProfile from '../../modules/myprofile/MyProfile';
-import { signOut } from '@firebase/auth';
-import { auth } from '../../../utils/firebase/firebase';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { db } from '../../../utils/firebase/firebase';
@@ -41,7 +39,6 @@ const UserSetting = ({}) => {
   });
   const handleLogout = async () => {
     try {
-      const logout = await signOut(auth);
       setIsLoggedIn(false);
       window.localStorage.clear();
       history.push('/');
