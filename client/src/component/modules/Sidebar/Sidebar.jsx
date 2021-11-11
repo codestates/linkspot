@@ -8,7 +8,7 @@ import { server } from '../../../db';
 const Sidebar = () => {
   const serverLocator = useContext(UserInfoContext).serverLocator;
   const userInfo = useContext(UserInfoContext).userInfo;
-  console.log(serverLocator);
+  console.log(userInfo);
 
   // const serverInfo = props.currentServerInfo.info
   // const user = props.user
@@ -51,11 +51,11 @@ const Sidebar = () => {
               <p>개인메세지</p>
             </div>
             <div className='card-container'>
-              {userInfo.friend ? (
-                <div>
+              {userInfo.directList.length !== 0 ? (
+                <>
                   <img src={avatar} alt='default img' />
                   <div className='card-info'>nickname</div>
-                </div>
+                </>
               ) : null}
             </div>
           </div>

@@ -11,13 +11,13 @@ const UserInfoContextProvider = (props) => {
   const [friends, setFriends] = useState([]);
   const [serverLocator, setServerLocator] = useState('');
 
-  useEffect(() => {
-    db.collection('server').onSnapshot((snapshot) => {
-      let list = [];
-      snapshot.forEach((doc) => list.push({ ...doc.data(), id: doc.id }));
-      setServer(list);
-    });
-  }, []);
+  // useEffect(() => {
+  //   db.collection('server').onSnapshot((snapshot) => {
+  //     let list = [];
+  //     snapshot.forEach((doc) => list.push({ ...doc.data(), id: doc.id }));
+  //     setServer(list);
+  //   });
+  // }, []);
 
   useEffect(() => {
     window.localStorage.setItem('userInfo', JSON.stringify(userInfo));

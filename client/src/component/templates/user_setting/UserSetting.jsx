@@ -8,7 +8,7 @@ import MyProfile from '../../modules/myprofile/MyProfile';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { userInfo as userInfoData } from '../../../db';
-
+import axios from 'axios';
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
@@ -17,12 +17,8 @@ const UserSetting = ({}) => {
 
   useEffect(() => {
     const getUserinfo = async () => {
-      const newUserData = userInfoData.filter(
-        (el) => el.email === userInfo.email
-      );
       try {
         //axios 들어가는 부분
-        setUserInfo(...newUserData);
       } catch (error) {}
     };
     getUserinfo();
@@ -37,10 +33,14 @@ const UserSetting = ({}) => {
   });
   const handleLogout = async () => {
     try {
-      setIsLoggedIn(false);
-      window.localStorage.clear();
-      history.push('/');
-    } catch (error) {}
+      await axios.post('http://localhost:8080/user/signout').then((data) => {
+        setIsLoggedIn(false);
+        window.localStorage.clear();
+        history.push('/');
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

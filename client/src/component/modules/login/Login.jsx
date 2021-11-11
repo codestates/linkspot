@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { userInfo as userInfoData } from '../../../db';
+import axios from 'axios';
 
 const Login = ({ isSignup, setIsSignup }) => {
   const [email, setEmail] = useState('');
@@ -34,14 +35,20 @@ const Login = ({ isSignup, setIsSignup }) => {
       setIsValidPassword(false);
       return;
     }
-    //console.log(e.target[0]);
-    // axios
-    const newUser = userInfoData.filter((el) => el.email === email);
-    try {
-      setIsLoggedIn(true);
 
-      setUserInfo(...newUser);
-      history.push('/');
+    try {
+      await axios
+        .post('http://localhost:8080/user/signin', {
+          email: email,
+          password: password,
+        })
+        .then((data) => {
+          console.log(data.data.data.userInfo);
+          setIsLoggedIn(true);
+
+          setUserInfo(data.data.data.userInfo);
+          history.push('/');
+        });
     } catch (error) {
       setIsValidEmail(false);
       setIsValidPassword(false);

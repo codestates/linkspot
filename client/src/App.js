@@ -9,6 +9,7 @@ import UserSetting from './component/templates/user_setting/UserSetting'
 import PublicRouter from "./router/PublicRouter"
 import PrivateRouter from "./router/PrivateRouter"
 import LoginFrom from "./component/templates/login-form/LoginFrom.jsx";
+import EmailValidation from './component/modules/email_vaildation/EmailValidation';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <PrivateRouter path="/" component={Main} exact />
           <PublicRouter path="/login" component={LoginFrom} exact />
           <PrivateRouter path="/user_setting" component={UserSetting} exact />
+          <PublicRouter path="/email/:id" component={EmailValidation} exact />
         </Layout> 
       </Switch>
     </Router>

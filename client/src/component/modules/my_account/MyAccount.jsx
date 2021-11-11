@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './MyAccount.css';
 import { FaDiscord } from 'react-icons/fa';
 import UpdateModal from '../update_modal/UpdateModal';
 import AccountDeleteModal from '../delete_modal/AccountDelete';
-
+import axios from 'axios';
 const MyAccount = ({ userInfo, setPage }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [IsDeleteModal, setIsDeleteModal] = useState(false);
-  const handleClick = (type) => {
+  let history = useHistory();
+  const handleClick = async (type) => {
     if (type === 'delete') {
-      setIsDeleteModal(true);
+      await axios.delete('http://localhost:8080/user').then((data) => {
+        window.localStorage.clear();
+        history.push('/login');
+        setIsDeleteModal(true);
+      });
     } else {
       setModalType(type);
       setIsModal(true);
@@ -27,10 +33,7 @@ const MyAccount = ({ userInfo, setPage }) => {
       ) : null}
       <h3>My Account</h3>
       <div className='box'>
-        <div
-          className='top'
-          style={{ backgroundColor: `${userInfo.profilecolor}` }}
-        >
+        <div className='top' style={{ backgroundColor: `${'#3DA45C'}` }}>
           <div className='profile-round'>
             <FaDiscord className='icon' />
             <div className='small'></div>
@@ -39,8 +42,8 @@ const MyAccount = ({ userInfo, setPage }) => {
         <div className='bottom'>
           <div className='bottom-upper'>
             <h4>
-              {userInfo.nickname
-                ? userInfo.nickname
+              {userInfo.username
+                ? userInfo.username
                 : userInfo.email.split('@')[0]}
             </h4>
             <button onClick={() => setPage('myprofile')}>프로필 수정</button>
@@ -51,8 +54,8 @@ const MyAccount = ({ userInfo, setPage }) => {
               <div>
                 <h6>사용자 설정</h6>
                 <h5>
-                  {userInfo.nickname
-                    ? userInfo.nickname
+                  {userInfo.username
+                    ? userInfo.username
                     : userInfo.email.split('@')[0]}
                 </h5>
               </div>

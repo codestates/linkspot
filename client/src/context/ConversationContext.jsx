@@ -24,7 +24,7 @@ export const ConversationsProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(conversations);
-    //createConversation('dsf');
+    // createConversation('dsf');
     if (userInfo) {
       setId(userInfo.email);
     }
