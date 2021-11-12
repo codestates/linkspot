@@ -1,0 +1,28 @@
+Index - contextprovider와 app을 연결 context 데이터를 전역으로 보내 줄 수 있다. 
+  
+  App - Main, LoginFrom, UserSetting component가 import 된다.
+    
+    Main (src/component/template) - ServerList와 SectionContainer import 
+      
+      ServerList (src/modules/serverlist)- main page 좌측에 위치 serverButton, ServerAddButton, ServerHandler import UserInfoContext 사용
+        ServerButton (src/component/atoms) - 서버버튼
+        ServerAddButton (src/component/atoms) - 서버추가 버튼
+        ServerHandler (src/component/modules) - 서버추가 버튼에 따른 모달 적용,  UserInfoContext로 user.email을 받아옴
+      
+      SectionContainer (src/component/modules) - useConversations을 불러와서 대화의 유무를 판단      
+        Header (src/component/modules) - UserInfoContext 사용
+        Sidebar (src/component/modules)- UserInfoContext 사용
+          UserSection (src/component/modules) - Sidebar 하단에 유저 정보 표시 박스, UserInfoContext 사용
+        Chatting (src/component/modules) - Chatting 박스  UserInfoContext, useConversations 사용
+
+    LoginFrom (src/component/template) 
+      Login (src/component/modules) - UserInfoContext, AuthContext 사용
+      Signup (src/component/modules) - UserInfoContext, AuthContext 사용
+        Dropdown (src/component/atoms) - 생년월일 드랍다운
+    
+    UserSetting (src/component/template) - UserInfoContext, AuthContext 사용
+      MyAccount (src/component/modules) 
+        UpdateModal - 유저 정보 수정
+      MyProfile (src/component/modules) - UserInfoContext 사용  
+        ImguploadModal - 유저 프로필 업로드
+      

@@ -1,0 +1,146 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+  height: 100%;
+  background-color: #2f3136;
+  color: #8e9297;
+}
+
+.sidebar-search,
+.sidebar-server-name {
+  box-shadow: 0 1px 0 rgba(4, 4, 5, 0.2), 0 1.5px 0 rgba(6, 6, 7, 0.05),
+    0 2px 0 rgba(4, 4, 5, 0.05);
+  background-color: #2f3136;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+}
+.sidebar-server-name {
+  font-weight: 600;
+  width: 100%;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding-left: -30px;
+}
+.sidebar-group-container {
+  width: 100%;
+  margin-top: 30px;
+  margin-left: 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.channel-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-group > p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 240px;
+  height: 24px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.channel-group > p:hover {
+  color: #fff;
+}
+
+.channel-group > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 240px;
+  height: 24px;
+  color: #8e9297;
+}
+
+.channel-group > div:hover {
+  background-color: #4f545c29;
+  color: #dcddde;
+}
+.channel-group > .channel {
+  margin-top: 8px;
+  width: 180px;
+  border-radius: 5px;
+  padding: 8px 20px;
+
+  cursor: pointer;
+}
+.sidebar-button {
+  background-color: #202225;
+  color: #72767d;
+  border: 0px;
+  border-radius: 4px;
+  box-shadow: none;
+  cursor: pointer;
+  text-align: start;
+  align-items: center;
+  font-size: 14px;
+  height: 24px;
+  width: 220px;
+  text-rendering: optimizeLegibility;
+}
+
+.my-info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  width: 240px;
+  height: 52px;
+  background-color: #292b2f;
+}
+
+.thumbnail {
+  width: 32px;
+  height: 32px;
+  margin: 0 10px 0 10px;
+  border-radius: 50%;
+}
+
+.friend-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 220px;
+  height: 42px;
+  color: #8e9297;
+}
+
+.friend-button:hover {
+  background-color: #4f545c29;
+  color: #dcddde;
+}
+
+.friend-button > div {
+  padding: 0 20px 0 10px;
+}
+
+.message-header > p {
+  padding: 15px 0px 15px 10px;
+  font-size: 12px;
+}
+
+.userinfo-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+.userinfo-nickname {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+.userinfo-tag {
+  font-size: 12px;
+  color: #b9bbbe;
+}
