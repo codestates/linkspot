@@ -5,10 +5,9 @@ import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import ServerHandler from '../server_handler/ServerHandler';
-
+import axios from 'axios';
 const ServerList = () => {
-  
-  const server = useContext(UserInfoContext).server
+  const server = useContext(UserInfoContext).server;
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
   const [open, setOpen] = useState(false);
@@ -19,18 +18,27 @@ const ServerList = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClick = (item) => {
-    setLocator({"server" : item._id, "channel" : ""})
+  const handleClick = async (item) => {
+    setLocator({ server: item._id, channel: '' });
+    console.log(locator.channel);
+    await axios
+      .get(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/server/${locator.server}/channel/${locator.channel}}/message?limit=5&skip=0`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        console.log(7, data);
+      });
   };
 
   return (
     <div className='serverlist-container'>
       <ServerButton
-        key=""
+        key=''
         img={icon}
-        onClick={() => 
-          setLocator({"server" : "Home", "channel" : ""})
-        }
+        onClick={() => setLocator({ server: 'Home', channel: '' })}
         className={
           locator.server === 'Home' || !locator ? 'Home clicked' : 'Home'
         }
@@ -48,14 +56,13 @@ const ServerList = () => {
                       ? `${server.serverName} clicked`
                       : `${server.serverName}`
                   }
-                  onClick={() =>              
-                    handleClick(server)
-                  }
+                  onClick={() => handleClick(server)}
                 >
                   <p>{server.serverName}</p>
                 </ServerButton>
               </>
-            )})
+            );
+          })
         : null}
       <ServerAddButton onClick={handleOpen} />
       {open && <ServerHandler onClose={handleClose} />}

@@ -1,16 +1,17 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import axios from "axios"
+import axios from 'axios';
 import './ServerHandler.css';
+import { useConversations } from '../../../context/ConversationContext';
 
 const ServerHandler = ({ onClose }) => {
-  const server = useContext(UserInfoContext).server
-  const setServer = useContext(UserInfoContext).setServer
+  const server = useContext(UserInfoContext).server;
+  const setServer = useContext(UserInfoContext).setServer;
   const [previewUrl, setPreviewUrl] = useState('');
   const [serverName, setServerName] = useState(
     `${useContext(UserInfoContext).userInfo.username}님의 서버`
   );
-
+  const { createConversation } = useConversations();
   const onChange = (e) => {
     setServerName(e.target.value);
   };
@@ -30,14 +31,27 @@ const ServerHandler = ({ onClose }) => {
     }
   };
 
-  const createServer =()=> {
-    axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/server`,{
-      "serverName" : serverName
-    },{
-      withCredentials:true
-    })
-    .then(response => setServer([...server,response.data.serverData]))
-    .catch(error => console.log(error))
+  const createServer = async () => {
+    await axios
+      .post(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/server`,
+        {
+          serverName: serverName,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        setServer([...server, response.data.serverData]);
+        console.log(response.data);
+        response.data.serverData.channelIds.map((el) => {
+          createConversation(el._id);
+        });
+
+        onClose();
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

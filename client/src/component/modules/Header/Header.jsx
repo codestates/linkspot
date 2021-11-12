@@ -12,7 +12,10 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 
 const Header = () => {
   const locator = useContext(UserInfoContext).locator;
-  const targetServer = useContext(UserInfoContext).server.filter((item)=> item._id === locator.server)[0] || []
+  const targetServer =
+    useContext(UserInfoContext).server.filter(
+      (item) => item._id === locator.server
+    )[0] || [];
   const [key, setKey] = useState('온라인');
   const tabList = ['온라인', '모두', '대기 중', '차단 목록', '친구 추가하기'];
   const [onlineList, setOnlineList] = useState([]);
@@ -21,7 +24,7 @@ const Header = () => {
   const [blockList, setBlockList] = useState([]);
   const [disable, setDisable] = useState(true);
 
-  console.log(targetServer)
+  //console.log(targetServer)
 
   const disableHandler = (e) => {
     if (e.target.value.length > 0) {

@@ -12,17 +12,12 @@ const MyAccount = ({ userInfo, setPage }) => {
   let history = useHistory();
   const handleClick = async (type) => {
     if (type === 'delete') {
-      await axios.delete('http://localhost:8080/user').then((data) => {
-        window.localStorage.clear();
-        history.push('/login');
-        setIsDeleteModal(true);
-      });
+      setIsDeleteModal(true);
     } else {
       setModalType(type);
       setIsModal(true);
     }
   };
-  console.log(userInfo);
   return (
     <div className='myaccount'>
       {isModal ? (

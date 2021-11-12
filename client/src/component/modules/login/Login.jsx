@@ -15,11 +15,10 @@ const Login = ({ isSignup, setIsSignup }) => {
   const [emailMessage, setEmailMessage] = useState('이메일');
   const history = useHistory();
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  const {server, setServer} = useContext(UserInfoContext)
+  const { server, setServer } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-  const email_Reg =
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const email_Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
 
   const isSubmit = async (e) => {
@@ -38,17 +37,25 @@ const Login = ({ isSignup, setIsSignup }) => {
 
     try {
       await axios
-        .post('https://localhost:8080/user/signin', {
-          email: email,
-          password: password,
-        },{
-          withCredentials:true
-        })
+        .post(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/signin`,
+          {
+            email: email,
+            password: password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((data) => {
-          const target = data.data.data
+          const target = data.data.data;
           setIsLoggedIn(true);
-          setServer(target.servers)
+          setServer(target.servers);
+
+          console.log(data.data);
           setUserInfo(target.userInfo);
+        })
+        .then(() => {
           history.push('/');
         });
     } catch (error) {

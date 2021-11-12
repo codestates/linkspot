@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './AccountDelete.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../../context/AuthContext';
-
+import axios from 'axios';
 const AccountDelete = ({ setIsModal }) => {
   let history = useHistory();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -12,9 +12,15 @@ const AccountDelete = ({ setIsModal }) => {
     //axios 패스워드 확인 맞으면 리다이렉트
     e.preventDefault();
     const password = e.target[0].value;
+    await axios
+      .delete(`${process.env.REACT_APP_SERVER_BASE_URL}/user`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        window.localStorage.clear();
+        history.push('/login');
+      });
     setIsLoggedIn(false);
-    window.localStorage.clear();
-    history.push('/');
   };
 
   return (

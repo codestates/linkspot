@@ -28,8 +28,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const history = useHistory();
-  const email_Reg =
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const email_Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
   const nickname_Reg = /^[a-zA-Z]\w*$/;
 
@@ -109,7 +108,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
 
       await axios
         .post(
-          'http://localhost:8080/user',
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user`,
           {
             email: e.target[0].value,
             password: e.target[2].value,
@@ -118,11 +117,10 @@ const Signup = ({ isSignup, setIsSignup }) => {
             profilecolor: '#3da45c',
           },
           {
-            ContentType: 'application/json',
+            withCredentials: true,
           }
         )
         .then((data) => {
-          console.log(data);
           setUserInfo({
             email: e.target[0].value,
             profilecolor: '#3da45c',
@@ -130,7 +128,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
             directList: [],
           });
           setIsLoggedIn(true);
-          history.push('/');
+          setIsSignup(false);
         });
     } catch (error) {
       setIsValidEmail(false);

@@ -34,11 +34,19 @@ const UserSetting = ({}) => {
   });
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/user/signout').then((data) => {
-        setIsLoggedIn(false);
-        window.localStorage.clear();
-        history.push('/');
-      });
+      await axios
+        .post(
+          'https://localhost:8080/user/signout',
+          {},
+          {
+            withCredentials: true,
+          }
+        )
+        .then((data) => {
+          setIsLoggedIn(false);
+          window.localStorage.clear();
+          history.push('/');
+        });
     } catch (error) {
       console.log(error);
     }

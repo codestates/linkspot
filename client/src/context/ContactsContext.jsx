@@ -10,33 +10,19 @@ export const ContactsProvider = ({ children }) => {
   const [contacts, setContacts] = useState(
     () => JSON.parse(window.localStorage.getItem('contacts')) || []
   );
-  const [channelId, setChannelId] = useState(
-    () => JSON.parse(window.localStorage.getItem('channelId')) || {}
-  );
-  const [userId, setUserId] = useState(
-    () => JSON.parse(window.localStorage.getItem('userId')) || {}
-  );
 
   useEffect(() => {
-    window.localStorage.setItem('channelId', JSON.stringify(channelId));
-    window.localStorage.setItem('userId', JSON.stringify(userId));
-  }, [channelId, userId]);
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
-  function createChannelId(id, name) {
-    const newObj = channelId;
-    newObj[id] = id; //{'id':id, }
-    setChannelId(newObj);
-  }
-  function createUserId(id, name) {
-    const newObj = userId;
-    newObj[id] = id;
-    setUserId(newObj);
+  function createContact(id, name) {
+    setContacts((prevContacts) => {
+      return [...prevContacts, { id, name }];
+    });
   }
 
   return (
-    <ContactsContext.Provider
-      value={{ contacts, channelId, createChannelId, userId, createUserId }}
-    >
+    <ContactsContext.Provider value={{ contacts, createContact }}>
       {children}
     </ContactsContext.Provider>
   );
