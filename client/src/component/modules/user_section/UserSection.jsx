@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState, useContext, useRef, useEffect } from "react"
 import StatusMenu from "../status_menu/StatusMenu"
 import { Link } from "react-router-dom"
@@ -19,6 +18,8 @@ const UserSection = () => {
   //유저섹션에서 다루는 정보
   // 1. 유저 정보
 
+
+  const userInfo = useContext(UserInfoContext).userInfo
   const [micOff, setMicOff] = useState(false)
   const [soundOff, setSoundOff] = useState(false)
   const [open, setOpen] = useState(false)
@@ -28,9 +29,6 @@ const UserSection = () => {
   const handleClose =()=>{
     setOpen(false)
   }
-
-  const userInfo = useContext(UserInfoContext).userInfo
-
 
   return(
     <>
@@ -65,41 +63,5 @@ const UserSection = () => {
   </>
   )
 }
-=======
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import './UserSection.css';
-import avatar from '../../../assets/image/avatar-yellow.png';
-import { UserInfoContext } from '../../../context/UserInfoContext';
-import { IoSettingsSharp } from 'react-icons/io5';
-
-const UserSection = () => {
-  const userInfo = useContext(UserInfoContext).userInfo;
-  return (
-    <>
-      <section className='my-info'>
-        {userInfo.profilePicture ? (
-          <img src={userInfo.profilePicture} alt={userInfo.username} />
-        ) : (
-          <img src={avatar} alt='default img' />
-        )}
-        <div className='userinfo-container'>
-          <p className='userinfo-nickname'>
-            {userInfo.username
-              ? userInfo.username
-              : userInfo.email.split('@')[0]}
-          </p>
-          <p className='userinfo-tag'>#1234</p>
-        </div>
-        <div className='icon-container'>
-          <Link to='/user_setting'>
-            <IoSettingsSharp className='icon' />
-          </Link>
-        </div>
-      </section>
-    </>
-  );
-};
->>>>>>> 5488769f55721d9b597ec5ebd1ad931af7405c75
 
 export default UserSection;

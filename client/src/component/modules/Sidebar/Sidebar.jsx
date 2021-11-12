@@ -1,40 +1,30 @@
 import './Sidebar.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import avatar from '../../../assets/image/avatar-yellow.png';
 import UserSection from '../user_section/UserSection';
-import { server } from '../../../db';
 
 const Sidebar = () => {
-  const serverLocator = useContext(UserInfoContext).serverLocator;
+  const locator = useContext(UserInfoContext).locator;
+  const setLocator = useContext(UserInfoContext).setLocator
   const userInfo = useContext(UserInfoContext).userInfo;
-  console.log(userInfo);
+  const targetServer = useContext(UserInfoContext).server.filter((item)=> item._id === locator.server)[0] || []
+  console.log(targetServer)
 
-  // const serverInfo = props.currentServerInfo.info
-  // const user = props.user
-  // const currentChannel = props.currentChannel
-  // const setCurrentChannel = props.setCurrentChannel
+  useEffect(()=>{
+    if(locator.server !== "Home"){
+      return setLocator({"server" : targetServer._id, "channel" : targetServer.channelIds[0]._id})
+    }
+  },[locator.server])
 
-  // useEffect(()=>{
-  //   if(window.localStorage.getItem("serverLocator") !== "Home" || !window.localStorage.getItem(`${serverName}`))
-  //   window.localStorage.setItem(
-  //     `${serverName}`,
-  //     JSON.stringify({"group" : Object.keys(serverInfo)[0],"channel" : Object.values(serverInfo)[0][0]}
-  //     ))
-  // },[])
-
-  // if(
-  //   !window.localStorage.getItem(`${serverName}`) && window.localStorage.getItem("server") && serverName !== "Home"){
-  //   window.localStorage.setItem(
-  //     `${serverName}`,
-  //     JSON.stringify({"group" : Object.keys(serverInfo)[0],"channel" : Object.values(serverInfo)[0][0]}
-  //     ))
-  // }
+  const handleClick = (item) => {
+    setLocator({"server" : item.serverId, "channel" : item._id})
+  };
 
   return (
     <div className='sidebar-container'>
-      {serverLocator === 'Home' || !serverLocator ? (
+      {locator.server === 'Home' ? (
         <>
           <div className='sidebar-search'>
             <button type='button' className='sidebar-button'>
@@ -64,38 +54,28 @@ const Sidebar = () => {
       ) : (
         <>
           <div className='sidebar-server-name'>
-            {'  '} {serverLocator}
+            {targetServer.serverName}
           </div>
           <div className='sidebar-group-container'>
             <div className='channel-group'>
-              {server[serverLocator].channel.map((sub) => {
-                const item = Object.keys(sub);
-                console.log(sub);
+              {targetServer.channelIds.map((group) => {
                 return (
                   <>
-                    <p>{sub.channelTitle}</p>
-                    {item.map((el) => {
-                      if (el !== 'channelTitle')
-                        return (
-                          <div
-                            className={`channel ${serverLocator}-${sub[el].channelName}`}
-                            onClick={() => {
-                              // setCurrentChannel(sub);
-                              window.localStorage.setItem(
-                                `${serverLocator}`,
-                                JSON.stringify({
-                                  group: serverLocator,
-                                  channel: sub[el].channelName,
-                                })
-                              );
-                            }}
-                          >
-                            {sub[el].channelName}
-                          </div>
-                        );
-                    })}
+                    <div className="channel-group">
+                      <p>{group.channelType === "Text" ? "채팅 채널" : "음성 채널"}</p>
+                    </div>
+                    <div
+                      className={
+                      locator.channel === `${group._id}`
+                        ? `${group.channelName} clicked`
+                        : `${group.channelName}`
+                      }
+                      onClick={() =>              
+                        handleClick(group)
+                      }
+                    >{group.channelName}</div>
                   </>
-                );
+                )
               })}
             </div>
           </div>

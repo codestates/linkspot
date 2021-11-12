@@ -5,7 +5,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { userInfo as userInfoData } from '../../../db';
 import axios from 'axios';
 
 const Login = ({ isSignup, setIsSignup }) => {
@@ -16,6 +15,7 @@ const Login = ({ isSignup, setIsSignup }) => {
   const [emailMessage, setEmailMessage] = useState('이메일');
   const history = useHistory();
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const {server, setServer} = useContext(UserInfoContext)
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const email_Reg =
@@ -38,15 +38,17 @@ const Login = ({ isSignup, setIsSignup }) => {
 
     try {
       await axios
-        .post('http://localhost:8080/user/signin', {
+        .post('https://localhost:8080/user/signin', {
           email: email,
           password: password,
+        },{
+          withCredentials:true
         })
         .then((data) => {
-          console.log(data.data.data.userInfo);
+          const target = data.data.data
           setIsLoggedIn(true);
-
-          setUserInfo(data.data.data.userInfo);
+          setServer(target.servers)
+          setUserInfo(target.userInfo);
           history.push('/');
         });
     } catch (error) {

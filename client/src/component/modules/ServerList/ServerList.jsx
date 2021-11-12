@@ -5,19 +5,13 @@ import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import ServerHandler from '../server_handler/ServerHandler';
-import { server } from '../../../db';
+
 const ServerList = () => {
-  // const server = useContext(UserInfoContext).server;
-  // useEffect(()=>{
-  //   return server = servers
-  // },[useContext(UserInfoContext).server])
   
   const server = useContext(UserInfoContext).server
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
   const [open, setOpen] = useState(false);
-
-  console.log(server)
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,12 +20,13 @@ const ServerList = () => {
     setOpen(false);
   };
   const handleClick = (item) => {
-    setLocator({"server" : item.serverName, "channel" : ""})
+    setLocator({"server" : item._id, "channel" : ""})
   };
 
   return (
     <div className='serverlist-container'>
       <ServerButton
+        key=""
         img={icon}
         onClick={() => 
           setLocator({"server" : "Home", "channel" : ""})
@@ -47,8 +42,9 @@ const ServerList = () => {
             return (
               <>
                 <ServerButton
+                  key={server._id}
                   className={
-                    locator.server === `${server.serverName}`
+                    locator.server === `${server._id}`
                       ? `${server.serverName} clicked`
                       : `${server.serverName}`
                   }
