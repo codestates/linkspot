@@ -8,7 +8,7 @@ const http = require("http")
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
 
-const { env } = require("../config/config")
+const { env } = require("../../config/config")
 const { NotFoundHandler } = require("./lib/middleware/not-found")
 const { errorHandlerMiddleware } = require("./lib/middleware/error-handler")
 
