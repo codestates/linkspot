@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body style="font-family:Roboto;">
+		<header>
+			<div style="height:48px; width:100%; background-color:#242323; text-align:center; ">
+				<h1 style="font-size: 24px; font-weight: bold; color:#f8f8f8; line-height:50px;">
+					LinkSpot
+				</h1>
+			</div>
+		</header>
+		<section style="background-color:#f2f2f2; padding:30px;">
+			<div>
+				<div style="text-align: center; color:#242323;">
+					<h2>
+						안녕하세요
+						<br />
+						{{user_nick}}
+						님
+						<br />
+						LinkSpot 입니다.
+					</h2>
+					<br />
+					<p style="text-align: center;">입력하신 이메일의 소유 확인을 위해 아래인증 링크를 클릭하신 후 계속
+						진행해주세요.</p>
+				</div>
+				<p style="text-align: center;"><a href={{url}}>이메일 인증하기</a></p>
+				<p style="color:gray; text-align: center;">이 링크는 발송 후 30분 후 만료됩니다.</p>
+			</div>
+		</section>
+		<footer style="font-size:14px; padding:20px; background-color:#191a20; color:#999; text-align:center;">
+			<span style="color:gray; font-size:32px; font-weight:bolder">LinkSpot</span>
+			<p style="color:#ffffff;">Copyright &copy; test. All rights reserved.</p>
+			<p style="color:#ffffff;">본 메일은 발신전용입니다.</p>
+		</footer>
+	</body>
+</html>
