@@ -14,9 +14,10 @@ const Sidebar = () => {
     useContext(UserInfoContext).server.filter(
       (item) => item._id === locator.server
     )[0] || [];
-  //console.log(targetServer);
+
   const { setSelectId } = useConversations();
   useEffect(() => {
+    console.log(targetServer);
     if (locator.server !== 'Home') {
       return setLocator({
         server: targetServer._id,
@@ -27,7 +28,7 @@ const Sidebar = () => {
 
   const handleClick = (item) => {
     setLocator({ server: item.serverId, channel: item._id });
-    //setSelectId(item._id);
+    setSelectId(item._id);
   };
 
   return (
@@ -64,29 +65,30 @@ const Sidebar = () => {
           <div className='sidebar-server-name'>{targetServer.serverName}</div>
           <div className='sidebar-group-container'>
             <div className='channel-group'>
-              {targetServer.channelIds.map((group) => {
-                return (
-                  <>
-                    <div className='channel-group'>
-                      <p>
-                        {group.channelType === 'Text'
-                          ? '채팅 채널'
-                          : '음성 채널'}
-                      </p>
-                    </div>
-                    <div
-                      className={
-                        locator.channel === `${group._id}`
-                          ? `${group.channelName} clicked`
-                          : `${group.channelName}`
-                      }
-                      onClick={() => handleClick(group)}
-                    >
-                      {group.channelName}
-                    </div>
-                  </>
-                );
-              })}
+              {targetServer &&
+                targetServer.channelIds.map((group) => {
+                  return (
+                    <>
+                      <div className='channel-group'>
+                        <p>
+                          {group.channelType === 'Text'
+                            ? '채팅 채널'
+                            : '음성 채널'}
+                        </p>
+                      </div>
+                      <div
+                        className={
+                          locator.channel === `${group._id}`
+                            ? `${group.channelName} clicked`
+                            : `${group.channelName}`
+                        }
+                        onClick={() => handleClick(group)}
+                      >
+                        {group.channelName}
+                      </div>
+                    </>
+                  );
+                })}
             </div>
           </div>
         </>

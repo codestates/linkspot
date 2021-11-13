@@ -48,17 +48,14 @@ const Login = ({ isSignup, setIsSignup }) => {
           }
         )
         .then((data) => {
-          const target = data.data.data;
+          const target = data.data;
           setIsLoggedIn(true);
           setServer(target.servers);
-
-          console.log(data.data);
           setUserInfo(target.userInfo);
-        })
-        .then(() => {
           history.push('/');
         });
     } catch (error) {
+      console.log(error);
       setIsValidEmail(false);
       setIsValidPassword(false);
       setEmailMessage('이메일 - 이메일 또는 비밀번호가 일치하지 않습니다.');

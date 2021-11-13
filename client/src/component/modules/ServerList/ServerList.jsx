@@ -6,11 +6,14 @@ import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import ServerHandler from '../server_handler/ServerHandler';
 import axios from 'axios';
+import { useContacts } from '../../../context/ContactsContext';
+
 const ServerList = () => {
   const server = useContext(UserInfoContext).server;
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
   const [open, setOpen] = useState(false);
+  const { createContact } = useContacts();
 
   const handleOpen = () => {
     setOpen(true);
@@ -18,18 +21,25 @@ const ServerList = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  // 채널 아이디 정의
   const handleClick = async (item) => {
-    setLocator({ server: item._id, channel: '' });
-    console.log(locator.channel);
+    setLocator({ server: item._id, channel: item.channelIds[0]._id });
+    const channel_Id = item.channelIds[0]._id;
+
     await axios
       .get(
-        `${process.env.REACT_APP_SERVER_BASE_URL}/server/${locator.server}/channel/${locator.channel}}/message?limit=5&skip=0`,
+        `${process.env.REACT_APP_SERVER_BASE_URL}/server/${item._id}/channel/${channel_Id}/message?limit=5&skip=0`,
         {
           withCredentials: true,
         }
       )
       .then((data) => {
-        console.log(7, data);
+        const demo = data.data.messages.map((message) => {
+          createContact(channel_Id, message);
+        });
+        if (demo.length === 0) {
+          createContact(channel_Id, '');
+        }
       });
   };
 

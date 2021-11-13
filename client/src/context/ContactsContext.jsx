@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const ContactsContext = createContext();
 
@@ -8,21 +8,26 @@ export function useContacts() {
 
 export const ContactsProvider = ({ children }) => {
   const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem('contacts')) || []
+    () => JSON.parse(window.localStorage.getItem('contact')) || []
   );
 
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
-  function createContact(id, name) {
-    setContacts((prevContacts) => {
-      return [...prevContacts, { id, name }];
-    });
+  function createContact(id, message) {
+    const creatTime = message.createdAt;
+    const text = message.text;
+    const prevValue = JSON.parse(window.localStorage.getItem(id));
+    console.log(creatTime);
+    if (!prevValue) {
+      const obj = {};
+      obj[creatTime] = text;
+      window.localStorage.setItem(id, JSON.stringify(obj));
+    } else {
+      prevValue[creatTime] = text;
+      window.localStorage.setItem(id, JSON.stringify(prevValue));
+    }
   }
 
   return (
-    <ContactsContext.Provider value={{ contacts, createContact }}>
+    <ContactsContext.Provider value={{ contacts, createContact, setContacts }}>
       {children}
     </ContactsContext.Provider>
   );

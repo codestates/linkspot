@@ -36,7 +36,7 @@ const UserSetting = ({}) => {
     try {
       await axios
         .post(
-          'https://localhost:8080/user/signout',
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/signout`,
           {},
           {
             withCredentials: true,
