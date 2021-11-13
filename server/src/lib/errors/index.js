@@ -10,6 +10,4 @@ module.exports = {
 	UnauthenticatedError,
 	NotFoundError,
 	BadRequestError,
-	NotAceptableError,
-	UnprocessableEntityError,
 }
