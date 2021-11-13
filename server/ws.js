@@ -37,7 +37,6 @@ const ws = async (io) => {
 		socket.on("direct-message", async (userId, msg) => {
 			socket.to(users[userId].socketId).emit("direct-message", socket.id, msg)
 		})
-
 		// 채널 입장
 		socket.on("join-channel", async (textChannelIds) => {
 			for await (const textChannelId of textChannelIds) {
@@ -63,9 +62,6 @@ const ws = async (io) => {
 		})
 
 		socket.on("disconnect", async () => {
-			// for await (const textChannelId of textChannelIds) {
-			// 	socket.leave(textChannelId);
-			// }
 			socket.broadcast.emit("offline user", users[userId])
 			delete users[userId]
 		})
