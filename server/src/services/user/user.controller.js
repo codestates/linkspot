@@ -102,17 +102,15 @@ const signin = asyncWrapper(async (req, res) => {
 	})
 
 	//  userInfo, servers 로 response body 변경
-	if (!userInfo.serverIds.length) {
-		res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
+	if (userInfo.serverIds.length !== 0) {
+		const serverlList = userInfo.serverIds.map((el) => {
+			return { serverIds: el }
+		})
+		const serverData = await db.server.findServersInfo(serverlList)
+		res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: serverData })
 	}
 
-	const serverlList = userInfo.serverIds.map((serverId) => {
-		return { serverIds: serverId }
-	})
-
-	const serverData = await db.server.findServersInfo(serverlList)
-
-	res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: serverData })
+	res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
 
 	// 정상적으로 로그인이 완료되고 유저가 가입한 서버가 없는 경우 응답코드(200)과 유저정보와 빈 채널목록을 응답
 	// if (!userInfo.serverIds.length) {
@@ -245,7 +243,7 @@ const updateNick = asyncWrapper(async (req, res) => {
 
 	const isMatch = await userInfo.comparePassword(password)
 	if (!isMatch) {
-		throw new UnauthenticatedError("비밀번호가 일치하지 않습니다.")
+		throw new UnauthenticatedError("비밀번호가 맞지 않습니다.")
 	}
 
 	const isValidNick = nickValidator(nick)
