@@ -8,9 +8,16 @@ const http = require("http")
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
 
-const { env } = require("../../config/config")
-const { NotFoundHandler } = require("./lib/middleware/not-found")
-const { errorHandlerMiddleware } = require("./lib/middleware/error-handler")
+const { env } = require("../config/config")
+const { NotFoundHandler } = require("./lib/middlewares/not-found")
+const { errorHandlerMiddleware } = require("./lib/middlewares/error-handler")
+
+const userRoute = require("./services/user/user.route")
+const channelRoute = require("./services/channel/channel.route")
+const directRoute = require("./services/direct/direct.route")
+const firendRoute = require("./services/friend/friend.route")
+const mentionRoute = require("./services/mention/mention.route")
+const serverRoute = require("./services/server/server.route")
 
 class Server {
 	constructor(config) {
@@ -51,6 +58,13 @@ class Server {
 		this.app.get("/", (req, res) => {
 			res.status(200).json({ message: "hello world!!" })
 		})
+
+		this.app.use(userRoute)
+		this.app.use(channelRoute)
+		this.app.use(directRoute)
+		this.app.use(firendRoute)
+		this.app.use(mentionRoute)
+		this.app.use(serverRoute)
 	}
 
 	setErrorHandler() {
