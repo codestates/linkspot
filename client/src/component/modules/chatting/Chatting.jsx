@@ -4,6 +4,7 @@ import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { FaDiscord } from 'react-icons/fa';
 import axios from 'axios';
+import { useContacts } from '../../../context/ContactsContext';
 
 const Chatting = ({ time }) => {
   const [text, setText] = useState('');
@@ -13,22 +14,24 @@ const Chatting = ({ time }) => {
   const setLocator = useContext(UserInfoContext).setLocator;
   const [convers, setConvers] = useState({});
   const [keys, setKeys] = useState([]);
+  const { messages, createContact } = useContacts();
+
   useEffect(() => {
-    const newConvers = JSON.parse(window.localStorage.getItem(locator.channel));
-    console.log(newConvers);
-    if (newConvers) {
-      const newKeys = Object.keys(newConvers);
+    console.log(7, messages[locator.channel]);
+    if (messages[locator.channel]) {
+      const newKeys = Object.keys(messages[locator.channel]);
       setKeys(newKeys);
-      setConvers(newConvers);
+      setConvers(messages[locator.channel]);
       return;
     }
-  }, []);
+  }, [messages]);
+
   //userInfoContext를 불러와서 locator, setlocator 추가
   // 채널 메시지 저장 axios 추가
-  async function handleSubmit(e) {
-    e.preventDefault();
 
-    await axios
+  function handleSubmit(e) {
+    e.preventDefault();
+    axios
       .post(
         `${process.env.REACT_APP_SERVER_BASE_URL}/server/${locator.server}/channel/${locator.channel}/message`,
         {
@@ -39,7 +42,24 @@ const Chatting = ({ time }) => {
         }
       )
       .then((data) => {
-        console.log(data);
+        axios
+          .get(
+            `${process.env.REACT_APP_SERVER_BASE_URL}/server/${locator.server}/channel/${locator.channel}/message?limit=5&skip=0`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((data) => {
+            console.log(data.data);
+
+            const demo = data.data.messages.map((message) => {
+              createContact(locator.channel, message);
+            });
+            if (data.data.messages.length === 0) {
+              createContact(locator.channel);
+              return;
+            }
+          });
       });
     //sendMessage(selectedConversation.recipients, text);
     setText('');

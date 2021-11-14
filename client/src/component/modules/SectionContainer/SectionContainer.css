@@ -16,6 +16,7 @@
 .chatting-container {
   margin-top: -30px;
   padding: 30px;
+  overflow-y: scroll;
 }
 .dd {
   flex: 1;

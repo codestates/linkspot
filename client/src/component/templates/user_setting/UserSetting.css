@@ -79,11 +79,13 @@
   margin-top: 120px;
   width: 22px;
   height: 22px;
-  padding: 5px;
+  padding: 2px 5px 8px 6px;
   border: solid 2px black;
   border-color: #72767c;
   border-radius: 100%;
   font-weight: bold;
+  font-size: 25px;
+  text-align: center;
   color: #fff;
 }
 .right-box-2 > .close:hover {

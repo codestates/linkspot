@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ContactsContext = createContext();
 
@@ -7,27 +7,39 @@ export function useContacts() {
 }
 
 export const ContactsProvider = ({ children }) => {
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem('contact')) || []
+  const [messages, setMessages] = useState(
+    () => JSON.parse(window.localStorage.getItem('contact')) || {}
   );
-
-  function createContact(id, message) {
+  console.log(messages);
+  const createContact = (id, message) => {
+    if (!message) {
+      const obj = {};
+      obj[id] = {};
+      return setMessages({ ...obj });
+    }
     const creatTime = message.createdAt;
     const text = message.text;
-    const prevValue = JSON.parse(window.localStorage.getItem(id));
-    console.log(creatTime);
-    if (!prevValue) {
-      const obj = {};
-      obj[creatTime] = text;
-      window.localStorage.setItem(id, JSON.stringify(obj));
+
+    if (!messages[id]) {
+      const obj2 = {};
+      obj2[id] = {};
+      obj2[id][creatTime] = text;
+
+      return setMessages({ ...obj2 });
     } else {
-      prevValue[creatTime] = text;
-      window.localStorage.setItem(id, JSON.stringify(prevValue));
+      const obj2 = messages;
+      obj2[id][creatTime] = text;
+      console.log(obj2);
+      return setMessages({ ...obj2 });
     }
-  }
+  };
+  useEffect(() => {
+    console.log('effet', messages);
+    window.localStorage.setItem('contact', JSON.stringify(messages));
+  }, [messages]);
 
   return (
-    <ContactsContext.Provider value={{ contacts, createContact, setContacts }}>
+    <ContactsContext.Provider value={{ messages, createContact, setMessages }}>
       {children}
     </ContactsContext.Provider>
   );

@@ -4,7 +4,6 @@ import './MyAccount.css';
 import { FaDiscord } from 'react-icons/fa';
 import UpdateModal from '../update_modal/UpdateModal';
 import AccountDeleteModal from '../delete_modal/AccountDelete';
-import axios from 'axios';
 const MyAccount = ({ userInfo, setPage }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalType, setModalType] = useState('');

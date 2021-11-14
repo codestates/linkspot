@@ -5,26 +5,16 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 import avatar from '../../../assets/image/avatar-yellow.png';
 import UserSection from '../user_section/UserSection';
 import { useConversations } from '../../../context/ConversationContext';
-
+import LeaveServer from '../leave_server/LeaveServer';
 const Sidebar = () => {
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
   const userInfo = useContext(UserInfoContext).userInfo;
-  const targetServer =
-    useContext(UserInfoContext).server.filter(
-      (item) => item._id === locator.server
-    )[0] || [];
+  const targetServer = useContext(UserInfoContext).server.filter(
+    (item) => item._id === locator.server
+  )[0];
 
   const { setSelectId } = useConversations();
-  useEffect(() => {
-    console.log(targetServer);
-    if (locator.server !== 'Home') {
-      return setLocator({
-        server: targetServer._id,
-        channel: targetServer.channelIds[0]._id,
-      });
-    }
-  }, [locator.server]);
 
   const handleClick = (item) => {
     setLocator({ server: item.serverId, channel: item._id });
@@ -62,7 +52,13 @@ const Sidebar = () => {
         </>
       ) : (
         <>
-          <div className='sidebar-server-name'>{targetServer.serverName}</div>
+          <div className='sidebar-server-name'>
+            <p>{targetServer.serverName}</p>
+          </div>
+          <LeaveServer
+            className='leave-server'
+            server={targetServer.serverName}
+          />
           <div className='sidebar-group-container'>
             <div className='channel-group'>
               {targetServer &&

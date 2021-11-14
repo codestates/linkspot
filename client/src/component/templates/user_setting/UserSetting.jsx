@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './UserSetting.css';
 import { useHistory } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
 import { createTheme } from '@mui/material/styles';
 import MyAccount from '../../modules/my_account/MyAccount';
 import MyProfile from '../../modules/myprofile/MyProfile';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { userInfo as userInfoData } from '../../../db';
 import axios from 'axios';
 
 const UserSetting = ({}) => {
@@ -83,7 +81,9 @@ const UserSetting = ({}) => {
           })()}
         </div>
         <div className='right-box-2'>
-          <CloseIcon className='close' onClick={() => history.push('/')} />
+          <div className='close' onClick={() => history.push('/')}>
+            &times;
+          </div>
         </div>
       </div>
     </div>

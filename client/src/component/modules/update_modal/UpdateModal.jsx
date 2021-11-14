@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './UpdateModal.css';
-import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 
@@ -124,7 +123,9 @@ const UpdateModal = ({ modalType, setIsModal }) => {
         }
         onSubmit={(e) => handleSubmit(e)}
       >
-        <CloseIcon className='icon' onClick={() => setIsModal(false)} />
+        <div className='icon' onClick={() => setIsModal(false)}>
+          &times;
+        </div>
         <h3>{modalType}</h3>
         <h5>{firstMessage}</h5>
         <p className={isValidName && isValidEmail ? '' : 'invalid'}>

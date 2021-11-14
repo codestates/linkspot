@@ -6,7 +6,6 @@ import './Signup.css';
 import Dropdown from '../../atoms/dropdown/Dropdown';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { userInfo as userInfoData } from '../../../db';
 import axios from 'axios';
 
 const Signup = ({ isSignup, setIsSignup }) => {

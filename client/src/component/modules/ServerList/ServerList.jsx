@@ -22,11 +22,11 @@ const ServerList = () => {
     setOpen(false);
   };
   // 채널 아이디 정의
-  const handleClick = async (item) => {
+  const handleClick = (item) => {
     setLocator({ server: item._id, channel: item.channelIds[0]._id });
     const channel_Id = item.channelIds[0]._id;
 
-    await axios
+    axios
       .get(
         `${process.env.REACT_APP_SERVER_BASE_URL}/server/${item._id}/channel/${channel_Id}/message?limit=5&skip=0`,
         {
@@ -37,8 +37,9 @@ const ServerList = () => {
         const demo = data.data.messages.map((message) => {
           createContact(channel_Id, message);
         });
-        if (demo.length === 0) {
-          createContact(channel_Id, '');
+        if (data.data.messages.length === 0) {
+          createContact(channel_Id);
+          return;
         }
       });
   };

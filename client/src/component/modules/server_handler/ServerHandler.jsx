@@ -31,8 +31,8 @@ const ServerHandler = ({ onClose }) => {
     }
   };
 
-  const createServer = async () => {
-    await axios
+  const createServer = () => {
+    axios
       .post(
         `${process.env.REACT_APP_SERVER_BASE_URL}/server`,
         {
@@ -45,6 +45,7 @@ const ServerHandler = ({ onClose }) => {
       .then((response) => {
         setServer([...server, response.data.serverData]);
         console.log(response.data);
+
         response.data.serverData.channelIds.map((el) => {
           createConversation(el._id);
         });

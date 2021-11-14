@@ -1,4 +1,4 @@
-.my-info{
+.my-info {
   position: absolute;
   display: flex;
   align-items: center;
@@ -15,44 +15,44 @@
   border-radius: 50%;
 }
 
-.userinfo-container{
+.userinfo-container {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
 }
-.userinfo-nickname{
+.userinfo-nickname {
   font-weight: 600;
-  font-size:14px;
+  font-size: 14px;
   color: #fff;
 }
 
-.thumbnail{
+.thumbnail {
   cursor: pointer;
 }
 
 .userinfo-tag {
-  font-size:12px;
+  font-size: 12px;
   color: #b9bbbe;
 }
 
 .icon-container {
   margin-right: 15px;
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: flex-end;
 }
 
-a:link { 
+a:link {
   text-decoration: none;
- }
-  
- a:visited { 
+}
+
+a:visited {
   text-decoration: none;
- }
-  
- a:hover { 
+}
+
+a:hover {
   text-decoration: underline;
- }
+}
 
 .icon {
   color: #b9bbbe;
@@ -62,14 +62,22 @@ svg {
   padding: 0px 5px;
 }
 
-.MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiMenu-paper MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+.MuiPaper-root
+  MuiPaper-elevation
+  MuiPaper-rounded
+  MuiPaper-elevation1
+  MuiMenu-paper
+  MuiPaper-root
+  MuiPaper-elevation
+  MuiPaper-rounded
+  MuiPaper-elevation8
+  MuiPopover-paper
+  css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
   position: absolute;
-  background-color: red;
-  bottom:100px;
+  bottom: 100px;
 }
 .MuiList-root {
-  width:228px;
-  height:200px;
-  bottom:25px;
-  background-color: tan;;
+  width: 228px;
+  height: 200px;
+  bottom: 25px;
 }
