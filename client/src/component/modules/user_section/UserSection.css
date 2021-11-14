@@ -28,6 +28,11 @@
 
 .thumbnail {
   cursor: pointer;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  padding: 9px;
+  background-color: #faa619;
 }
 
 .userinfo-tag {
@@ -40,8 +45,15 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  gap: 0px 5px;
 }
-
+.set-icons {
+  cursor: pointer;
+  margin-top: -20px;
+}
+.setting-icon {
+  margin-bottom: 16px;
+}
 a:link {
   text-decoration: none;
 }

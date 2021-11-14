@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import './AccountDelete.css';
-import CloseIcon from '@mui/icons-material/Close';
 import { AuthContext } from '../../../context/AuthContext';
 import axios from 'axios';
 const AccountDelete = ({ setIsModal }) => {
@@ -27,7 +26,9 @@ const AccountDelete = ({ setIsModal }) => {
     <>
       <div className='background' onClick={() => setIsModal(false)}></div>
       <form className='delete-modal' onSubmit={(e) => handleSubmit(e)}>
-        <CloseIcon className='icon' onClick={() => setIsModal(false)} />
+        <div className='icon' onClick={() => setIsModal(false)}>
+          &times;
+        </div>
         <h3>계정삭제</h3>
         <div className='yellow-box'>
           <h5>

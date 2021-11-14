@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import './MyProfile.css';
 import { ChromePicker } from 'react-color';
 import rgbHex from 'rgb-hex';
-import ColorizeIcon from '@mui/icons-material/Colorize';
-import CheckIcon from '@mui/icons-material/Check';
+import colorpicker from '../../../assets/image/colorpicker.svg';
+import check from '../../../assets/image/check.svg';
+import imgupload from '../../../assets/image/imgupload.svg';
+import linkspot from '../../../assets/image/linkspot.svg';
 import ImguploadModal from '../imgupload_modal/ImguploadModal';
-import { FaDiscord } from 'react-icons/fa';
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 const MyProfile = () => {
   const [openColorPicker, setOpenColorPicker] = useState(false);
@@ -54,7 +54,7 @@ const MyProfile = () => {
               setIsCustomColor(false);
             }}
           >
-            {!isCustomColor && <CheckIcon className='check-icon' />}
+            {!isCustomColor && <img src={check} className='check-icon' />}
           </div>
           <div
             className='color-picker'
@@ -67,8 +67,8 @@ const MyProfile = () => {
               setIsCustomColor(true);
             }}
           >
-            {isCustomColor && <CheckIcon className='check-icon' />}
-            <ColorizeIcon className='icon' />
+            {isCustomColor && <img src={check} className='check-icon' />}
+            <img src={colorpicker} className='icon' />
           </div>
           {openColorPicker && (
             <ChromePicker
@@ -104,9 +104,9 @@ const MyProfile = () => {
               >
                 아바타 수정
               </div>
-              {!previewUrl && <FaDiscord className='icon' />}
+              {!previewUrl && <img src={linkspot} className='icon' />}
 
-              <WallpaperIcon className='upload-icon' />
+              <img src={imgupload} className='upload-icon' />
             </div>
           </div>
           <div className='bottom'>

@@ -90,6 +90,7 @@
   align-self: flex-end;
   color: #6f7276;
   cursor: pointer;
+  font-size: 30px;
 }
 .delete-modal > .icon:hover {
   color: rgba(255, 255, 255, 0.836);

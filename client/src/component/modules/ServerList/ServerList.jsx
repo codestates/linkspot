@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import ServerButton from '../../atoms/button/ServerButton';
 import ServerAddButton from '../../atoms/button/ServerAddButton';
-import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
+import linkspot from '../../../assets/image/linkspot.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import ServerHandler from '../server_handler/ServerHandler';
@@ -48,7 +48,7 @@ const ServerList = () => {
     <div className='serverlist-container'>
       <ServerButton
         key=''
-        img={icon}
+        img={linkspot}
         onClick={() => setLocator({ server: 'Home', channel: '' })}
         className={
           locator.server === 'Home' || !locator ? 'Home clicked' : 'Home'

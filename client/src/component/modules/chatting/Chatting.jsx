@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import './Chatting.css';
 import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
@@ -15,9 +15,9 @@ const Chatting = ({ time }) => {
   const [convers, setConvers] = useState({});
   const [keys, setKeys] = useState([]);
   const { messages, createContact } = useContacts();
+  const endMessage = useRef();
 
   useEffect(() => {
-    console.log(7, messages[locator.channel]);
     if (messages[locator.channel]) {
       const newKeys = Object.keys(messages[locator.channel]);
       setKeys(newKeys);
@@ -50,8 +50,6 @@ const Chatting = ({ time }) => {
             }
           )
           .then((data) => {
-            console.log(data.data);
-
             const demo = data.data.messages.map((message) => {
               createContact(locator.channel, message);
             });
@@ -114,7 +112,7 @@ const Chatting = ({ time }) => {
               );
             })}
           </div>
-
+          <div ref={endMessage}></div>
           <form onSubmit={handleSubmit} className='catting-form'>
             <div className='input-box'>
               <div className='inner-box'>
