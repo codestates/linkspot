@@ -12,7 +12,7 @@ const findAdminInServer = async (userId, serverId) => {
 }
 
 const findServersInfo = async (serverIds) =>
-	Server.find({ servers: { $or: serverIds } })
+	Server.find({ $or: serverIds })
 		.populate({
 			path: "channelIds",
 		})

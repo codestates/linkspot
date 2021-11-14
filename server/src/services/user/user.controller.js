@@ -107,11 +107,7 @@ const signin = asyncWrapper(async (req, res) => {
 		const serverList = userInfo.serverIds.map((el) => {
 			return { _id: el }
 		})
-		console.log(serverList)
 		const serverData = await db.server.findServersInfo(serverList)
-		const test = await Server.find({ $or: serverList })
-		console.log(test, 1231)
-		// console.log(serverData)
 		return res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: serverData })
 	}
 
