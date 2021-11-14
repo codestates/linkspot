@@ -1,0 +1,30 @@
+.server-add-button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height: 60px;
+}
+
+.server-add-button{
+  color : #dcddde;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0px;
+  width: 48px;
+  height: 48px;
+  /* background-color: #DCDDDE; */
+  background-color: #36393f;
+  color:#3ba55d;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.server-add-button:hover {
+  border-radius: 15px;
+  background-color: #3ba55d;
+  color:#ffffff;
+  transition: background-color .15s ease-out, color .15s ease-out;
+  transition: color .15s ease-out, background-color .15s ease-out;
+}
