@@ -62,10 +62,10 @@ const Sidebar = () => {
           <div className='sidebar-group-container'>
             <div className='channel-group'>
               {targetServer &&
-                targetServer.channelIds.map((group) => {
+                targetServer.channelIds.map((group, idx) => {
                   return (
                     <>
-                      <div className='channel-group'>
+                      <div className='channel-group' key={idx}>
                         <p>
                           {group.channelType === 'Text'
                             ? '채팅 채널'

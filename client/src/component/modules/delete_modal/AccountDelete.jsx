@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/AuthContext';
 import axios from 'axios';
 const AccountDelete = ({ setIsModal }) => {
   let history = useHistory();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     //axios 패스워드 확인 맞으면 리다이렉트

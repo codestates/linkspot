@@ -1,5 +1,5 @@
 import './Header.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { TiMessages } from 'react-icons/ti';
 import { RiInboxFill } from 'react-icons/ri';

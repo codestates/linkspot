@@ -9,11 +9,6 @@ import micoff from '../../../assets/image/micoff.svg';
 import micon from '../../../assets/image/micon.svg';
 import setting from '../../../assets/image/setting.svg';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import { IoSettingsSharp } from 'react-icons/io5';
-import { MdHeadsetMic } from 'react-icons/md';
-import { MdHeadsetOff } from 'react-icons/md';
-import { BsFillMicFill } from 'react-icons/bs';
-import { BsFillMicMuteFill } from 'react-icons/bs';
 
 const UserSection = () => {
   //유저섹션에서 다루는 정보

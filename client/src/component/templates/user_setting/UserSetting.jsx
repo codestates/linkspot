@@ -11,7 +11,7 @@ import axios from 'axios';
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(() => {

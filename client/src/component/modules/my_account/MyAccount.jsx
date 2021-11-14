@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './MyAccount.css';
-import { FaDiscord } from 'react-icons/fa';
 import linkspot from '../../../assets/image/linkspot.svg';
 import UpdateModal from '../update_modal/UpdateModal';
 import AccountDeleteModal from '../delete_modal/AccountDelete';
