@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -28,18 +29,19 @@ const LeaveServer = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   console.log(locator.server);
+  const history = useHistory();
   const serverLeave = () => {
     axios
       .delete(
         `${process.env.REACT_APP_SERVER_BASE_URL}/server/${locator.server}`,
-        {},
         {
           withCredentials: true,
         }
       )
-      .then((response) =>
-        setServer(server.filter((item) => item._id !== locator.server))
-      )
+      .then((response) => {
+        setServer(server.filter((item) => item._id !== locator.server));
+        history.push('/');
+      })
       .catch((err) => console.log(err));
   };
 
