@@ -6,6 +6,9 @@ import avatar from '../../../assets/image/avatar-yellow.png';
 import UserSection from '../user_section/UserSection';
 import { useConversations } from '../../../context/ConversationContext';
 import LeaveServer from '../leave_server/LeaveServer';
+import SidebarUserCard from '../../user_info_card/SidebarUserCard';
+
+
 const Sidebar = () => {
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
@@ -40,14 +43,7 @@ const Sidebar = () => {
             <div className='message-header'>
               <p>개인메세지</p>
             </div>
-            <div className='card-container'>
-              {userInfo.directList.length !== 0 ? (
-                <>
-                  <img src={avatar} alt='default img' />
-                  <div className='card-info'>nickname</div>
-                </>
-              ) : null}
-            </div>
+            <SidebarUserCard/>
           </div>
         </>
       ) : (

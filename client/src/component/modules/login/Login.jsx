@@ -22,6 +22,9 @@ const Login = ({ isSignup, setIsSignup }) => {
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
 
+
+  console.log(process.env.REACT_APP_SERVER_BASE_URL)
+
   const isSubmit = async (e) => {
     e.preventDefault();
     if (!email_Reg.test(email) || email.length === 0) {
@@ -40,6 +43,7 @@ const Login = ({ isSignup, setIsSignup }) => {
       await axios
         .post(
           `${process.env.REACT_APP_SERVER_BASE_URL}/user/signin`,
+          // "http://localhost:8080/user/signin",
           {
             email: email,
             password: password,

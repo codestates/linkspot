@@ -30,6 +30,7 @@ const UserInfoContextProvider = (props) => {
   useEffect(() => {
     window.localStorage.setItem('locator', JSON.stringify(locator));
   }, [locator]);
+  
 
   return (
     <UserInfoContext.Provider

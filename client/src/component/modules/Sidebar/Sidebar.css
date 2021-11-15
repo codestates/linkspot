@@ -127,6 +127,7 @@
 }
 
 .message-header > p {
+  width: 220px;
   padding: 15px 0px 15px 10px;
   font-size: 12px;
 }
