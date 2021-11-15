@@ -87,7 +87,7 @@ const UserSection = () => {
           )}
           {/* 개인정보 수정 버튼 */}
           <Link to='/user_setting'>
-            <img src={setting} className='setting-icon' />
+            <img src={setting} className='set-icons setting' />
           </Link>
         </div>
       </section>
