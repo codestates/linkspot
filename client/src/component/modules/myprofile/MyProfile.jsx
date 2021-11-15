@@ -19,10 +19,12 @@ const MyProfile = () => {
   useEffect(() => {
     if (userInfo.profilecolor !== '#3da45c') {
       setIsCustomColor(true);
-      return;
-    } else {
     }
-  }, []);
+    console.log(userInfo);
+    if (previewUrl) {
+      setUserInfo({ ...userInfo, profilePicture: previewUrl });
+    }
+  }, [previewUrl]);
 
   return (
     <div className='my-profile'>
@@ -98,7 +100,7 @@ const MyProfile = () => {
             <div
               className='profile-round'
               style={{
-                backgroundImage: `url(${previewUrl})`,
+                backgroundImage: `url(${userInfo.profilePicture})`,
               }}
             >
               <div
@@ -107,7 +109,9 @@ const MyProfile = () => {
               >
                 아바타 수정
               </div>
-              {!previewUrl && <img src={linkspot} className='icon' />}
+              {!userInfo.profilePicture && (
+                <img src={linkspot} className='icon' />
+              )}
 
               <img src={imgupload} className='upload-icon' />
             </div>

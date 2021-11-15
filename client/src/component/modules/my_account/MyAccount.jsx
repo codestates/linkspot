@@ -29,8 +29,17 @@ const MyAccount = ({ userInfo, setPage }) => {
           className='top'
           style={{ backgroundColor: `${userInfo.profilecolor || '#3DA45C'}` }}
         >
-          <div className='profile-round'>
-            <img src={linkspot} className='icon' />
+          <div
+            className='profile-round'
+            style={{
+              backgroundImage: `url(${
+                userInfo.profilePicture ? userInfo.profilePicture : null
+              })`,
+            }}
+          >
+            {!userInfo.profilePicture && (
+              <img src={linkspot} className='icon' />
+            )}
           </div>
         </div>
         <div className='bottom'>
