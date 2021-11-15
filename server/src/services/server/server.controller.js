@@ -30,7 +30,15 @@ const deleteServer = asyncWrapper(async (req, res) => {
 	// 유저가 서버의 어드민인지 확인해야함
 	// 어드민이 아닐경우
 	// 응답코드(401)와 { message: "서버의 관리자 권한이 필요합니다." } 응답 해야함
-	await db.server.deleteServer(req.params.serverId)
+	const { userInfo } = req
+	const { serverId } = req.params
+
+	const { admin: isAdmin } = await db.server.findAdminInServer(userInfo._id, serverId)
+	if (!isAdmin) {
+		throw new UnauthenticatedError("관리자 권한이 필요합니다.")
+	}
+	
+	await db.server.deleteServer(serverId)
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
