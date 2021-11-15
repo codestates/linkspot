@@ -11,7 +11,6 @@ const createChannelMessage = asyncWrapper(async (req, res) => {
 	// Authorization: accessToken
 	// serverId, TextChannelId, senderId, mentionId, text
 	const { _id: senderId } = req.userInfo
-	console.log(req.userInfo._id, senderId)
 	const { serverId, channelId } = req.params
 	const { mentionIds, text } = req.body
 
@@ -147,8 +146,8 @@ const addUserInChannel = asyncWrapper(async (req, res) => {
 		throw new BadRequestError("유효하지 않은 서버 혹은 채널입니다.")
 	}
 
-	const { admin } = await db.server.findAdminInServer(userInfo._id, serverId)
-	if (!admin) {
+	const { admin: isAdmin } = await db.server.findAdminInServer(userInfo._id, serverId)
+	if (!isAdmin) {
 		throw new UnauthenticatedError("관리자 권한이 필요합니다.")
 	}
 
@@ -177,8 +176,8 @@ const deleteUserInChannel = asyncWrapper(async (req, res) => {
 		throw new BadRequestError("유효하지 않은 서버 혹은 채널입니다.")
 	}
 
-	const { admin } = await db.server.findAdminInServer(userInfo._id, serverId)
-	if (!admin) {
+	const { admin: isAdmin } = await db.server.findAdminInServer(userInfo._id, serverId)
+	if (!isAdmin) {
 		throw new UnauthenticatedError("관리자 권한이 필요합니다.")
 	}
 
@@ -212,8 +211,8 @@ const updateChannel = asyncWrapper(async (req, res) => {
 		throw new BadRequestError("유효하지 않은 서버 혹은 채널입니다.")
 	}
 
-	const { admin } = await db.server.findAdminInServer(userInfo._id, serverId)
-	if (!admin) {
+	const { admin: isAdmin } = await db.server.findAdminInServer(userInfo._id, serverId)
+	if (!isAdmin) {
 		throw new UnauthenticatedError("관리자 권한이 필요합니다.")
 	}
 
