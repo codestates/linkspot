@@ -19,19 +19,19 @@ export const ConversationsProvider = ({ children }) => {
   const [conversations, setConversations] = useState(
     () => JSON.parse(window.localStorage.getItem('conversations')) || []
   );
-  const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const { userInfo } = useContext(UserInfoContext);
   const [id, setId] = useState();
 
   useEffect(() => {
-    console.log(conversations);
+    //console.log(conversations);
     // createConversation('dsf');
     if (userInfo) {
       setId(userInfo.email);
     }
     window.localStorage.setItem('conversations', JSON.stringify(conversations));
   }, [conversations]);
-
   const [selectConversationIndex, setSelectConversationIndex] = useState(0);
+  const [selectId, setSelectId] = useState('');
   const { contacts } = useContacts();
   // const { channelId } = useContacts();
   // const { userId } = useContacts();
@@ -79,12 +79,14 @@ export const ConversationsProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket === undefined) return;
-
     socket.on('direct-message', addMessageToConversation);
 
     return () => socket.off('direct-message');
   }, [socket, addMessageToConversation]);
 
+  // const conversationIndex = conversations.findIndex(
+  //   (el) => selectId === el.recipients
+  // );
   const formattedConversations = conversations.map((conversation, index) => {
     // const recipients = conversation.recipients.map((recipient) => {
     //   const contact = contacts.find((contact) => {
@@ -102,6 +104,7 @@ export const ConversationsProvider = ({ children }) => {
       const fromMe = id === message.sender;
       return { ...message, senderName: name, fromMe };
     });
+
     const selected = index === selectConversationIndex;
     return { ...conversation, messages, recipients, selected };
   });
@@ -110,7 +113,8 @@ export const ConversationsProvider = ({ children }) => {
     conversations: formattedConversations,
     selectedConversation: formattedConversations[selectConversationIndex],
     sendMessage,
-    selectConversationIndex: setSelectConversationIndex,
+    setSelectId,
+    setSelectConversationIndex,
     createConversation,
   };
 

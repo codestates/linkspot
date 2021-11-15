@@ -84,11 +84,12 @@
   background-color: #3f4aad;
 }
 .user-setting-modal > .icon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   padding: 10px;
   align-self: flex-end;
+  font-size: 30px;
   color: #6f7276;
   cursor: pointer;
 }

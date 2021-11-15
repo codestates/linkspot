@@ -1,17 +1,19 @@
 import { useContext, useState, useEffect } from 'react';
 import ServerButton from '../../atoms/button/ServerButton';
 import ServerAddButton from '../../atoms/button/ServerAddButton';
-import icon from '../../../assets/image/icon_clyde_white_RGB.svg';
+import linkspot from '../../../assets/image/linkspot.svg';
 import './ServerList.css';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import ServerHandler from '../server_handler/ServerHandler';
+import axios from 'axios';
+import { useContacts } from '../../../context/ContactsContext';
 
 const ServerList = () => {
-  
-  const server = useContext(UserInfoContext).server
+  const server = useContext(UserInfoContext).server;
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
   const [open, setOpen] = useState(false);
+  const { createContact } = useContacts();
 
   const handleOpen = () => {
     setOpen(true);
@@ -19,18 +21,35 @@ const ServerList = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  // 채널 아이디 정의
   const handleClick = (item) => {
-    setLocator({"server" : item._id, "channel" : ""})
+    setLocator({ server: item._id, channel: item.channelIds[0]._id });
+    const channel_Id = item.channelIds[0]._id;
+
+    axios
+      .get(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/server/${item._id}/channel/${channel_Id}/message?limit=5&skip=0`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        const demo = data.data.messages.map((message) => {
+          createContact(channel_Id, message);
+        });
+        if (data.data.messages.length === 0) {
+          createContact(channel_Id);
+          return;
+        }
+      });
   };
 
   return (
     <div className='serverlist-container'>
       <ServerButton
-        key=""
-        img={icon}
-        onClick={() => 
-          setLocator({"server" : "Home", "channel" : ""})
-        }
+        key=''
+        img={linkspot}
+        onClick={() => setLocator({ server: 'Home', channel: '' })}
         className={
           locator.server === 'Home' || !locator ? 'Home clicked' : 'Home'
         }
@@ -48,14 +67,13 @@ const ServerList = () => {
                       ? `${server.serverName} clicked`
                       : `${server.serverName}`
                   }
-                  onClick={() =>              
-                    handleClick(server)
-                  }
+                  onClick={() => handleClick(server)}
                 >
                   <p>{server.serverName}</p>
                 </ServerButton>
               </>
-            )})
+            );
+          })
         : null}
       <ServerAddButton onClick={handleOpen} />
       {open && <ServerHandler onClose={handleClose} />}

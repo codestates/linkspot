@@ -15,7 +15,7 @@ const Login = ({ isSignup, setIsSignup }) => {
   const [emailMessage, setEmailMessage] = useState('이메일');
   const history = useHistory();
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  const {server, setServer} = useContext(UserInfoContext)
+  const { server, setServer } = useContext(UserInfoContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const email_Reg =
@@ -38,20 +38,25 @@ const Login = ({ isSignup, setIsSignup }) => {
 
     try {
       await axios
-        .post('https://localhost:8080/user/signin', {
-          email: email,
-          password: password,
-        },{
-          withCredentials:true
-        })
+        .post(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/signin`,
+          {
+            email: email,
+            password: password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((data) => {
-          const target = data.data.data
+          const target = data.data;
           setIsLoggedIn(true);
-          setServer(target.servers)
+          setServer(target.servers);
           setUserInfo(target.userInfo);
           history.push('/');
         });
     } catch (error) {
+      console.log(error);
       setIsValidEmail(false);
       setIsValidPassword(false);
       setEmailMessage('이메일 - 이메일 또는 비밀번호가 일치하지 않습니다.');

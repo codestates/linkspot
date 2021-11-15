@@ -13,16 +13,16 @@ export const SocketProvider = ({ children }) => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const [id, setId] = useState();
 
-  useEffect(() => {
-    if (userInfo) {
-      console.log(typeof userInfo);
-      setId(userInfo.email);
-    }
-    const newSocket = io('http://localhost:8080');
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     console.log(typeof userInfo);
+  //     setId(userInfo.email);
+  //   }
+  //   const newSocket = io('http://localhost:8080');
 
-    setSocket(newSocket);
-    return () => newSocket.close();
-  }, [userInfo]);
+  //   setSocket(newSocket);
+  //   return () => newSocket.close();
+  // }, [userInfo]);
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>

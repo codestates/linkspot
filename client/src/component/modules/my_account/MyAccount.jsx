@@ -1,28 +1,20 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import './MyAccount.css';
-import { FaDiscord } from 'react-icons/fa';
+import linkspot from '../../../assets/image/linkspot.svg';
 import UpdateModal from '../update_modal/UpdateModal';
 import AccountDeleteModal from '../delete_modal/AccountDelete';
-import axios from 'axios';
 const MyAccount = ({ userInfo, setPage }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [IsDeleteModal, setIsDeleteModal] = useState(false);
-  let history = useHistory();
   const handleClick = async (type) => {
     if (type === 'delete') {
-      await axios.delete('http://localhost:8080/user').then((data) => {
-        window.localStorage.clear();
-        history.push('/login');
-        setIsDeleteModal(true);
-      });
+      setIsDeleteModal(true);
     } else {
       setModalType(type);
       setIsModal(true);
     }
   };
-  console.log(userInfo);
   return (
     <div className='myaccount'>
       {isModal ? (
@@ -33,10 +25,12 @@ const MyAccount = ({ userInfo, setPage }) => {
       ) : null}
       <h3>My Account</h3>
       <div className='box'>
-        <div className='top' style={{ backgroundColor: `${'#3DA45C'}` }}>
+        <div
+          className='top'
+          style={{ backgroundColor: `${userInfo.profilecolor || '#3DA45C'}` }}
+        >
           <div className='profile-round'>
-            <FaDiscord className='icon' />
-            <div className='small'></div>
+            <img src={linkspot} className='icon' />
           </div>
         </div>
         <div className='bottom'>

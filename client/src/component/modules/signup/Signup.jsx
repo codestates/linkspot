@@ -6,7 +6,6 @@ import './Signup.css';
 import Dropdown from '../../atoms/dropdown/Dropdown';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { userInfo as userInfoData } from '../../../db';
 import axios from 'axios';
 
 const Signup = ({ isSignup, setIsSignup }) => {
@@ -109,7 +108,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
 
       await axios
         .post(
-          'http://localhost:8080/user',
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user`,
           {
             email: e.target[0].value,
             password: e.target[2].value,
@@ -118,11 +117,10 @@ const Signup = ({ isSignup, setIsSignup }) => {
             profilecolor: '#3da45c',
           },
           {
-            ContentType: 'application/json',
+            withCredentials: true,
           }
         )
         .then((data) => {
-          console.log(data);
           setUserInfo({
             email: e.target[0].value,
             profilecolor: '#3da45c',
@@ -130,7 +128,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
             directList: [],
           });
           setIsLoggedIn(true);
-          history.push('/');
+          setIsSignup(false);
         });
     } catch (error) {
       setIsValidEmail(false);

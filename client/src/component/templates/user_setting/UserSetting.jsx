@@ -1,19 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './UserSetting.css';
 import { useHistory } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
 import { createTheme } from '@mui/material/styles';
 import MyAccount from '../../modules/my_account/MyAccount';
 import MyProfile from '../../modules/myprofile/MyProfile';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import { AuthContext } from '../../../context/AuthContext';
-import { userInfo as userInfoData } from '../../../db';
 import axios from 'axios';
 
 const UserSetting = ({}) => {
   const [page, setPage] = useState('/');
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -34,11 +32,19 @@ const UserSetting = ({}) => {
   });
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/user/signout').then((data) => {
-        setIsLoggedIn(false);
-        window.localStorage.clear();
-        history.push('/');
-      });
+      await axios
+        .post(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/signout`,
+          {},
+          {
+            withCredentials: true,
+          }
+        )
+        .then((data) => {
+          setIsLoggedIn(false);
+          window.localStorage.clear();
+          history.push('/');
+        });
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +81,9 @@ const UserSetting = ({}) => {
           })()}
         </div>
         <div className='right-box-2'>
-          <CloseIcon className='close' onClick={() => history.push('/')} />
+          <div className='close' onClick={() => history.push('/')}>
+            &times;
+          </div>
         </div>
       </div>
     </div>

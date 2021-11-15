@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './UpdateModal.css';
-import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import { UserInfoContext } from '../../../context/UserInfoContext';
 
 const UpdateModal = ({ modalType, setIsModal }) => {
   const [firstMessage, setFirstMessage] = useState('');
@@ -17,6 +18,7 @@ const UpdateModal = ({ modalType, setIsModal }) => {
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
   const nickname_Reg = /^[a-zA-Z]\w*$/;
+  const { userInfo, setUserInfo } = useContext(UserInfoContext);
 
   useEffect(() => {
     if (modalType === '사용자 이름 수정') {
@@ -32,7 +34,7 @@ const UpdateModal = ({ modalType, setIsModal }) => {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(e.target[2].value.length);
     if (modalType === '사용자 이름 수정') {
@@ -44,6 +46,19 @@ const UpdateModal = ({ modalType, setIsModal }) => {
         setIsValidName(false);
         return;
       }
+      await axios
+        .patch(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/nick`,
+          {
+            nick: e.target[0].value,
+            password: e.target[1].value,
+          },
+          { withCredentials: true }
+        )
+        .then((data) => {
+          setUserInfo({ ...userInfo, nick: e.target[0].value });
+          setIsModal(false);
+        });
     } else if (modalType === '이메일 수정') {
       if (
         !email_Reg.test(e.target[0].value) ||
@@ -53,6 +68,19 @@ const UpdateModal = ({ modalType, setIsModal }) => {
         setIsValidName(false);
         return;
       }
+      await axios
+        .patch(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/email`,
+          {
+            email: e.target[0].value,
+            password: e.target[1].value,
+          },
+          { withCredentials: true }
+        )
+        .then((data) => {
+          setUserInfo({ ...userInfo, email: e.target[0].value });
+          setIsModal(false);
+        });
     } else if (modalType === '비밀번호 수정') {
       if (
         e.target[1].value !== e.target[2].value ||
@@ -62,7 +90,20 @@ const UpdateModal = ({ modalType, setIsModal }) => {
         setCheckPassword(false);
         return;
       }
+      await axios
+        .patch(
+          `${process.env.REACT_APP_SERVER_BASE_URL}/user/password`,
+          {
+            currentPassword: e.target[0].value,
+            changePassword: e.target[1].value,
+          },
+          { withCredentials: true }
+        )
+        .then((data) => {
+          setIsModal(false);
+        });
     }
+
     //axios로 비밀번호 확인 후 전달
     // if (
     //   !password_Reg.test(e.target[0].value) ||
@@ -82,7 +123,9 @@ const UpdateModal = ({ modalType, setIsModal }) => {
         }
         onSubmit={(e) => handleSubmit(e)}
       >
-        <CloseIcon className='icon' onClick={() => setIsModal(false)} />
+        <div className='icon' onClick={() => setIsModal(false)}>
+          &times;
+        </div>
         <h3>{modalType}</h3>
         <h5>{firstMessage}</h5>
         <p className={isValidName && isValidEmail ? '' : 'invalid'}>
