@@ -31,11 +31,11 @@ const freindRequest = async (senderId, username, userNumber) => {
 	if (friendInfo) throw new BadRequestError("이미 친구 입니다.")
 
 	if (!receiver) {
-		return { code: 404, message: "해당 아이디는 존재하지 않습니다." }
+		return { code: 400 }
 	}
 
 	if (receiver.friendRequests && receiver.friendRequests.includes(senderId)) {
-		return { code: 409, message: "이미 친구요청을 보냈습니다." }
+		return { code: 409 }
 	}
 
 	await User.updateOne({ _id: receiver._id }, { $push: { friendRequests: senderId } })
