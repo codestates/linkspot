@@ -10,7 +10,6 @@ const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 const { validator, emailValidator, nickValidator, passwordValidator } = require("../../lib/validator")
 const { crossOriginEmbedderPolicy } = require("helmet")
-const { Server } = require("../../models")
 
 // 화원가입 컨트롤러
 const signup = asyncWrapper(async (req, res) => {
@@ -103,15 +102,37 @@ const signin = asyncWrapper(async (req, res) => {
 	})
 
 	//  userInfo, servers 로 response body 변경
-	if (userInfo.serverIds.length !== 0) {
-		const serverList = userInfo.serverIds.map((el) => {
-			return { _id: el }
-		})
-		const serverData = await db.server.findServersInfo(serverList)
-		return res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: serverData })
+	if (!userInfo.serverIds.length) {
+		res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
 	}
 
-	res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
+	const serverlList = userInfo.serverIds.map((serverId) => {
+		return { serverIds: serverId }
+	})
+
+	const serverData = await db.server.findServersInfo(serverlList)
+
+	res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: serverData })
+
+	// 정상적으로 로그인이 완료되고 유저가 가입한 서버가 없는 경우 응답코드(200)과 유저정보와 빈 채널목록을 응답
+	// if (!userInfo.serverIds.length) {
+	// 	return res
+	// 		.status(StatusCodes.OK)
+	// 		.json({ userInfo: userData, channels: [] });
+	// }
+
+	// const channelsByServerId = userInfo.serverIds.map((serverId) => {
+	// 	return serverId.channelIds.map((_) => {
+	// 		return { _id: serverId };
+	// 	});
+	// });
+
+	// const channelsIds = channelsByServerId.flat();
+	// const channels = await db.channel.findChannelsByChannelId(channelsIds);
+
+	// // 정상적으로 로그인이 완료된 경우
+	// // 응답코드(200)와 유저정보와 채널목록을 응답
+	// res.status(StatusCodes.OK).json({ userInfo: userData, channels });
 })
 
 // 이메일 인증 컨트롤러
@@ -224,7 +245,7 @@ const updateNick = asyncWrapper(async (req, res) => {
 
 	const isMatch = await userInfo.comparePassword(password)
 	if (!isMatch) {
-		throw new UnauthenticatedError("비밀번호가 맞지 않습니다.")
+		throw new UnauthenticatedError("비밀번호가 일치하지 않습니다.")
 	}
 
 	const isValidNick = nickValidator(nick)
