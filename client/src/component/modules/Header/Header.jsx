@@ -12,6 +12,7 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 
 const Header = () => {
   const locator = useContext(UserInfoContext).locator;
+  const participant = useContext(UserInfoContext).participant
   const targetServer = useContext(UserInfoContext).server.filter((item)=> item._id === locator.server)[0]
   const [key, setKey] = useState('온라인');
   const tabList = ['온라인', '모두', '대기 중', '차단 목록', '친구 추가하기'];
@@ -27,6 +28,9 @@ const Header = () => {
     }
   })[0].channelName
 : null
+
+
+  console.log(currentChannel)
 
   const disableHandler = (e) => {
     if (e.target.value.length > 0) {
@@ -119,7 +123,7 @@ const Header = () => {
 
   return (
     <>
-      {!locator.server || locator.server === 'Home' ? (
+      {locator.server === 'Home' && locator.channel === "" ? (
         <div className='header-container'>
           <nav className='nav-container'>
             <div className='friend-tag'>
@@ -153,7 +157,7 @@ const Header = () => {
           <div className='tab-content'>{tabComponent()}</div>
         </div>
       ) : (
-        <div className='location-name'>{currentChannel}</div>
+        <div className='location-name'>{currentChannel ? currentChannel : `${participant} 님과의 대화`}</div>
       )}
     </>
   );

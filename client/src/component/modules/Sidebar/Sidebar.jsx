@@ -1,12 +1,10 @@
 import './Sidebar.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import avatar from '../../../assets/image/avatar-yellow.png';
 import UserSection from '../user_section/UserSection';
-import { useConversations } from '../../../context/ConversationContext';
 import LeaveServer from '../leave_server/LeaveServer';
-import SidebarUserCard from '../../user_info_card/SidebarUserCard';
+import SidebarUserCard from '../user_info_card/SidebarUserCard';
 
 
 const Sidebar = () => {
@@ -50,11 +48,11 @@ const Sidebar = () => {
         <>
           <div className='sidebar-server-name'>
             <p>{targetServer.serverName}</p>
-          </div>
-          <LeaveServer
+            <LeaveServer
             className='leave-server'
             server={targetServer.serverName}
           />
+          </div>
           <div className='sidebar-group-container'>
             <div className='channel-group'>
               {targetServer &&

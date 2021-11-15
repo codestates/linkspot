@@ -18,6 +18,13 @@ const UserInfoContextProvider = (props) => {
         channel: '',
       }
   );
+  const [participant, setParticipant] = useState(
+    ()=> JSON.parse(window.localStorage.getItem("participant")) || {}
+  );
+
+  useEffect(()=>{
+    window.localStorage.setItem("participant", JSON.stringify(participant))
+  },[participant])
 
   useEffect(() => {
     window.localStorage.setItem('server', JSON.stringify(server));
@@ -43,6 +50,8 @@ const UserInfoContextProvider = (props) => {
         setLocator,
         friends,
         setFriends,
+        participant,
+        setParticipant
       }}
     >
       {props.children}
