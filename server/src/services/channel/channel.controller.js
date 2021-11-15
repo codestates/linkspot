@@ -217,6 +217,7 @@ const updateChannel = asyncWrapper(async (req, res) => {
 	}
 
 	await db.channel.editChannelName(channelName, channelId)
+	
 	res.status(StatusCodes.OK).json({ message: "채널이름 수정 완료" })
 })
 
