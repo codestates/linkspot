@@ -15,6 +15,7 @@ const createServer = asyncWrapper(async (req, res) => {
 	}
 
 	const serverData = await db.server.createServer(serverName, req.userInfo._id)
+	
 	res.status(StatusCodes.CREATED).json({ serverData })
 })
 
@@ -39,6 +40,7 @@ const deleteServer = asyncWrapper(async (req, res) => {
 	}
 	
 	await db.server.deleteServer(serverId)
+	
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
@@ -78,6 +80,7 @@ const leaveServer = asyncWrapper(async (req, res) => {
 
 const isAdminInServer = asyncWrapper(async (req, res) => {
 	const isAdmin = await db.server.findAdminInServer(req.userInfo._id, req.params.serverId)
+	
 	res.status(StatusCodes.OK).json({ data: isAdmin })
 })
 
