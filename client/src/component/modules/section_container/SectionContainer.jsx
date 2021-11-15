@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
+import Header from '../header/Header';
+import Sidebar from '../sidebar/Sidebar';
 import './SectionContainer.css';
 import Chatting from '../chatting/Chatting';
 import './SectionContainer.css';

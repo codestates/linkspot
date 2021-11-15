@@ -1,5 +1,5 @@
 import "./App.css"
-import Layout from "./component/Layout/Layout.jsx"
+import Layout from "./component/layout/Layout.jsx"
 import Main from "./component/templates/main/Main.jsx"
 import {
   BrowserRouter as Router,

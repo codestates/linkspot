@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import axios from 'axios';
 import './ServerHandler.css';

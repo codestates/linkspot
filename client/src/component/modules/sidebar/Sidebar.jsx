@@ -10,7 +10,6 @@ import SidebarUserCard from '../user_info_card/SidebarUserCard';
 const Sidebar = () => {
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
-  const userInfo = useContext(UserInfoContext).userInfo;
   const targetServer = useContext(UserInfoContext).server.filter(
     (item) => item._id === locator.server
   )[0];

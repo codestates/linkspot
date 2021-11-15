@@ -1,5 +1,5 @@
 import './Header.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { TiMessages } from 'react-icons/ti';
 import { RiInboxFill } from 'react-icons/ri';
@@ -21,13 +21,13 @@ const Header = () => {
   const [requestList, setRequestList] = useState([]);
   const [blockList, setBlockList] = useState([]);
   const [disable, setDisable] = useState(true);
-  let currentChannel = locator.server !== "Home" 
-  ? targetServer.channelIds.filter((item)=>{
-    if(locator.channel === item._id){
-      return item
-    }
-  })[0].channelName
-: null
+  let currentChannel = locator.server !== "Home" ? 
+  targetServer.channelIds.filter((item)=>{
+      if(locator.channel === item._id){
+        return item
+      }
+    })[0].channelName
+  : null
 
 
   console.log(currentChannel)

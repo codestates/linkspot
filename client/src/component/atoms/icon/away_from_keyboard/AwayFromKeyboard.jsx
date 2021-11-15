@@ -1,4 +1,3 @@
-import { BsMoonFill } from "react-icons/bs"
 import eclipse from "../../../../assets/image/eclipse.svg"
 import "./AwayFromKeyboard.css"
 

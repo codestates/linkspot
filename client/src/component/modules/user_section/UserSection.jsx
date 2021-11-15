@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import StatusMenu from '../status_menu/StatusMenu';
 import { Link } from 'react-router-dom';
 import './UserSection.css';
@@ -63,31 +63,35 @@ const UserSection = () => {
             <img
               className='set-icons'
               src={micoff}
+              alt="mic off"
               onClick={() => setMicOff(!micOff)}
             />
           ) : (
             <img
               className='set-icons'
               src={micon}
+              alt="mic on"
               onClick={() => setMicOff(!micOff)}
             />
           )}
           {soundOff ? (
             <img
               className='set-icons'
+              alt="sound off"
               src={headphone_off}
               onClick={() => setSoundOff(!soundOff)}
             />
           ) : (
             <img
               className='set-icons'
+              alt="sound on"
               src={headphone_on}
               onClick={() => setSoundOff(!soundOff)}
             />
           )}
           {/* 개인정보 수정 버튼 */}
           <Link to='/user_setting'>
-            <img src={setting} className='set-icons setting' />
+            <img src={setting} alt="setting" className='set-icons setting' />
           </Link>
         </div>
       </section>

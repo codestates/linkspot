@@ -1,17 +1,14 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import './Chatting.css';
-import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import linkspot from '../../../assets/image/linkspot.svg';
 import axios from 'axios';
 import { useContacts } from '../../../context/ContactsContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
 const Chatting = ({ time }) => {
-  const [text, setText] = useState('');
-  const { sendMessage, selectedConversation } = useConversations();
-  const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const [text, setText] = useState('');;
+  const { userInfo } = useContext(UserInfoContext);
   const locator = useContext(UserInfoContext).locator;
-  const setLocator = useContext(UserInfoContext).setLocator;
   const [convers, setConvers] = useState({});
   const [keys, setKeys] = useState([]);
   const { messages, createContact } = useContacts();
