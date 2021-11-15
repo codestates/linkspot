@@ -195,14 +195,29 @@ const deleteUserInChannel = asyncWrapper(async (req, res) => {
 const updateChannel = asyncWrapper(async (req, res) => {
 	// req 구성
 	// Authorization: accessToken
-	if (!ObjectId.isValid(req.params.serverId)) throw new UnprocessableEntityError("serverId를 잘 못 입력했습니다.")
-	if (!ObjectId.isValid(req.params.channelId)) throw new UnprocessableEntityError("channelId를 잘 못 입력했습니다.")
-	const isChannelInServer = await db.server.findChannelInServer(req.params.serverId, req.params.channelId)
-	if (!isChannelInServer) throw new BadRequestError("서버 또는 채널이 없습니다.")
-	const { admin } = await db.server.findAdminInServer(req.userInfo._id, req.params.serverId)
-	if (!admin) throw new BadRequestError("권한이 없습니다.")
-	if (!req.body.channelName) throw new BadRequestError("수정할 채널 이름을 입력하세요.")
-	await db.channel.editChannelName(req.body.channelName, req.params.channelId)
+	const { serverId, channelId } = req.params
+	const { channelName } = req.body
+	const { userInfo } = req
+
+	if (!ObjectId.isValid(serverId) || !ObjectId.isValid(channelId)) {
+		throw new BadRequestError("유효하지 않은 serverId 혹은 channelId 입니다.")
+	}
+
+	if (!channelName) {
+		throw new BadRequestError("유효하지 않은 body 데이터입니다.")
+	}
+
+	const isChannelInServer = await db.server.findChannelInServer(serverId, channelId)
+	if (!isChannelInServer) {
+		throw new BadRequestError("유효하지 않은 서버 혹은 채널입니다.")
+	}
+
+	const { admin } = await db.server.findAdminInServer(userInfo._id, serverId)
+	if (!admin) {
+		throw new UnauthenticatedError("관리자 권한이 필요합니다.")
+	}
+
+	await db.channel.editChannelName(channelName, channelId)
 	res.status(StatusCodes.OK).json({ message: "채널이름 수정 완료" })
 })
 
