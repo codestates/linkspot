@@ -7,7 +7,11 @@ require("./db")
 
 function main(config = {}) {
 	const server = createServer(config)
-	const io = new Server(server)
+	const io = new Server(server, {
+		cors: {
+			origin: true,
+		},
+	})
 	ws(io)
 	server.listen(config.port, () => {
 		console.log(`Running at port ${config.port}`)

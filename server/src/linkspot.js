@@ -39,10 +39,20 @@ class Server {
 			//* security middleware
 			this.app.use(hpp())
 			this.app.use(helmet())
-			this.app.use(cors({ origin: "site-url", credentials: true }))
+			this.app.use(
+				cors({
+					origin: "site-url",
+					credentials: true,
+				})
+			)
 		} else {
 			this.app.use(morgan("dev"))
-			this.app.use(cors({ origin: true, credentials: true }))
+			this.app.use(
+				cors({
+					origin: true,
+					credentials: true,
+				})
+			)
 		}
 
 		//* json middleware, urlencoded
