@@ -5,6 +5,7 @@ const db = require("../../lib/db")
 const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// 친구 요청 컨트롤러
 const friendRequest = asyncWrapper(async (req, res) => {
 	const { username, userNumber } = req.body
 	const { userInfo } = req
@@ -26,6 +27,7 @@ const friendRequest = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "친구 요청 성공" })
 })
 
+// 친구 거절 컨트롤러
 const rejectFriendRequest = asyncWrapper(async (req, res) => {
 	const { userId } = req.params
 	const { userInfo } = req
@@ -39,10 +41,8 @@ const rejectFriendRequest = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).send({ message: "친구 요청 거절" })
 })
 
+// 친구 승인 
 const createFriend = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: senderId, receiverId
 	const { userId } = req.params
 	const { userInfo } = req
 
@@ -66,10 +66,8 @@ const createFriend = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ result })
 })
 
+// 친구목록 get 컨트롤러
 const readFriendList = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: userId
 	const { userInfo } = req
 
 	const friendList = await db.friend.readFreindList(userInfo._id)
@@ -77,10 +75,8 @@ const readFriendList = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ friendList })
 })
 
+// 친구 삭제 
 const deleteFriend = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: userId1, userId2
 	const { userId } = req.params
 	const { userInfo } = req
 
