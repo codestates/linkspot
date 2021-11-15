@@ -79,7 +79,7 @@ const signin = asyncWrapper(async (req, res) => {
 	}
 
 	const serverlList = userInfo.serverIds.map((serverId) => {
-		return { serverIds: serverId }
+		return { _id: serverId }
 	})
 
 	const serverData = await db.server.findServersInfo(serverlList)
