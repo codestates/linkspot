@@ -103,7 +103,7 @@ const signin = asyncWrapper(async (req, res) => {
 
 	//  userInfo, servers 로 response body 변경
 	if (!userInfo.serverIds.length) {
-		res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
+		return res.status(StatusCodes.ACCEPTED).json({ userInfo: userData, servers: [] })
 	}
 
 	const serverlList = userInfo.serverIds.map((serverId) => {
