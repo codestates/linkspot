@@ -6,15 +6,12 @@ const { asyncWrapper } = require("../../lib/middlewares/async")
 
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// 메세지 생성 컨트롤러
 const createChannelMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// serverId, TextChannelId, senderId, mentionId, text
 	const { _id: senderId } = req.userInfo
 	const { serverId, channelId } = req.params
 	const { mentionIds, text } = req.body
 
-	// UnprocessableEntityError(code: 422) 는 WebDav 서버 전용 응답코드라 제외
 	if (!text) {
 		throw new BadRequestError("유효하지 않은 body 데이터입니다.")
 	}
@@ -28,11 +25,8 @@ const createChannelMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.CREATED).json({ message: "채널 메세지 저장 성공" })
 })
 
+// 메세지 get 컨트롤러
 const readChannelMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// query: limit, skip
-
 	const { serverId, channelId } = req.params
 	const { skip, limit } = req.query
 
@@ -50,10 +44,8 @@ const readChannelMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ messages })
 })
 
+// 메세지 patch 컨
 const updateChannelMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: messageId, mentionIds, text
 	const { messageId } = req.params
 	const { mentionIds, text } = req.body
 
@@ -76,10 +68,8 @@ const updateChannelMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "채널 메세지 수정 성공" })
 })
 
+// 메세지 delete 컨트롤러
 const deleteChannelMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: messageId, mentionId, text
 	const { messageId } = req.params
 
 	if (!ObjectId.isValid(messageId)) {
@@ -94,11 +84,8 @@ const deleteChannelMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
-// 채널 생성
+// 채널 생성 컨트롤러
 const createChannel = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// const server = await db.server.findServersInfo(req.params.serverId)
 	const { serverId } = req.params
 	const { channelName } = req.body
 
@@ -116,9 +103,8 @@ const createChannel = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ channelInfo })
 })
 
+// 채널 delete 컨트롤러
 const deleteChannel = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
 	const { channelId } = req.params
 	if (!ObjectId.isValid(channelId)) {
 		throw new BadRequestError("유효하지 않은 channelId 입니다.")
@@ -132,11 +118,11 @@ const deleteChannel = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
+// 채널에 유저 추가 컨트롤러
 const addUserInChannel = asyncWrapper(async (req, res) => {
 	const { userInfo } = req
 	const { serverId, channelId, userId } = req.params
 
-	// UnprocessableEntityError(422)는 WebDav 서버 전용 응답코드라 제외
 	if (!ObjectId.isValid(serverId) || !ObjectId.isValid(channelId)) {
 		throw new BadRequestError("유효하지 않은 serverId 혹은 channelId 입니다.")
 	}
@@ -156,17 +142,16 @@ const addUserInChannel = asyncWrapper(async (req, res) => {
 		throw new ConflictError("이미 서버에 존재하는 유저입니다.")
 	}
 
-	// 채널이 서버안에 있는지 확인
 	await db.channel.addUserInChannel(channelId, userId)
 
 	res.status(StatusCodes.OK).json({ message: "채널 유저 추가 성공" })
 })
 
+// 채널에 유저 delete 컨트롤러
 const deleteUserInChannel = asyncWrapper(async (req, res) => {
 	const { userInfo } = req
 	const { serverId, channelId, userId } = req.params
 
-	// UnprocessableEntityError(422)는 WebDav 서버 전용 응답코드라 제외
 	if (!ObjectId.isValid(serverId) || !ObjectId.isValid(channelId)) {
 		throw new BadRequestError("유효하지 않은 serverId 혹은 channelId 입니다.")
 	}
@@ -191,9 +176,8 @@ const deleteUserInChannel = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
+// 채널 patch 컨트롤러
 const updateChannel = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
 	const { serverId, channelId } = req.params
 	const { channelName } = req.body
 	const { userInfo } = req
@@ -221,6 +205,7 @@ const updateChannel = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "채널이름 수정 완료" })
 })
 
+// channel 유저 어드민 확인 
 const isAdminInChannel = asyncWrapper(async (req, res) => {
 	const { userInfo } = req
 	const { channelId } = req.params
