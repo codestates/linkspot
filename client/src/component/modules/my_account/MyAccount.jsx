@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import './MyAccount.css';
 import linkspot from '../../../assets/image/linkspot.svg';
 import UpdateModal from '../update_modal/UpdateModal';
@@ -8,7 +7,6 @@ const MyAccount = ({ userInfo, setPage }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [IsDeleteModal, setIsDeleteModal] = useState(false);
-  let history = useHistory();
   const handleClick = async (type) => {
     if (type === 'delete') {
       setIsDeleteModal(true);
@@ -27,10 +25,12 @@ const MyAccount = ({ userInfo, setPage }) => {
       ) : null}
       <h3>My Account</h3>
       <div className='box'>
-        <div className='top' style={{ backgroundColor: `${'#3DA45C'}` }}>
+        <div
+          className='top'
+          style={{ backgroundColor: `${userInfo.profilecolor || '#3DA45C'}` }}
+        >
           <div className='profile-round'>
             <img src={linkspot} className='icon' />
-            <div className='small'></div>
           </div>
         </div>
         <div className='bottom'>

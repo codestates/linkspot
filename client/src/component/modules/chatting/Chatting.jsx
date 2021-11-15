@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import './Chatting.css';
 import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
-import { FaDiscord } from 'react-icons/fa';
+import linkspot from '../../../assets/image/linkspot.svg';
 import axios from 'axios';
 import { useContacts } from '../../../context/ContactsContext';
-
+import ScrollToBottom from 'react-scroll-to-bottom';
 const Chatting = ({ time }) => {
   const [text, setText] = useState('');
   const { sendMessage, selectedConversation } = useConversations();
@@ -88,14 +88,14 @@ const Chatting = ({ time }) => {
         </div>
       ) : (
         <div className='chatting'>
-          <div className='chatting-box'>
+          <ScrollToBottom className='chatting-box'>
             {keys.map((time, index) => {
               const min = time.split('T')[1].split(':')[0];
               const sec = time.split('T')[1].split(':')[1];
               return (
                 <div className='message-box'>
                   <div className='profile-circle'>
-                    <FaDiscord className='icon' />
+                    <img src={linkspot} className='icon' />
                   </div>
                   <div key={index} className='text-box'>
                     <div className='name'>
@@ -111,7 +111,7 @@ const Chatting = ({ time }) => {
                 </div>
               );
             })}
-          </div>
+          </ScrollToBottom>
           <div ref={endMessage}></div>
           <form onSubmit={handleSubmit} className='catting-form'>
             <div className='input-box'>

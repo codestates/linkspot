@@ -39,16 +39,6 @@
   transform: scale(3.5);
   color: #fff;
 }
-.profile-round > .small {
-  position: relative;
-  top: 7px;
-  left: 56px;
-  width: 17px;
-  height: 17px;
-  border: solid 1.6mm #1f2225;
-  border-radius: 100%;
-  background-color: #3da45c;
-}
 
 .box > .bottom {
   flex: 3;

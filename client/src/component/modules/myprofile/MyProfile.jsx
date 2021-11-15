@@ -19,8 +19,11 @@ const MyProfile = () => {
   useEffect(() => {
     if (userInfo.profilecolor !== '#3da45c') {
       setIsCustomColor(true);
+      return;
+    } else {
     }
   }, []);
+
   return (
     <div className='my-profile'>
       {openColorPicker && (
