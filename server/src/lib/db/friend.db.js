@@ -55,10 +55,11 @@ const rejectFriendRequest = async (senderId, receiverId) => {
 	return await deleteFriendRequest(senderId, receiverId)
 }
 
-const isFriend = async (userId, friendId) =>
-	Friend.findOne({
+const isFriend = async (userId, friendId) => {
+	return Friend.findOne({
 		$and: [{ friends: userId }, { friends: friendId }],
 	})
+}
 
 module.exports = {
 	addFreind,
