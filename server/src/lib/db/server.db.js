@@ -11,8 +11,8 @@ const findAdminInServer = async (userId, serverId) => {
 	return { admin: false }
 }
 
-const findServersInfo = async (serverIds) =>
-	Server.find({ $or: serverIds })
+const findServersInfo = async (serverIds) => {
+	return Server.find({ $or: serverIds })
 		.populate({
 			path: "channelIds",
 		})
@@ -20,8 +20,10 @@ const findServersInfo = async (serverIds) =>
 			path: "users.userId",
 			select: ["_id", "username", "userNumber", "profilePicture"],
 		})
-const addServer = async (serverName, userId) =>
-	Server.create({
+}
+
+const addServer = async (serverName, userId) => {
+	return Server.create({
 		serverName,
 		gettingStart: {
 			inviteUser: false,
@@ -36,20 +38,39 @@ const addServer = async (serverName, userId) =>
 			},
 		],
 	})
-const addServerInUser = async (userId, serverId) => User.updateOne({ _id: userId }, { $push: { serverIds: serverId } })
-const addChannelInServer = async (serverId, channelId) =>
-	Server.updateOne({ _id: serverId, channels: channelId }, { $push: { channelIds: channelId } })
+}
 
-const addUserInServer = async (serverId, userId) =>
-	Server.updateOne({ _id: serverId }, { $push: { users: { userId, admin: false } } })
-const deleteServerInUser = async (userId, serverId) =>
-	User.updateOne({ _id: userId }, { $pull: { serverIds: serverId } })
-const deleteUserInServer = async (serverId, userId) =>
-	Server.updateOne({ _id: serverId }, { $pull: { users: { userId } } })
-const findServersByServerId = async (serverId) => Server.findOne({ _id: serverId })
-const deleteServerByServerId = async (serverId) => Server.deleteOne({ _id: serverId })
+const addServerInUser = async (userId, serverId) => {
+	return User.updateOne({ _id: userId }, { $push: { serverIds: serverId } })
+}
+
+const addChannelInServer = async (serverId, channelId) => {
+	return Server.updateOne({ _id: serverId, channels: channelId }, { $push: { channelIds: channelId } })
+}
+
+const addUserInServer = async (serverId, userId) => {
+	return Server.updateOne({ _id: serverId }, { $push: { users: { userId, admin: false } } })
+}
+
+const deleteServerInUser = async (userId, serverId) => {
+	return User.updateOne({ _id: userId }, { $pull: { serverIds: serverId } })
+}
+
+const deleteUserInServer = async (serverId, userId) => {
+	return Server.updateOne({ _id: serverId }, { $pull: { users: { userId } } })
+}
+const findServersByServerId = async (serverId) => {
+	return Server.findOne({ _id: serverId })
+}
+
+const deleteServerByServerId = async (serverId) => {
+	return Server.deleteOne({ _id: serverId })
+}
+
 // 추가
-const findUsersInServer = async (serverId) => Server.findOne({ _id: serverId })
+const findUsersInServer = async (serverId) => {
+	return Server.findOne({ _id: serverId })
+}
 // .select("users")
 
 const createServer = async (serverName, userId) => {
@@ -124,10 +145,11 @@ const leaveServer = async (userId, serverId) => {
 	}
 }
 
-const findChannelInServer = async (serverId, channelId) =>
-	Server.findOne({
+const findChannelInServer = async (serverId, channelId) => {
+	return Server.findOne({
 		$and: [{ _id: serverId }, { channelIds: channelId }],
 	})
+}
 
 module.exports = {
 	createServer,
