@@ -5,10 +5,6 @@ const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
 const createServer = asyncWrapper(async (req, res) => {
-	// req 구성
-	// cookies: authorization[로그인 인증용 JWT 토큰]
-	// body: serverName[생성 서버이름]
-
 	const { serverName } = req.body
 	if (!serverName) {
 		throw new BadRequestError("유효하지 않은 데이터입니다.")
@@ -20,10 +16,6 @@ const createServer = asyncWrapper(async (req, res) => {
 })
 
 const deleteServer = asyncWrapper(async (req, res) => {
-	// req 구성
-	// cookies: authorization[로그인 인증용 JWT 토큰]
-	// params: serverId[삭제 서버 Id]
-	
 	const { userInfo } = req
 	const { serverId } = req.params
 
@@ -38,10 +30,6 @@ const deleteServer = asyncWrapper(async (req, res) => {
 })
 
 const joinServer = asyncWrapper(async (req, res) => {
-	// req 구성
-	// cookies: authorization[로그인 인증용 JWT 토큰]
-	// params: serverId[가입 서버 Id]
-
 	const result = await db.server.joinServer(req.userInfo._id, req.params.serverId)
 	if (!result) {
 		throw new ConflictError("이미 가입된 서버입니다.")
@@ -51,14 +39,9 @@ const joinServer = asyncWrapper(async (req, res) => {
 })
 
 const leaveServer = asyncWrapper(async (req, res) => {
-	// req 구성
-	// cookies: authorization[로그인 인증용 JWT 토큰]
-	// params: serverId[탈퇴 서버 Id]
-	
 	await db.server.leaveServer(
 		req.userInfo._id,
 		req.params.serverId
-		// req.bodychannelIds
 	)
 
 	res.status(StatusCodes.OK).json({ message: "서버 탈퇴에 성공했습니다." })
