@@ -4,6 +4,7 @@ const db = require("../../lib/db")
 const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// 맨션 get 
 const readMention = asyncWrapper(async (req, res) => {
 	const userIds = req.userInfo._id
 
