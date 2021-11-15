@@ -10,7 +10,9 @@ const deletDirectList = async (senderId, receiverId) => {
 	return User.updateOne({ _id: senderId }, { $pull: { directList: receiverId } })
 }
 
-const findDMbyMessageId = async (messageId) => Message.findOne({ _id: messageId })
+const findDMbyMessageId = async (messageId) => {
+	return Message.findOne({ _id: messageId })
+}
 
 module.exports = {
 	addMessage,
