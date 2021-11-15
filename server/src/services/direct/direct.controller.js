@@ -5,11 +5,8 @@ const db = require("../../lib/db")
 const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// DM 생성 컨트롤러
 const createDirectMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: senderId, receiverID, mentionId, text
-
 	const { userId: receiverId } = req.params
 	const { text } = req.body
 	const { _id: senderId } = req.userInfo
@@ -20,14 +17,12 @@ const createDirectMessage = asyncWrapper(async (req, res) => {
 
 	await db.direct.addMessage({ senderId, receiverId, text })
 
-	// 있으면 추가 안 할 것.
 	const userInfo = await db.user.findUserInfoByUserId(senderId)
 	const receiverInfo = await db.user.findUserInfoByUserId(receiverId)
 	if (!receiverInfo) {
 		throw new BadRequestError("존재하지 않는 userId 입니다.")
 	}
 
-	// DM을 주고 받는 유저끼리 Direct List에 서로가 없을 경우 등록 있을 경우 등록하지 않습니다.
 	if (!userInfo.directList.includes(receiverInfo._id)) {
 		await db.user.updateDirectList(userInfo._id, receiverInfo._id)
 	}
@@ -38,10 +33,8 @@ const createDirectMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "Direct Messsage 저장 성공" })
 })
 
+// DM get 컨트롤러
 const readDirectMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// query: limit, skip
 	const { userId: receiverId } = req.params
 	const { limit, skip } = req.body
 	const { _id: senderId } = req.userInfo
@@ -50,9 +43,6 @@ const readDirectMessage = asyncWrapper(async (req, res) => {
 		throw new BadRequestError("유효하지 않은 userId입니다.")
 	}
 
-	// skip, limit의 기본 설정
-	// 기본설정을 제공할 시 페이지네이션에서 skip 과 limit가 둘 다 없는 요청이 여러 번 들어올 경우
-	// 중복된 데이터를 여러번 응답할 수도 있음.
 	if (!limit || !skip) {
 		throw new BadRequestError("유효하지 않은 limit 혹은 skip 입니다.")
 	}
@@ -62,11 +52,8 @@ const readDirectMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ data: directMessages })
 })
 
+// DM 메세지 patch 컨트롤러
 const updateDirectMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: messageId, mentionId, text
-
 	const { text } = req.body
 	const { userId, messageId } = req.params
 	const { userInfo } = req
@@ -97,11 +84,8 @@ const updateDirectMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "Direct Message 수정완료" })
 })
 
+// DM 메세지 delete 컨트롤러
 const deleteDirectMessage = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: messageId
-
 	const { userId, messageId } = req.params
 	const { userInfo } = req
 
@@ -126,11 +110,8 @@ const deleteDirectMessage = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "Direct Message 삭제 성공" })
 })
 
+// DM 리스트 delete 
 const deleteDirectList = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: senderId, receiverId
-
 	const { userId } = req.params
 	const { userInfo } = req
 
