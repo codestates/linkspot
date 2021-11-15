@@ -4,6 +4,7 @@ const db = require("../../lib/db")
 const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// 서버 생성 컨트롤러
 const createServer = asyncWrapper(async (req, res) => {
 	const { serverName } = req.body
 	if (!serverName) {
@@ -15,6 +16,7 @@ const createServer = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.CREATED).json({ serverData })
 })
 
+// 서버 삭제 컨트롤러
 const deleteServer = asyncWrapper(async (req, res) => {
 	const { userInfo } = req
 	const { serverId } = req.params
@@ -29,6 +31,7 @@ const deleteServer = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.NO_CONTENT).json()
 })
 
+// 서버 가입 컨트롤러
 const joinServer = asyncWrapper(async (req, res) => {
 	const result = await db.server.joinServer(req.userInfo._id, req.params.serverId)
 	if (!result) {
@@ -38,6 +41,7 @@ const joinServer = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.CREATED).json({ result })
 })
 
+// 서버 탈퇴 컨트롤러
 const leaveServer = asyncWrapper(async (req, res) => {
 	await db.server.leaveServer(
 		req.userInfo._id,
@@ -47,6 +51,7 @@ const leaveServer = asyncWrapper(async (req, res) => {
 	res.status(StatusCodes.OK).json({ message: "서버 탈퇴에 성공했습니다." })
 })
 
+// 유저 어드민 권한 확인 
 const isAdminInServer = asyncWrapper(async (req, res) => {
 	const isAdmin = await db.server.findAdminInServer(req.userInfo._id, req.params.serverId)
 	
