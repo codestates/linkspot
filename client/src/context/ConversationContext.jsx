@@ -19,6 +19,7 @@ export const ConversationsProvider = ({ children }) => {
   const [conversations, setConversations] = useState(
     () => JSON.parse(window.localStorage.getItem('conversations')) || []
   );
+
   const { userInfo } = useContext(UserInfoContext);
   const [id, setId] = useState();
 

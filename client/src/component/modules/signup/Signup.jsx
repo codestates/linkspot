@@ -48,7 +48,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
     setYears(tempYear);
     setMonths(tempMonth);
     setDays(tempDay);
-    return () => console.log('unmount');
+    return () => {};
   }, [month]);
 
   const isSubmit = async (e) => {

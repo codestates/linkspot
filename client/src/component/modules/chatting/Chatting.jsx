@@ -15,7 +15,7 @@ const Chatting = () => {
   const { messages, createContact } = useContacts();
   const endMessage = useRef();
   const [dm, setDm] = useState([]);
-  useEffect(() => {
+ useEffect(() => {
     if (messages[locator.channel]) {
       const newKeys = Object.keys(messages[locator.channel]);
       setKeys(newKeys);
