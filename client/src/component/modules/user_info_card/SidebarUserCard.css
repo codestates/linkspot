@@ -1,0 +1,44 @@
+.card-container,
+.card-container-clicked{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0px;
+  width:220px;
+  height: 42px;
+  color: #8E9297;
+}
+
+.card-container:hover{
+  background-color: #4f545c29;
+  color:#dcddde;
+}
+
+.card-container-clicked{
+  background-color: rgba(79,84,92,0.32);
+  color:#fff
+}
+
+.card-container:hover > .remove-button,
+.card-container-clicked > .remove-button {
+  cursor:pointer;
+  visibility: visible;
+}
+
+.card-container > img ,
+.card-container-clicked > img {
+  width:32px;
+  height:32px;
+  margin: 0 10px 0 10px;
+  border-radius: 50%;
+}
+
+.remove-button {
+  font-weight: 100;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 10px 0 10px;
+  visibility:hidden;
+}

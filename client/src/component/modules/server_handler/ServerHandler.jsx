@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import axios from 'axios';
 import './ServerHandler.css';
@@ -44,7 +44,6 @@ const ServerHandler = ({ onClose }) => {
       )
       .then((response) => {
         setServer([...server, response.data.serverData]);
-
         response.data.serverData.channelIds.map((el) => {
           createConversation(el._id);
         });

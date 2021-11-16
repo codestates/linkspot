@@ -1,22 +1,20 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import './Chatting.css';
-import { useConversations } from '../../../context/ConversationContext';
 import { UserInfoContext } from '../../../context/UserInfoContext';
 import linkspot from '../../../assets/image/linkspot.svg';
 import axios from 'axios';
 import { useContacts } from '../../../context/ContactsContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
-const Chatting = ({ time }) => {
+
+const Chatting = () => {
   const [text, setText] = useState('');
-  const { sendMessage, selectedConversation } = useConversations();
-  const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const { userInfo, friends } = useContext(UserInfoContext);
   const locator = useContext(UserInfoContext).locator;
-  const setLocator = useContext(UserInfoContext).setLocator;
   const [convers, setConvers] = useState({});
   const [keys, setKeys] = useState([]);
   const { messages, createContact } = useContacts();
   const endMessage = useRef();
-
+  const [dm, setDm] = useState([]);
   useEffect(() => {
     if (messages[locator.channel]) {
       const newKeys = Object.keys(messages[locator.channel]);
@@ -24,7 +22,19 @@ const Chatting = ({ time }) => {
       setConvers(messages[locator.channel]);
       return;
     }
-  }, [messages]);
+
+    if (locator.server === 'Home' && locator.channel) {
+      const newDm = friends.filter(
+        (data) => data.messageId === locator.channel
+      );
+      if (newDm.length === 0) {
+        return setDm([]);
+      } else {
+        return setDm([...newDm[0].message]);
+      }
+    }
+    return;
+  }, [messages, locator]);
 
   //userInfoContext를 불러와서 locator, setlocator 추가
   // 채널 메시지 저장 axios 추가
@@ -63,29 +73,66 @@ const Chatting = ({ time }) => {
     setText('');
   }
   // selectedConversation.messages.map((message, index) = socket.io 사용시 폼
-
   return (
     <>
       {keys.length === 0 ? (
-        <div className='chatting'>
-          <div className='chatting-box'></div>
-
-          <form onSubmit={handleSubmit} className='catting-form'>
-            <div className='input-box'>
-              <div className='inner-box'>
-                <input
-                  value={text}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setText(e.target.value);
-                  }}
-                />
-
-                <button type='submit'></button>
-              </div>
+        <>
+          {dm && locator.server === 'Home' ? (
+            <div className='chatting'>
+              <ScrollToBottom className='chatting-box'>
+                {dm.map((data, index) => {
+                  return (
+                    <div className='message-box' key={index}>
+                      <div className='profile-circle'>
+                        <img src={linkspot} className='icon' />
+                      </div>
+                      <div key={index} className='text-box'>
+                        <div className='name'>
+                          {data.senderName}
+                          {'  '}
+                          {/* {message.senderName} {'  '} 
+                      senderName을 가져와야하는 부분
+                    */}
+                        </div>
+                        <div className='text'>{data.text}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </ScrollToBottom>
+              <div ref={endMessage}></div>
+              <form onSubmit={handleSubmit} className='catting-form'>
+                <div className='input-box'>
+                  <div className='inner-box'>
+                    <input
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                    />
+                    <button type='submit'></button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
+          ) : (
+            <div className='chatting'>
+              <div className='chatting-box'></div>
+              <form onSubmit={handleSubmit} className='catting-form'>
+                <div className='input-box'>
+                  <div className='inner-box'>
+                    <input
+                      value={text}
+                      onChange={(e) => {
+                        e.preventDefault();
+                        setText(e.target.value);
+                      }}
+                    />
+                    <button type='submit'></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          )}
+        </>
       ) : (
         <div className='chatting'>
           <ScrollToBottom className='chatting-box'>
@@ -93,7 +140,7 @@ const Chatting = ({ time }) => {
               const min = time.split('T')[1].split(':')[0];
               const sec = time.split('T')[1].split(':')[1];
               return (
-                <div className='message-box'>
+                <div className='message-box' key={index}>
                   <div className='profile-circle'>
                     <img src={linkspot} className='icon' />
                   </div>
@@ -117,7 +164,6 @@ const Chatting = ({ time }) => {
             <div className='input-box'>
               <div className='inner-box'>
                 <input value={text} onChange={(e) => setText(e.target.value)} />
-
                 <button type='submit'></button>
               </div>
             </div>

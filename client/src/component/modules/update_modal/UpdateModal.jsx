@@ -17,7 +17,7 @@ const UpdateModal = ({ modalType, setIsModal }) => {
   const email_Reg =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
-  const nickname_Reg = /^[a-zA-Z]\w*$/;
+  const nickname_Reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const UpdateModal = ({ modalType, setIsModal }) => {
       setSecondMessage('현재 비밀번호');
       setIsPassword(true);
     }
+    return () => {};
   }, []);
 
   const handleSubmit = async (e) => {

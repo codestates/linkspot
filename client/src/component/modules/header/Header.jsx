@@ -1,5 +1,5 @@
 import './Header.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FaUserFriends } from 'react-icons/fa';
 import { TiMessages } from 'react-icons/ti';
 import { RiInboxFill } from 'react-icons/ri';
@@ -12,7 +12,10 @@ import { UserInfoContext } from '../../../context/UserInfoContext';
 
 const Header = () => {
   const locator = useContext(UserInfoContext).locator;
-  const targetServer = useContext(UserInfoContext).server.filter((item)=> item._id === locator.server)[0] || []
+  const participant = useContext(UserInfoContext).participant;
+  const targetServer = useContext(UserInfoContext).server.filter(
+    (item) => item._id === locator.server
+  )[0];
   const [key, setKey] = useState('온라인');
   const tabList = ['온라인', '모두', '대기 중', '차단 목록', '친구 추가하기'];
   const [onlineList, setOnlineList] = useState([]);
@@ -20,8 +23,16 @@ const Header = () => {
   const [requestList, setRequestList] = useState([]);
   const [blockList, setBlockList] = useState([]);
   const [disable, setDisable] = useState(true);
+  let currentChannel =
+    locator.server !== 'Home'
+      ? targetServer.channelIds.filter((item) => {
+          if (locator.channel === item._id) {
+            return item;
+          }
+        })[0].channelName
+      : null;
 
-  console.log(targetServer)
+  console.log(currentChannel);
 
   const disableHandler = (e) => {
     if (e.target.value.length > 0) {
@@ -114,7 +125,7 @@ const Header = () => {
 
   return (
     <>
-      {!locator.server || locator.server === 'Home' ? (
+      {locator.server === 'Home' && locator.channel === '' ? (
         <div className='header-container'>
           <nav className='nav-container'>
             <div className='friend-tag'>
@@ -148,7 +159,9 @@ const Header = () => {
           <div className='tab-content'>{tabComponent()}</div>
         </div>
       ) : (
-        <div className='location-name'>{targetServer.channel}</div>
+        <div className='location-name'>
+          {currentChannel ? currentChannel : `${participant} 님과의 대화`}
+        </div>
       )}
     </>
   );

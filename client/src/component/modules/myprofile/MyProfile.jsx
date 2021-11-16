@@ -20,10 +20,11 @@ const MyProfile = () => {
     if (userInfo.profilecolor !== '#3da45c') {
       setIsCustomColor(true);
     }
-    console.log(userInfo);
+
     if (previewUrl) {
       setUserInfo({ ...userInfo, profilePicture: previewUrl });
     }
+    return () => console.log(userInfo);
   }, [previewUrl]);
 
   return (
