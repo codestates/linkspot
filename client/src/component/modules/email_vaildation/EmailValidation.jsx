@@ -10,9 +10,9 @@ const EmailValidation = () => {
     const token = Url[Url.length - 1];
     console.log(token);
     await axios
-      .post(`http://localhost:8080/user/email/${token}`)
+    .post(`${process.env.REACT_APP_SERVER_BASE_URL}/user/email/${token}`)
       .then((data) => {
-        history.push('/');
+        history.push('/login');
       });
   };
   //console.log(checked);

@@ -9,6 +9,9 @@ import NoRequest from '../../../assets/image/no-request.svg';
 import Nobody from '../../../assets/image/nobody.svg';
 import NoBlock from '../../../assets/image/no-block.svg';
 import { UserInfoContext } from '../../../context/UserInfoContext';
+import dummy from "../../../dummy"
+import HeaderUserCard from '../user_info_card/HeaderUserCard';
+import BlockUserCard from '../user_info_card/BlockUserCard';
 
 const Header = () => {
   const locator = useContext(UserInfoContext).locator;
@@ -16,10 +19,10 @@ const Header = () => {
   const targetServer = useContext(UserInfoContext).server.filter((item)=> item._id === locator.server)[0]
   const [key, setKey] = useState('온라인');
   const tabList = ['온라인', '모두', '대기 중', '차단 목록', '친구 추가하기'];
-  const [onlineList, setOnlineList] = useState([]);
-  const [friendList, setFriendList] = useState([]);
-  const [requestList, setRequestList] = useState([]);
-  const [blockList, setBlockList] = useState([]);
+  const [onlineList, setOnlineList] = useState(dummy.filter((item)=> item.status ==="online"));
+  const [friendList, setFriendList] = useState(dummy.filter((item)=> item.status !== "blocked" && item.status !== "request"));
+  const [requestList, setRequestList] = useState(dummy.filter((item)=> item.status ==="request"));
+  const [blockList, setBlockList] = useState(dummy.filter((item)=> item.status ==="blocked"));
   const [disable, setDisable] = useState(true);
   let currentChannel = locator.server !== "Home" ? 
   targetServer.channelIds.filter((item)=>{
@@ -28,9 +31,6 @@ const Header = () => {
       }
     })[0].channelName
   : null
-
-
-  console.log(currentChannel)
 
   const disableHandler = (e) => {
     if (e.target.value.length > 0) {
@@ -50,7 +50,14 @@ const Header = () => {
           <p>아무도 Wumpus와 놀고 싶지 않은가 봐요.</p>
         </div>
       ) : (
-        <div className='online-friend'>{onlineList.length}</div>
+        <>
+          <div className='online-friend'>
+            <p>온라인 - {onlineList.length}명</p>
+          </div>
+          {onlineList.map((item)=>{
+            return <HeaderUserCard data={item} setState={setFriendList}/>
+          })}
+        </>
       );
     } else if (key === '모두') {
       return friendList.length === 0 ? (
@@ -61,7 +68,14 @@ const Header = () => {
           <p>Wumpus는 친구를 기다리고 있어요.</p>
         </div>
       ) : (
-        <div className='friends'>{friendList.length}</div>
+        <>
+          <div className='friends'>
+            <p>모든 친구 - {friendList.length}명</p>
+          </div>
+            {friendList.map((item)=>{
+              return <HeaderUserCard data={item} setState={setFriendList}/>
+            })}
+        </>
       );
     } else if (key === '대기 중') {
       return requestList.length === 0 ? (
@@ -72,7 +86,14 @@ const Header = () => {
           <p>대기 중인 친구 요청이 없네요. 그래도 옆에 Wumpus는 있네요.</p>
         </div>
       ) : (
-        <div className='request'>{requestList.length}</div>
+        <>
+          <div className='request'>
+            <p>대기 중 - {requestList.length}명</p>
+          </div>
+          {requestList.map((item)=>{
+              return <HeaderUserCard data={item} setState={{friendList, requestList, setRequestList, setFriendList}}/>
+            })}
+        </>
       );
     } else if (key === '차단 목록') {
       return blockList.length === 0 ? (
@@ -83,7 +104,15 @@ const Header = () => {
           <p>Wumpus는 차단 해제를 할 수 없어요.</p>
         </div>
       ) : (
-        <div className='block'>{blockList.length}</div>
+        <>
+          <div className='block'>
+            <p>차단 목록 - {blockList.length}명</p>
+          </div>
+          {blockList.map((item)=>{
+              return <BlockUserCard data={item} setState={{friendList, blockList, setBlockList, setFriendList}}/>
+            })}
+        </>
+
       );
     } else if (key === '친구 추가하기') {
       return (
@@ -92,7 +121,7 @@ const Header = () => {
             <div className='friend-request-head'>
               <p className='title'>친구 추가하기</p>
               <p className='explaination'>
-                Discord Tag를 사용하여 친구를 추가할 수 있어요. 대문자, 소문자를
+                Friend Tag를 사용하여 친구를 추가할 수 있어요. 대문자, 소문자를
                 구별한답니다!
               </p>
             </div>

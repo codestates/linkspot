@@ -23,8 +23,6 @@ const Login = ({ isSignup, setIsSignup }) => {
   const password_Reg = /^[a-z0-9_]{8,15}$/;
 
 
-  console.log(process.env.REACT_APP_SERVER_BASE_URL)
-
   const isSubmit = async (e) => {
     e.preventDefault();
     if (!email_Reg.test(email) || email.length === 0) {

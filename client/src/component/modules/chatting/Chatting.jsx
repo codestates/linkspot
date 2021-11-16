@@ -21,6 +21,7 @@ const Chatting = ({ time }) => {
       setConvers(messages[locator.channel]);
       return;
     }
+    return ()=>{}
   }, [messages]);
 
   //userInfoContext를 불러와서 locator, setlocator 추가

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './Signup.css';
@@ -17,20 +16,19 @@ const Signup = ({ isSignup, setIsSignup }) => {
   const [day, setDay] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
-  const [isValidNickname, setIsValidNickname] = useState(true);
+  const [isValidPassword2, setIsValidPassword2] = useState(true);
   const [isValidDob, setIsValidDob] = useState(true);
   const [emailMessage, setEmailMessage] = useState('이메일');
   const [passwordMessage, setPasswordMessage] = useState('비밀번호');
-  const [nicknameMessage, setNicknameMessage] = useState('이름');
+  const [checkPasswordMessage, setCheckPasswordMessage] =
+    useState('비밀번호 확인');
   const [dobMessage, setDobMessage] = useState('생년월일');
   const [user, setUser] = useState({});
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
-  const history = useHistory();
   const email_Reg =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const password_Reg = /^[a-z0-9_]{8,15}$/;
-  const nickname_Reg = /^[a-zA-Z]\w*$/;
 
   useEffect(() => {
     let tempYear = [];
@@ -50,6 +48,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
     setYears(tempYear);
     setMonths(tempMonth);
     setDays(tempDay);
+    return () => {};
   }, [month]);
 
   const isSubmit = async (e) => {
@@ -64,22 +63,8 @@ const Signup = ({ isSignup, setIsSignup }) => {
     }
 
     if (
-      !nickname_Reg.test(e.target[1].value) ||
+      !password_Reg.test(e.target[1].value) ||
       e.target[1].value.length === 0
-    ) {
-      setIsValidNickname(false);
-      setNicknameMessage(
-        '이름 - 이름이 유효하지 않습니다. (특수문자를 사용할 수 없습니다.)'
-      );
-      return;
-    } else {
-      setIsValidNickname(true);
-      setNicknameMessage('이름');
-    }
-
-    if (
-      !password_Reg.test(e.target[2].value) ||
-      e.target[2].value.length === 0
     ) {
       setIsValidPassword(false);
       setPasswordMessage(
@@ -89,6 +74,14 @@ const Signup = ({ isSignup, setIsSignup }) => {
     } else {
       setIsValidPassword(true);
       setPasswordMessage('비밀번호');
+    }
+    if (e.target[2].value.length !== e.target[1].value.length) {
+      setIsValidPassword2(false);
+      setCheckPasswordMessage('비밀번호 - 비밀번호가 일치하지 않습니다.');
+      return;
+    } else {
+      setIsValidPassword2(true);
+      setCheckPasswordMessage('비밀번호 확인');
     }
     if (
       e.target[3].value.length === 0 ||
@@ -121,6 +114,7 @@ const Signup = ({ isSignup, setIsSignup }) => {
           }
         )
         .then((data) => {
+          console.log(55, data);
           setUserInfo({
             email: e.target[0].value,
             profilecolor: '#3da45c',
@@ -132,8 +126,8 @@ const Signup = ({ isSignup, setIsSignup }) => {
         });
     } catch (error) {
       setIsValidEmail(false);
-      setEmailMessage('이메일 - 이미 존재하는 이메일입니다.');
-      console.log(error.message);
+      setEmailMessage('이메일 - 이메일이 유효하지 않습니다.');
+      console.log(error);
     }
     //axios redirect
   };
@@ -149,7 +143,6 @@ const Signup = ({ isSignup, setIsSignup }) => {
   const handleBackword = (e) => {
     e.preventDefault();
     setIsSignup(false);
-    //history.push('/');
   };
   return (
     <div className='signup-box'>
@@ -159,10 +152,12 @@ const Signup = ({ isSignup, setIsSignup }) => {
         </div>
         <p className={isValidEmail ? '' : 'invalid'}>{emailMessage}</p>
         <input className={isValidEmail ? '' : 'red-box'} />
-        <p className={isValidNickname ? '' : 'invalid'}>{nicknameMessage}</p>
-        <input className={isValidNickname ? '' : 'red-box'} />
         <p className={isValidPassword ? '' : 'invalid'}>{passwordMessage}</p>
         <input type='password' className={isValidPassword ? '' : 'red-box'} />
+        <p className={isValidPassword2 ? '' : 'invalid'}>
+          {checkPasswordMessage}
+        </p>
+        <input type='password' className={isValidPassword2 ? '' : 'red-box'} />
         <p className={isValidDob ? '' : 'invalid'}>{dobMessage}</p>
         <div className={isValidDob ? 'date-of-birth' : 'date-of-birth red-box'}>
           <Dropdown
