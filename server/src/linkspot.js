@@ -9,8 +9,8 @@ const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
 
 const { env } = require("../config/config")
-const { NotFoundHandler } = require("./lib/middlewares/not-found")
-const { errorHandlerMiddleware } = require("./lib/middlewares/error-handler")
+const NotFoundHandler = require("./lib/middlewares/not-found")
+const ErrorHandlerMiddleware = require("./lib/middlewares/error-handler")
 
 const userRoute = require("./services/user/user.route")
 const channelRoute = require("./services/channel/channel.route")
@@ -39,7 +39,7 @@ class Server {
 			//* security middleware
 			this.app.use(hpp())
 			this.app.use(helmet())
-			this.app.use(cors({ origin: "site-url", credentials: true }))
+			this.app.use(cors({ origin: config.client_url, credentials: true }))
 		} else {
 			this.app.use(morgan("dev"))
 			this.app.use(cors({ origin: true, credentials: true }))
@@ -72,7 +72,7 @@ class Server {
 		this.app.use(NotFoundHandler)
 
 		//* 500 middleware
-		this.app.use(errorHandlerMiddleware)
+		this.app.use(ErrorHandlerMiddleware)
 	}
 }
 

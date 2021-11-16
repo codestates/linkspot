@@ -5,55 +5,88 @@ const db = require("../../lib/db")
 const { asyncWrapper } = require("../../lib/middlewares/async")
 const { ConflictError, UnauthenticatedError, NotFoundError, BadRequestError } = require("../../lib/errors")
 
+// 친구 요청 컨트롤러
 const friendRequest = asyncWrapper(async (req, res) => {
-	const isInvalid = await db.friend.freindRequest(req.userInfo._id, req.body.username, req.body.userNumber)
-	if (isInvalid) {
-		return res.status(isInvalid.code).json({ message: isInvalid.message })
+	const { username, userNumber } = req.body
+	const { userInfo } = req
+
+	if (!username || !userNumber) {
+		throw new newBadRequestError("유효하지 않은 body 데이터입니다.")
 	}
 
-	res.status(StatusCodes.OK).json({ message: "친구 요청을 보냈습니다." })
+	const isInvalid = await db.friend.freindRequest(userInfo._id, username, userNumber)
+
+	if (isInvalid.code === 400) {
+		throw new BadRequestError("유효하지 않은 userId 입니다.")
+	}
+
+	if (isInvalid.code === 409) {
+		throw new ConflictError("이미 친구 요청을 보냈습니다.")
+	}
+
+	res.status(StatusCodes.OK).json({ message: "친구 요청 성공" })
 })
 
+// 친구 거절 컨트롤러
 const rejectFriendRequest = asyncWrapper(async (req, res) => {
-	if (!ObjectId.isValid(req.params.userId)) throw new BadRequestError("userId를 잘 못 입력했습니다.")
-	await db.friend.rejectFriendRequest(req.params.userId, req.userInfo._id)
+	const { userId } = req.params
+	const { userInfo } = req
 
-	res.status(StatusCodes.OK).send({ message: "친구 요청을 거절했습니다." })
+	if (!ObjectId.isValid(userId)) {
+		throw new BadRequestError("유효하지 않은 userId 입니다.")
+	}
+
+	await db.friend.rejectFriendRequest(userId, userInfo._id)
+
+	res.status(StatusCodes.OK).send({ message: "친구 요청 거절" })
 })
 
+// 친구 승인 
 const createFriend = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: senderId, receiverId
-	if (!ObjectId.isValid(req.params.userId)) throw new BadRequestError("userId를 잘 못 입력했습니다.")
-	const user = await db.user.findUserInfoByUserId(req.params.userId)
-	if (!user) throw new BadRequestError("없는 유저입니다.")
-	const friendInfo = await db.friend.isFriend(req.userInfo._id, req.params.userId)
-	if (friendInfo) throw new BadRequestError("이미 친구 입니다.")
+	const { userId } = req.params
+	const { userInfo } = req
 
-	const data = await db.friend.addFreind(req.userInfo._id, req.params.userId)
-	await db.friend.rejectFriendRequest(req.userInfo._id, req.params.userId)
+	if (!ObjectId.isValid(userId)) {
+		throw new BadRequestError("유효하지 않은 userId 입니다.")
+	}
 
-	res.status(StatusCodes.OK).json({ data })
+	const user = await db.user.findUserInfoByUserId(userId)
+	if (!user) {
+		throw new BadRequestError("존재하지 않는 userId 입니다.")
+	}
+
+	const friendInfo = await db.friend.isFriend(userInfo._id, userId)
+	if (friendInfo) {
+		throw new ConflictError("이미 친구 입니다.")
+	}
+
+	const result = await db.friend.addFreind(userInfo._id, userId)
+	await db.friend.rejectFriendRequest(userInfo._id, userId)
+
+	res.status(StatusCodes.OK).json({ result })
 })
 
+// 친구목록 get 컨트롤러
 const readFriendList = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: userId
-	const friendList = await db.friend.readFreindList(req.userInfo._id)
+	const { userInfo } = req
 
-	res.status(StatusCodes.OK).json({ data: friendList })
+	const friendList = await db.friend.readFreindList(userInfo._id)
+
+	res.status(StatusCodes.OK).json({ friendList })
 })
 
+// 친구 삭제 
 const deleteFriend = asyncWrapper(async (req, res) => {
-	// req 구성
-	// Authorization: accessToken
-	// body: userId1, userId2
-	if (!ObjectId.isValid(req.params.userId)) throw new BadRequestError("userId를 잘 못 입력했습니다.")
-	await db.friend.deleteFriend(req.userInfo._id, req.params.userId)
+	const { userId } = req.params
+	const { userInfo } = req
 
-	res.status(StatusCodes.OK).json({ message: "친구 삭제 성공" })
+	if (!ObjectId.isValid(userId)) {
+		throw new BadRequestError("유효하지 않은 userId 입니다.")
+	}
+
+	await db.friend.deleteFriend(userInfo._id, userId)
+
+	res.status(StatusCodes.NO_CONTENT).json()
 })
 
 module.exports = {

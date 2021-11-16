@@ -49,11 +49,12 @@ const updateVerified = async (_id, status) => {
 	return User.updateOne({ _id }, { $set: { verified: status } })
 }
 
-const findUserInfoByUserId = async (userId) =>
-	User.findOne({ _id: userId }).select(["_id", "username", "userNumber", "profilePicture", "directList"])
+const findUserInfoByUserId = async (userId) => {
+	return User.findOne({ _id: userId }).select(["_id", "username", "userNumber", "profilePicture", "directList"])
+}
 
-const updateDirectList = async (senderId, receiverId) =>
-	User.updateOne(
+const updateDirectList = async (senderId, receiverId) => {
+	return User.updateOne(
 		{ _id: senderId },
 		{
 			$push: {
@@ -61,6 +62,7 @@ const updateDirectList = async (senderId, receiverId) =>
 			},
 		}
 	)
+}
 
 module.exports = {
 	addUser,
