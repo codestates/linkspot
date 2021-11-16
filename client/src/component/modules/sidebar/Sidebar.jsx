@@ -6,7 +6,6 @@ import UserSection from '../user_section/UserSection';
 import LeaveServer from '../leave_server/LeaveServer';
 import SidebarUserCard from '../user_info_card/SidebarUserCard';
 
-
 const Sidebar = () => {
   const locator = useContext(UserInfoContext).locator;
   const setLocator = useContext(UserInfoContext).setLocator;
@@ -40,7 +39,7 @@ const Sidebar = () => {
             <div className='message-header'>
               <p>개인메세지</p>
             </div>
-            <SidebarUserCard/>
+            <SidebarUserCard />
           </div>
         </>
       ) : (
@@ -48,9 +47,9 @@ const Sidebar = () => {
           <div className='sidebar-server-name'>
             <p>{targetServer.serverName}</p>
             <LeaveServer
-            className='leave-server'
-            server={targetServer.serverName}
-          />
+              className='leave-server'
+              server={targetServer.serverName}
+            />
           </div>
           <div className='sidebar-group-container'>
             <div className='channel-group'>

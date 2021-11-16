@@ -47,10 +47,11 @@ const findChannelsByChannelId = async (channelList) => {
 	return Channel.find({ $or: channelList })
 }
 
-const findUserInChannel = async (channelId, userId) =>
-	Channel.findOne({
+const findUserInChannel = async (channelId, userId) => {
+	return Channel.findOne({
 		$and: [{ _id: channelId }, { "users.userId": userId }],
 	}).select("users")
+}
 
 // 채널 이름 수정 추가 안함.
 

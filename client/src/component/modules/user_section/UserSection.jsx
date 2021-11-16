@@ -31,10 +31,10 @@ const UserSection = () => {
       <section className='my-info'>
         <div className='thumnail-container'>
           {/* 유저 정보에 썸네일이 없을 경우 기본 아바타를, 있을 경우 썸네일 랜더링 */}
-          {userInfo.thumbnail ? (
+          {userInfo.profilePicture ? (
             <img
               className='thumbnail'
-              src={userInfo.thumbnail}
+              src={userInfo.profilePicture}
               alt={userInfo.nickname}
               onClick={handleOpen}
             />
@@ -63,35 +63,35 @@ const UserSection = () => {
             <img
               className='set-icons'
               src={micoff}
-              alt="mic off"
+              alt='mic off'
               onClick={() => setMicOff(!micOff)}
             />
           ) : (
             <img
               className='set-icons'
               src={micon}
-              alt="mic on"
+              alt='mic on'
               onClick={() => setMicOff(!micOff)}
             />
           )}
           {soundOff ? (
             <img
               className='set-icons'
-              alt="sound off"
+              alt='sound off'
               src={headphone_off}
               onClick={() => setSoundOff(!soundOff)}
             />
           ) : (
             <img
               className='set-icons'
-              alt="sound on"
+              alt='sound on'
               src={headphone_on}
               onClick={() => setSoundOff(!soundOff)}
             />
           )}
           {/* 개인정보 수정 버튼 */}
           <Link to='/user_setting'>
-            <img src={setting} alt="setting" className='set-icons setting' />
+            <img src={setting} alt='setting' className='set-icons setting' />
           </Link>
         </div>
       </section>

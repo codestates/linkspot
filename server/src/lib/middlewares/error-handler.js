@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes")
 
-exports.errorHandlerMiddleware = (err, req, res, next) => {
+const ErrorHandlerMiddleware = (err, req, res, next) => {
 	let error = {
 		//* default
 		statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
@@ -13,3 +13,5 @@ exports.errorHandlerMiddleware = (err, req, res, next) => {
 
 	return res.status(error.statusCode).json({ message: error.message })
 }
+
+module.exports = ErrorHandlerMiddleware

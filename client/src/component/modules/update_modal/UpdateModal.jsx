@@ -32,6 +32,7 @@ const UpdateModal = ({ modalType, setIsModal }) => {
       setSecondMessage('현재 비밀번호');
       setIsPassword(true);
     }
+    return () => {};
   }, []);
 
   const handleSubmit = async (e) => {

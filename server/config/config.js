@@ -19,6 +19,7 @@ const config = {
 	database: process.env.DATABASE,
 	jwtSecret: process.env.JWT_SECRET,
 	cookieSecret: process.env.COOKIE_SECRET,
+	client_url: "https://www.linkspot.shop",
 };
 
 module.exports = { config, env };

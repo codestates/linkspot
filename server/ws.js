@@ -7,6 +7,7 @@ const ws = async (io) => {
 	const users = {}
 
 	io.on("connection", async (socket) => {
+		console.log("connect")
 		const addUser = (userId, socketId, state) => {
 			if (users[userId]) return users[userId]
 			users[userId] = {}
@@ -19,7 +20,6 @@ const ws = async (io) => {
 		// 로그인 => 접속 상태를 업데이트 합니다.
 		socket.on("online-user", async (userId) => {
 			const userInfo = addUser(userId, socket.id)
-			console.log(users)
 			socket.broadcast.emit("broadcat:online-user", userInfo)
 		})
 
@@ -35,6 +35,7 @@ const ws = async (io) => {
 		})
 		// direct message를 socketId로 보내기 요청 => DM을 client에 보냅니다. - client에서 io.on("direct message", callback) 작성바랍니다.
 		socket.on("direct-message", async (userId, msg) => {
+			// console.log(userId, msg, users)
 			socket.to(users[userId].socketId).emit("direct-message", socket.id, msg)
 		})
 		// 채널 입장
@@ -61,9 +62,13 @@ const ws = async (io) => {
 			socket.broadcast.to(voiceChannelId).emit("leave-voice-channel", voiceChannelId, users[userId])
 		})
 
-		socket.on("disconnect", async () => {
-			socket.broadcast.emit("offline user", users[userId])
+		socket.on("deleteUser", async (userId) => {
+			socket.broadcast.emit("offline-user", users[userId])
 			delete users[userId]
+		})
+
+		socket.on("disconnect", async () => {
+			console.log(users)
 		})
 	})
 }

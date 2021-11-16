@@ -14,14 +14,6 @@ const UserSetting = ({}) => {
   const { setIsLoggedIn } = useContext(AuthContext);
   const history = useHistory();
 
-  useEffect(() => {
-    const getUserinfo = async () => {
-      try {
-        //axios 들어가는 부분
-      } catch (error) {}
-    };
-    getUserinfo();
-  }, []);
   const theme = createTheme({
     palette: {
       primary: {

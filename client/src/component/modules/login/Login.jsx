@@ -58,10 +58,11 @@ const Login = ({ isSignup, setIsSignup }) => {
           history.push('/');
         });
     } catch (error) {
-      console.log(error);
       setIsValidEmail(false);
       setIsValidPassword(false);
       setEmailMessage('이메일 - 이메일 또는 비밀번호가 일치하지 않습니다.');
+      console.log(error);
+      throw error;
     }
   };
 
@@ -83,6 +84,7 @@ const Login = ({ isSignup, setIsSignup }) => {
         setIsValidEmail(false);
         setEmailMessage('이메일 - 이메일을 정확히 입력해주세요!');
         //console.log(error);
+        throw error;
       }
 
       //axios

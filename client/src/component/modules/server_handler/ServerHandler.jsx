@@ -44,7 +44,6 @@ const ServerHandler = ({ onClose }) => {
       )
       .then((response) => {
         setServer([...server, response.data.serverData]);
-
         response.data.serverData.channelIds.map((el) => {
           createConversation(el._id);
         });
