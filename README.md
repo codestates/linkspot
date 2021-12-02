@@ -10,8 +10,6 @@
 
 ## 2. Project
 
----
-
 ## 1. 소개
 
 관심사를 서로 공유하는 서버를 만들고 정보를 공유하세요.
@@ -29,11 +27,11 @@
 - MongoDB ([https://www.mongodb.com/](https://www.mongodb.com/))
 - Mongoose ([https://mongoosejs.com/](https://mongoosejs.com/))
 
-![back-end.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/01638e82-2cdd-4407-8ea4-a02f58cb44c2/back-end.png)
+![back-end.png](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F01638e82-2cdd-4407-8ea4-a02f58cb44c2%2Fback-end.png?table=block&id=a7f47956-08e9-4526-bec6-e90428d719d0&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&width=860&userId=&cache=v2)
 
 ## Front-End
 
-![font-end.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a4014ab1-ac2f-496a-939d-eef634e76c20/font-end.png)
+![font-end.png](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa4014ab1-ac2f-496a-939d-eef634e76c20%2Ffont-end.png?table=block&id=178203e5-24e9-48b6-a85e-9f0afe08fa14&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&width=960&userId=&cache=v2)
 
 ## Depoly
 
@@ -45,12 +43,12 @@
 
 - 회원가입, 로그인, 이메일인증, 로그아웃, 회원 탈퇴
     
-    ![user.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/651cc954-cd52-4767-b3b2-45d80dd65fe1/user.gif)
+    ![user.gif](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F651cc954-cd52-4767-b3b2-45d80dd65fe1%2Fuser.gif?table=block&id=1f103b8b-0e98-444d-bd13-60c4184764dc&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&userId=&cache=v2)
     
 - 이메일 수정
     
-    ![test02.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cb1397b5-d116-4a05-a52b-3df10683d5e3/test02.gif)
+    ![test02.gif](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcb1397b5-d116-4a05-a52b-3df10683d5e3%2Ftest02.gif?table=block&id=e2453cfb-23a0-4a52-a1d2-4072f4446f8e&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&userId=&cache=v2)
     
 - 서버 생성 및 채널에 메시지 전달
     
-    ![test03.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e6e2e758-fc30-4e9f-be9b-6a159a8c9fd8/test03.gif)
+    ![test03.gif](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe6e2e758-fc30-4e9f-be9b-6a159a8c9fd8%2Ftest03.gif?table=block&id=d9f97bbd-c98c-4b65-833b-ff7876433df4&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&userId=&cache=v2)
