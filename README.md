@@ -1,4 +1,4 @@
-#linkspot
+# LinkSpot
 
 <img src="https://user-images.githubusercontent.com/83802720/139703893-c519f771-5b25-44c0-b132-dc442cd9af33.png" width="300" height="300">
 
