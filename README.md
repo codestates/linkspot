@@ -1,7 +1,5 @@
 ## 1. Intro
 
----
-
 ![123.png](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4f306f6f-a84f-4798-968d-06fadfe372a7%2F123.png?table=block&id=c2ed13d0-81e4-4f42-937b-53f4dba3506d&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&width=670&userId=&cache=v2)
 
 - **팀 명 :** 토레타
@@ -9,7 +7,6 @@
 - **프로젝트 형태 : 수강생 프로젝트**
 - **팀원 :** 황호준(팀장), 전원재, 최동현, 한성민
 - **배포 링크 :** [https://www.linkspot.shop](https://www.linkspot.shop)
-- **깃허브 링크** **[:](https://www.linkspot.shop/login)** [https://github.com/codestates/linkspot](https://github.com/codestates/linkspot)
 
 ## 2. Project
 
