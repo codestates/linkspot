@@ -52,3 +52,54 @@
 - 서버 생성 및 채널에 메시지 전달
     
     ![test03.gif](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe6e2e758-fc30-4e9f-be9b-6a159a8c9fd8%2Ftest03.gif?table=block&id=d9f97bbd-c98c-4b65-833b-ff7876433df4&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&userId=&cache=v2)
+    
+## 3. Members
+
+### 팀장 : 황호준
+
+- Role : Team Leader
+- Position : Back-end
+- Stack : Node.js, Express, JWT, MongoDB, Mongoose, Socket.io
+- Works :
+    - DB Schema 작성
+    - Model 작성
+    - DB 컨트롤러 작성
+    - Services 컨트롤러 작성
+    - Services 컨트롤러 에러 핸들링
+    - API 문서 작성 및 기능 테스트
+    - 배포 시스템 구축
+
+
+### 팀원 : 한성민
+
+- Role : Team member
+- Position : Back-end
+- Stack : Node.js, Express, JWT, MongoDB, Mongoose, Mailgun
+- Works :
+    - Class 를 이용한 메인 서버 파일 및 폴더 구조 작성
+    - 파일 내에서 DB 함수 분리
+    - 유저 컨트롤러 작성
+    - 이메일 인증 기능 작성
+    - 전체 에러 핸들링 (class)
+    - 재사용성을 위한 코드 리펙터링
+    -
+
+### 팀원 : 전원재
+
+- Role : Team member
+- Position : Front-end
+- Stack : React, axios, react-router-dom
+- Works :
+    1. 로그인 / 회원가입 구현
+    2. 프로필 창, 수정 기능구현
+    3. 채팅 기능 구현(axios를 통해 구현)
+
+### 팀원 : 최동현
+
+- Role : Team member
+- Position : Front-end
+- Stack : React, axios, react-router-dom
+- Works :
+    1. Restrict Router를 이용한 권한별 페이지 접근 통제 기능
+    2. 서버 추가 / 삭제 기능
+    3. 친구 추가/삭제/추가/블락 기능
