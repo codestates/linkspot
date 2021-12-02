@@ -2,7 +2,7 @@
 
 ---
 
-![123.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4f306f6f-a84f-4798-968d-06fadfe372a7/123.png)
+![123.png](https://codestates.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4f306f6f-a84f-4798-968d-06fadfe372a7%2F123.png?table=block&id=c2ed13d0-81e4-4f42-937b-53f4dba3506d&spaceId=82d63a72-8254-4cde-bf1e-b2597b7c099c&width=670&userId=&cache=v2)
 
 - **팀 명 :** 토레타
 - **프로젝트 명 :** LinkSpot
